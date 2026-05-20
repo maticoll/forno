@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fidelización — FORNNO</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+@font-face { font-family:'Brice'; src:url('Brice_Font/Brice-Black.woff2') format('woff2'); font-weight:900; }
+@font-face { font-family:'Brice'; src:url('Brice_Font/Brice-Bold.woff2') format('woff2'); font-weight:700; }
+@font-face { font-family:'Brice'; src:url('Brice_Font/Brice-Semi-Bold.woff2') format('woff2'); font-weight:600; }
+@font-face { font-family:'Brice'; src:url('Brice_Font/Brice-Regular.woff2') format('woff2'); font-weight:400; }
+
+:root {
+  --orange:#D94F1A; --orange-dark:#B83D10; --orange-glow:rgba(217,79,26,.14);
+  --bg:#F5F0E8; --bg2:#EDE8DE; --bg3:#E5DFD3;
+  --border:#D4CCC0; --text:#1A1612; --muted:#7A6F62; --muted2:#A89E94;
+  --green:#2a7a4b; --radius:12px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'Montserrat',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;}
+
+/* nav */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 40px;display:flex;align-items:center;justify-content:space-between;transition:background .35s;}
+nav.solid{background:rgba(245,240,232,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);}
+.nav-logo{font-family:'Brice',sans-serif;font-weight:900;font-size:22px;letter-spacing:.04em;color:var(--text);text-decoration:none;display:flex;align-items:center;gap:6px;}
+.nav-logo .dot{color:var(--orange);}
+.nav-back,.nav-next{display:flex;align-items:center;gap:8px;font-family:'Montserrat',sans-serif;font-weight:600;font-size:13px;color:var(--muted);text-decoration:none;letter-spacing:.06em;text-transform:uppercase;transition:color .2s;}
+.nav-back:hover,.nav-next:hover{color:var(--orange);}
+.nav-back svg,.nav-next svg{transition:transform .2s;}
+.nav-back:hover svg{transform:translateX(-3px);} .nav-next:hover svg{transform:translateX(3px);}
+
+.container{max-width:1140px;margin:0 auto;padding:0 40px;}
+.screen{min-height:100vh;display:flex;align-items:center;position:relative;overflow:hidden;}
+.bg-num{position:absolute;font-family:'Brice',sans-serif;font-weight:900;font-size:clamp(280px,35vw,520px);line-height:1;color:rgba(26,22,18,.035);right:-1vw;bottom:-6vh;pointer-events:none;user-select:none;}
+
+.section-tag{display:inline-flex;align-items:center;gap:8px;background:var(--orange-glow);border:1px solid rgba(217,79,26,.25);border-radius:100px;padding:7px 16px;font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--orange);margin-bottom:28px;}
+.section-tag .dot{width:7px;height:7px;border-radius:50%;background:var(--orange);animation:pulse-dot 2s ease-in-out infinite;}
+@keyframes pulse-dot{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.5;transform:scale(.75);}}
+
+.btn{display:inline-flex;align-items:center;gap:8px;border-radius:var(--radius);font-family:'Montserrat',sans-serif;font-weight:600;font-size:15px;text-decoration:none;transition:transform .2s,box-shadow .2s,background .2s,color .2s;cursor:pointer;border:none;}
+.btn-primary{background:var(--orange);color:#fff;padding:14px 28px;}
+.btn-primary:hover{background:var(--orange-dark);transform:translateY(-2px);box-shadow:0 10px 40px rgba(255,92,26,.45);}
+.btn-secondary{background:transparent;color:var(--text);padding:13px 26px;border:1.5px solid var(--border);}
+.btn-secondary:hover{border-color:var(--orange);color:var(--orange);}
+.btn-lg{padding:16px 34px;font-size:16px;}
+
+.fade-up{opacity:0;transform:translateY(30px);transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1);}
+.fade-up.visible{opacity:1;transform:translateY(0);}
+
+/* ── HERO ─────────────────────────── */
+#hero{background:var(--bg);padding-top:80px;}
+.hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;width:100%;}
+.hero-label{font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--muted2);margin-bottom:12px;}
+.hero-h1{font-family:'Brice',sans-serif;font-weight:900;font-size:clamp(52px,6vw,80px);line-height:1.0;margin-bottom:24px;}
+.hero-h1 em{font-style:normal;background:linear-gradient(135deg,#FF7040,#FF3B00);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hero-sub{font-size:17px;color:var(--muted);line-height:1.6;max-width:460px;margin-bottom:36px;}
+.hero-btns{display:flex;gap:14px;flex-wrap:wrap;}
+
+/* ── DARK LOYALTY CARD (elemento obligatorio 7) ────────── */
+.loyalty-card-dark{
+  background:linear-gradient(145deg,#1a1a1a,#111);
+  border:1px solid #2a2a2a; border-radius:16px; padding:22px;
+  position:relative; overflow:hidden;
+}
+.loyalty-card-dark::before{
+  content:''; position:absolute; top:0; left:0; right:0; height:4px;
+  background:linear-gradient(90deg,var(--orange),#FF3B00);
+}
+.card-brand-name{font-family:'Brice',sans-serif;font-size:17px;font-weight:900;color:#fff;letter-spacing:.04em;text-transform:uppercase;}
+.card-program{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--orange);margin-top:3px;}
+.card-points-num{font-family:'Brice',sans-serif;font-size:28px;font-weight:900;color:var(--orange);line-height:1;}
+.card-points-label{font-size:9px;color:#555;text-transform:uppercase;letter-spacing:.1em;}
+
+/* QR container (elemento obligatorio 4) */
+.qr-container{background:#fff;border-radius:10px;padding:14px;display:flex;align-items:center;justify-content:center;}
+
+/* Platform chips (elemento 4) */
+.platform-chips{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap;}
+.chip{display:inline-flex;align-items:center;gap:5px;border-radius:6px;padding:5px 10px;font-size:12px;font-weight:600;}
+.chip-wa{background:rgba(37,211,102,.1);border:1px solid rgba(37,211,102,.3);color:#25D366;}
+.chip-apple{background:rgba(0,0,0,.06);border:1px solid var(--border);color:var(--text);}
+.chip-google{background:rgba(26,115,232,.08);border:1px solid rgba(26,115,232,.25);color:#1a73e8;}
+.chip-qr{background:var(--orange-glow);border:1px solid rgba(255,92,26,.3);color:var(--orange);}
+
+/* ── SECTION PADS ─────────────────── */
+.section-pad{padding:120px 0;}
+.section-alt{background:var(--bg2);}
+.feature-label{font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--orange);margin-bottom:16px;}
+.feature-h2{font-family:'Brice',sans-serif;font-weight:900;font-size:clamp(36px,4vw,52px);line-height:1.05;margin-bottom:20px;}
+.feature-p{font-size:16px;color:var(--muted);line-height:1.7;margin-bottom:32px;}
+.feature-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;}
+.feature-list{list-style:none;display:flex;flex-direction:column;gap:14px;margin-bottom:36px;}
+.feature-list li{display:flex;align-items:flex-start;gap:12px;font-size:15px;color:var(--text);line-height:1.5;}
+.feature-list li .check{width:22px;height:22px;border-radius:50%;background:rgba(42,122,75,.1);border:1px solid rgba(42,122,75,.25);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;transition:transform .2s;}
+.feature-list li:hover .check{transform:scale(1.2);}
+.feature-list li .check svg{width:11px;height:11px;stroke:var(--green);}
+
+/* ── POINTS CARD HERO ─────────────── */
+.points-hero{background:#fff;border:1px solid var(--border);border-radius:16px;padding:28px;box-shadow:0 20px 60px rgba(0,0,0,.08);}
+.progress-bar{background:var(--border);border-radius:100px;height:6px;margin-top:12px;overflow:hidden;}
+.progress-fill{height:100%;border-radius:100px;background:linear-gradient(90deg,var(--orange),#FF3B00);width:68%;animation:progress-grow 1.5s cubic-bezier(.22,1,.36,1) forwards;transform-origin:left;}
+@keyframes progress-grow{from{width:0;}to{width:68%;}}
+.levels-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:20px;}
+.level-box{background:var(--bg2);border-radius:10px;padding:12px 8px;text-align:center;border:1.5px solid transparent;transition:border-color .2s,transform .2s;}
+.level-box:hover{border-color:var(--orange);transform:translateY(-2px);}
+.level-box.active{border-color:var(--orange);background:var(--orange-glow);}
+.level-icon{font-size:20px;display:block;margin-bottom:4px;}
+.level-name{font-family:'Brice',sans-serif;font-weight:700;font-size:13px;}
+.level-pts{font-size:10px;color:var(--muted);margin-top:2px;}
+
+/* ── RECOMPENSAS CARDS ────────────── */
+.rewards-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:48px;}
+.reward-card{background:#fff;border:1px solid var(--border);border-radius:16px;padding:24px;text-align:center;transition:transform .25s,box-shadow .25s,border-color .25s;}
+.reward-card:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(0,0,0,.1);border-color:rgba(217,79,26,.3);}
+.reward-icon{font-size:32px;display:block;margin-bottom:14px;}
+.reward-title{font-family:'Brice',sans-serif;font-weight:700;font-size:18px;margin-bottom:8px;}
+.reward-desc{font-size:14px;color:var(--muted);line-height:1.5;}
+.reward-pts{display:inline-block;background:var(--orange-glow);border:1px solid rgba(217,79,26,.25);border-radius:100px;padding:4px 12px;font-size:11px;font-weight:700;color:var(--orange);margin-top:14px;}
+
+/* ── AGENTE REACTIVACIÓN ──────────── */
+.reactivation-card{background:#fff;border:1px solid var(--border);border-radius:20px;padding:28px;box-shadow:0 20px 60px rgba(0,0,0,.07);}
+.rcv-row{display:flex;justify-content:space-between;align-items:center;padding:12px 14px;background:var(--bg2);border-radius:10px;margin-bottom:10px;font-size:13px;}
+.rcv-row:last-child{margin-bottom:0;}
+.rcv-name{font-weight:600;}
+.rcv-badge{border-radius:6px;padding:4px 10px;font-size:11px;font-weight:700;}
+.badge-red{background:rgba(217,79,26,.1);color:var(--orange);}
+.badge-yellow{background:rgba(255,193,7,.15);color:#b38600;}
+.badge-green{background:rgba(42,122,75,.1);color:var(--green);}
+.rcv-rate{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--muted);}
+.rcv-rate strong{color:var(--green);font-size:14px;}
+
+/* ── APPLE WALLET SECTION (elemento obligatorio 6) ─────── */
+#tarjeta-lealtad{background:var(--bg2);}
+.tilt-card{transition:transform .1s;cursor:default;}
+
+/* ── CTA ──────────────────────────── */
+.cta-h2{font-family:'Brice',sans-serif;font-weight:900;font-size:clamp(44px,6vw,72px);line-height:1.05;margin-bottom:24px;max-width:700px;margin-left:auto;margin-right:auto;}
+.cta-h2 em{font-style:normal;background:linear-gradient(135deg,#FF7040,#FF3B00);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.cta-btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;}
+
+/* page nav */
+.page-nav{background:var(--bg);border-top:1px solid var(--border);padding:48px 40px;}
+.page-nav-inner{max-width:1140px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;}
+.page-nav-btn{display:flex;align-items:center;gap:14px;text-decoration:none;padding:18px 24px;border-radius:16px;border:1.5px solid var(--border);background:#fff;transition:border-color .2s,box-shadow .2s,transform .2s;}
+.page-nav-btn:hover{border-color:var(--orange);transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.08);}
+.nav-num{font-size:11px;font-weight:600;letter-spacing:.12em;color:var(--muted2);text-transform:uppercase;}
+.nav-label{font-family:'Brice',sans-serif;font-weight:700;font-size:18px;color:var(--text);margin-top:2px;}
+.nav-arrow{font-size:22px;color:var(--orange);}
+.page-nav-home{font-family:'Montserrat',sans-serif;font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .2s;}
+.page-nav-home:hover{color:var(--orange);}
+
+.scroll-nav{position:fixed;right:28px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:10px;z-index:90;}
+.scroll-dot{width:8px;height:8px;border-radius:50%;background:var(--border);display:block;text-decoration:none;transition:background .25s,transform .25s;}
+.scroll-dot.active{background:var(--orange);transform:scale(1.4);}
+.scroll-dot:hover{background:var(--muted);}
+
+@media(max-width:900px){
+  .hero-grid,.feature-grid{grid-template-columns:1fr;gap:40px;}
+  nav{padding:18px 24px;} .container{padding:0 24px;} .scroll-nav{display:none;}
+  .levels-grid{grid-template-columns:repeat(2,1fr);}
+  .rewards-grid{grid-template-columns:1fr 1fr;}
+}
+@media(max-width:640px){
+  .rewards-grid{grid-template-columns:1fr;}
+  .hero-h1{font-size:42px;}
+}
+</style>
+</head>
+<body>
+
+<nav id="main-nav">
+  <a href="escalabilidad.html" class="nav-back">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+    Escalabilidad
+  </a>
+  <a href="index.html" class="nav-logo"><span class="dot">●</span> FORNNO</a>
+  <a href="app.html" class="nav-next">
+    App
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+  </a>
+</nav>
+
+<nav class="scroll-nav">
+  <a href="#hero"           class="scroll-dot active" title="Fidelización"></a>
+  <a href="#agente-fidel"   class="scroll-dot" title="Agente"></a>
+  <a href="#puntos"         class="scroll-dot" title="Puntos"></a>
+  <a href="#tarjeta-lealtad" class="scroll-dot" title="Tarjeta digital"></a>
+  <a href="#recompensas"    class="scroll-dot" title="Recompensas"></a>
+  <a href="#cta-fidel"      class="scroll-dot" title="Empezar"></a>
+</nav>
+
+<!-- ══ HERO ══════════════════════════════════════════════ -->
+<section class="screen" id="hero">
+  <div class="container" style="width:100%;">
+    <div class="hero-grid">
+      <div>
+        <p class="hero-label fade-up">03 — Fidelización</p>
+        <div class="section-tag fade-up" style="transition-delay:.1s"><span class="dot"></span>5%–15% de conversión probada</div>
+        <h1 class="hero-h1 fade-up" style="transition-delay:.2s">
+          Que vuelvan.<br>Que gasten<br><em>más. Siempre.</em>
+        </h1>
+        <p class="hero-sub fade-up" style="transition-delay:.3s">
+          Sistema de puntos, niveles VIP, tarjeta digital y agente de reactivación. Cada visita construye una relación más profunda con tu marca.
+        </p>
+        <div class="hero-btns fade-up" style="transition-delay:.4s">
+          <a href="#puntos" class="btn btn-primary btn-lg">Ver el programa →</a>
+          <a href="#tarjeta-lealtad" class="btn btn-secondary btn-lg">Tarjeta digital</a>
+        </div>
+      </div>
+
+      <!-- Points card preview -->
+      <div class="fade-up" style="transition-delay:.5s;">
+        <div class="points-hero">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;">
+            <div>
+              <div style="font-family:'Brice',sans-serif;font-weight:900;font-size:15px;letter-spacing:.04em;">● TU RESTAURANTE</div>
+              <div style="font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--orange);margin-top:3px;">Programa de Lealtad</div>
+            </div>
+            <div style="background:rgba(255,193,7,.15);border:1px solid rgba(255,193,7,.4);border-radius:8px;padding:6px 12px;font-size:12px;font-weight:700;color:#b38600;">🥇 GOLD</div>
+          </div>
+          <div style="font-family:'Brice',sans-serif;font-weight:900;font-size:clamp(48px,5vw,64px);color:var(--orange);line-height:1;">2.840</div>
+          <div style="font-size:12px;color:var(--muted);margin-top:4px;">puntos acumulados · canjeás desde 500</div>
+          <div class="progress-bar"><div class="progress-fill" id="prog"></div></div>
+          <div style="font-size:11px;color:var(--muted);margin-top:8px;">68% hacia PLATINUM · te faltan 1.360 pts</div>
+          <div class="levels-grid" style="margin-top:20px;">
+            <div class="level-box">
+              <span class="level-icon">🥉</span>
+              <div class="level-name">Bronze</div>
+              <div class="level-pts">0–999 pts</div>
+            </div>
+            <div class="level-box active">
+              <span class="level-icon">🥇</span>
+              <div class="level-name">Gold</div>
+              <div class="level-pts">1K–4K pts</div>
+            </div>
+            <div class="level-box">
+              <span class="level-icon">💎</span>
+              <div class="level-name">Platinum</div>
+              <div class="level-pts">4K–9K pts</div>
+            </div>
+            <div class="level-box">
+              <span class="level-icon">👑</span>
+              <div class="level-name">VIP</div>
+              <div class="level-pts">9K+ pts</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <span class="bg-num">03</span>
+</section>
+
+<!-- ══ AGENTE DE REACTIVACIÓN ════════════════════════════ -->
+<section id="agente-fidel" class="section-pad section-alt">
+  <div class="container">
+    <div class="feature-grid">
+      <div class="fade-up">
+        <p class="feature-label">03 · A — Agente de marketing</p>
+        <h2 class="feature-h2">Recuperá los clientes<br>antes de perderlos.</h2>
+        <p class="feature-p">El agente segmenta tu base de clientes automáticamente y los rankea por riesgo de churn. Dispara campañas de recuperación con conversión probada de entre el 5% y el 15%.</p>
+        <ul class="feature-list">
+          <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Segmentación automática por ticket, frecuencia y última visita</li>
+          <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Ranking de clientes en riesgo de no volver</li>
+          <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Propone y dispara campañas de recuperación sin intervención manual</li>
+          <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>5%–15% de conversión en campañas de reactivación</li>
+          <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Cada peso del cliente genera datos para la próxima campaña</li>
+        </ul>
+        <a href="#cta-fidel" class="btn btn-primary">Quiero el agente →</a>
+      </div>
+
+      <!-- Reactivation dashboard -->
+      <div class="reactivation-card fade-up" style="transition-delay:.15s;">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;">
+          <div style="font-family:'Brice',sans-serif;font-weight:700;font-size:16px;">Clientes en riesgo</div>
+          <div style="font-size:11px;font-weight:600;color:var(--orange);background:var(--orange-glow);border:1px solid rgba(217,79,26,.25);border-radius:6px;padding:4px 10px;">Actualizado hoy</div>
+        </div>
+        <div class="rcv-row">
+          <div>
+            <div class="rcv-name">Valentina G.</div>
+            <div style="font-size:11px;color:var(--muted);">Última visita: hace 45 días</div>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;">
+            <span class="rcv-badge badge-red">⚠ Riesgo alto</span>
+          </div>
+        </div>
+        <div class="rcv-row">
+          <div>
+            <div class="rcv-name">Diego M.</div>
+            <div style="font-size:11px;color:var(--muted);">Última visita: hace 28 días</div>
+          </div>
+          <div>
+            <span class="rcv-badge badge-yellow">⚡ Riesgo medio</span>
+          </div>
+        </div>
+        <div class="rcv-row">
+          <div>
+            <div class="rcv-name">Luciana B.</div>
+            <div style="font-size:11px;color:var(--muted);">Última visita: hace 18 días</div>
+          </div>
+          <div>
+            <span class="rcv-badge badge-yellow">⚡ Riesgo medio</span>
+          </div>
+        </div>
+        <div class="rcv-row" style="background:rgba(42,122,75,.08);border:1px solid rgba(42,122,75,.2);">
+          <div>
+            <div class="rcv-name" style="color:var(--green);">✅ Campaña enviada</div>
+            <div style="font-size:11px;color:var(--muted);">12 mensajes · esta semana</div>
+          </div>
+          <div class="rcv-rate"><strong>9%</strong> conversión</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SISTEMA DE PUNTOS ═══════════════════════════════════ -->
+<section id="puntos" class="section-pad">
+  <div class="container">
+    <div class="fade-up" style="max-width:560px;margin-bottom:60px;">
+      <p class="feature-label">03 · B — Sistema de puntos y niveles</p>
+      <h2 class="feature-h2">Cada peso gastado<br>construye hábito.</h2>
+      <p class="feature-p">Un programa con cuatro niveles de membresía diseñado para generar recompra, expectativa y pertenencia — todo sin esfuerzo de tu parte.</p>
+    </div>
+    <div class="feature-grid">
+      <div class="fade-up" style="background:#fff;border:1px solid var(--border);border-radius:20px;padding:32px;box-shadow:0 20px 60px rgba(0,0,0,.07);">
+        <div style="display:flex;flex-direction:column;gap:16px;">
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px;background:var(--bg2);border-radius:12px;">
+            <div style="display:flex;align-items:center;gap:12px;">
+              <span style="font-size:22px;">🥉</span>
+              <div><div style="font-family:'Brice',sans-serif;font-weight:700;font-size:15px;">Bronze</div><div style="font-size:11px;color:var(--muted);">0 – 999 puntos</div></div>
+            </div>
+            <div style="font-size:12px;font-weight:600;color:var(--muted);">1 pto / $100</div>
+          </div>
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px;background:rgba(255,193,7,.08);border:1px solid rgba(255,193,7,.3);border-radius:12px;">
+            <div style="display:flex;align-items:center;gap:12px;">
+              <span style="font-size:22px;">🥇</span>
+              <div><div style="font-family:'Brice',sans-serif;font-weight:700;font-size:15px;">Gold</div><div style="font-size:11px;color:var(--muted);">1.000 – 3.999 puntos</div></div>
+            </div>
+            <div style="font-size:12px;font-weight:600;color:#b38600;">1.5 ptos / $100</div>
+          </div>
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px;background:rgba(26,115,232,.06);border:1px solid rgba(26,115,232,.2);border-radius:12px;">
+            <div style="display:flex;align-items:center;gap:12px;">
+              <span style="font-size:22px;">💎</span>
+              <div><div style="font-family:'Brice',sans-serif;font-weight:700;font-size:15px;">Platinum</div><div style="font-size:11px;color:var(--muted);">4.000 – 8.999 puntos</div></div>
+            </div>
+            <div style="font-size:12px;font-weight:600;color:#1a73e8;">2 ptos / $100</div>
+          </div>
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px;background:var(--orange-glow);border:1px solid rgba(217,79,26,.3);border-radius:12px;">
+            <div style="display:flex;align-items:center;gap:12px;">
+              <span style="font-size:22px;">👑</span>
+              <div><div style="font-family:'Brice',sans-serif;font-weight:700;font-size:15px;">VIP</div><div style="font-size:11px;color:var(--muted);">9.000+ puntos</div></div>
+            </div>
+            <div style="font-size:12px;font-weight:600;color:var(--orange);">3 ptos / $100 + acceso VIP</div>
+          </div>
+        </div>
+      </div>
+      <div class="fade-up" style="transition-delay:.15s;">
+        <ul class="feature-list">
+          <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Cada peso gastado acumula puntos automáticamente</li>
+          <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Cuatro niveles de membresía con beneficios crecientes</li>
+          <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Puntos dobles en cumpleaños y eventos especiales</li>
+          <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Programa de referidos: traé un amigo, ambos ganan puntos</li>
+          <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Desafíos mensuales que incentivan visitas frecuentes</li>
+          <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Tu cliente sabe exactamente cuánto le falta para el próximo nivel</li>
+        </ul>
+        <a href="#cta-fidel" class="btn btn-primary">Activar programa de puntos →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ TARJETA DE LEALTAD DIGITAL (elementos 4, 6, 7) ═══════ -->
+<section id="tarjeta-lealtad" class="section-pad section-alt">
+  <div class="container">
+    <div class="feature-grid">
+      <!-- TEXT (elemento 6 — Apple Wallet section) -->
+      <div class="fade-up">
+        <p class="feature-label">03 · D — Tarjeta de lealtad digital</p>
+        <h2 class="feature-h2">Tu marca en el bolsillo<br>de cada <em style="font-style:normal;background:linear-gradient(135deg,#FF7040,#FF3B00);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">cliente.</em></h2>
+        <p class="feature-p">Un programa 100% digital con tu logo, tus colores y tu tono. Sin plástico, sin apps que descargar. El cliente recibe y usa su tarjeta en los canales que ya usa todos los días.</p>
+        <ul class="feature-list">
+          <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><strong>WhatsApp</strong> — la tarjeta llega directo al chat. Sin fricción, sin descarga</li>
+          <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><strong>Apple Wallet &amp; Google Wallet</strong> — un toque y está guardada para siempre</li>
+          <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><strong>QR físico</strong> — en mesa, en caja o en la puerta. Siempre activo</li>
+          <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>100% con tu marca: logo, colores y mensaje propios</li>
+          <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Puntos, niveles VIP y notificaciones push automáticas</li>
+        </ul>
+        <a href="#cta-fidel" class="btn btn-primary btn-lg">
+          Conocer más sobre tarjetas de lealtad →
+        </a>
+      </div>
+
+      <!-- CARD VISUAL (elementos 7 + 4) -->
+      <div class="fade-up tilt-card" style="transition-delay:.15s;">
+        <!-- Dark loyalty card mockup (elemento 7) -->
+        <div class="loyalty-card-dark">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:20px;margin-top:6px;">
+            <div>
+              <div class="card-brand-name">TU RESTAURANTE</div>
+              <div class="card-program">Programa de Lealtad</div>
+            </div>
+            <div style="text-align:right;">
+              <div class="card-points-label">Puntos</div>
+              <div class="card-points-num">2.840</div>
+            </div>
+          </div>
+          <!-- QR (elemento 4) -->
+          <div class="qr-container">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 37 37" shape-rendering="crispEdges" style="width:100px;height:100px">
+              <path fill="#ffffff" d="M0 0h37v37H0z"/>
+              <path stroke="#111111" d="M0 0.5h7m4 0h1m3 0h1m2 0h1m2 0h3m4 0h1m1 0h7M0 1.5h1m5 0h1m8 0h2m1 0h1m1 0h1m1 0h1m1 0h1m1 0h3m1 0h1m5 0h1M0 2.5h1m1 0h3m1 0h1m1 0h3m1 0h1m2 0h2m4 0h4m3 0h1m1 0h1m1 0h3m1 0h1M0 3.5h1m1 0h3m1 0h1m1 0h3m1 0h1m1 0h4m2 0h1m1 0h1m2 0h4m1 0h1m1 0h3m1 0h1M0 4.5h1m1 0h3m1 0h1m1 0h1m1 0h1m2 0h2m2 0h1m2 0h2m1 0h1m2 0h1m1 0h1m1 0h1m1 0h3m1 0h1M0 5.5h1m5 0h1m1 0h2m5 0h1m1 0h1m3 0h2m2 0h4m1 0h1m5 0h1M0 6.5h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7M8 7.5h1m1 0h1m6 0h2m1 0h2m1 0h1m2 0h3M0 8.5h1m1 0h5m3 0h1m1 0h3m1 0h1m3 0h4m2 0h3m1 0h5M2 9.5h4m1 0h2m1 0h3m1 0h2m2 0h2m1 0h3m2 0h3m2 0h1m2 0h2M1 10.5h1m3 0h2m2 0h5m1 0h3m2 0h2m4 0h5m2 0h1m1 0h2M0 11.5h1m4 0h1m6 0h4m4 0h3m1 0h1m1 0h2m1 0h1m1 0h1m4 0h1M0 12.5h4m2 0h1m1 0h1m4 0h3m1 0h3m2 0h1m1 0h3m1 0h9M1 13.5h1m2 0h1m2 0h3m1 0h4m1 0h1m2 0h2m1 0h4m2 0h2m1 0h1M1 14.5h2m1 0h3m1 0h1m4 0h1m1 0h1m2 0h1m1 0h1m1 0h1m4 0h7m1 0h2M0 15.5h2m3 0h1m1 0h5m1 0h1m1 0h1m4 0h3m5 0h1m1 0h3M1 16.5h2m1 0h1m1 0h1m1 0h1m1 0h2m1 0h2m3 0h3m1 0h5m1 0h3m3 0h3M0 17.5h2m1 0h1m3 0h2m1 0h1m4 0h2m2 0h1m1 0h3m5 0h3m1 0h3M1 18.5h2m3 0h1m1 0h1m1 0h2m1 0h1m6 0h3m1 0h2m1 0h4m1 0h1m2 0h2M0 19.5h1m1 0h1m2 0h1m1 0h2m3 0h1m3 0h1m1 0h4m6 0h2m6 0h1M0 20.5h1m1 0h1m2 0h3m1 0h1m4 0h1m1 0h2m1 0h2m1 0h1m1 0h4m1 0h2m1 0h1m1 0h1M0 21.5h3m5 0h1m3 0h2m1 0h3m1 0h1m1 0h1m1 0h1m4 0h2m3 0h1M0 22.5h3m2 0h5m3 0h1m1 0h3m7 0h1m1 0h2m1 0h4m2 0h1M0 23.5h1m4 0h1m1 0h1m1 0h2m1 0h1m1 0h1m1 0h6m1 0h1m2 0h2m1 0h4m2 0h2M0 24.5h4m2 0h5m1 0h5m5 0h2m2 0h1m1 0h4m2 0h1m1 0h1M0 25.5h1m1 0h1m1 0h2m1 0h2m1 0h6m2 0h4m1 0h1m2 0h1m1 0h2m1 0h1m1 0h1M0 26.5h1m1 0h3m1 0h1m3 0h1m3 0h4m2 0h1m5 0h2m1 0h3m2 0h3M0 27.5h1m1 0h1m2 0h1m1 0h2m3 0h4m5 0h4m1 0h4m1 0h2m3 0h1M0 28.5h1m5 0h1m2 0h1m1 0h1m1 0h3m1 0h4m1 0h1m1 0h2m1 0h6m1 0h2M8 29.5h1m3 0h3m1 0h1m2 0h3m1 0h1m4 0h1m3 0h2m1 0h2M0 30.5h7m2 0h1m1 0h1m3 0h2m1 0h1m1 0h2m6 0h1m1 0h1m1 0h1m1 0h3M0 31.5h1m5 0h1m1 0h1m2 0h2m1 0h1m1 0h1m2 0h6m1 0h1m1 0h1m3 0h2m1 0h1M0 32.5h1m1 0h3m1 0h1m1 0h1m3 0h4m2 0h2m2 0h1m2 0h1m1 0h6m1 0h1m1 0h1M0 33.5h1m1 0h3m1 0h1m1 0h5m2 0h3m1 0h2m2 0h1m1 0h1m1 0h2m1 0h1m1 0h1m3 0h1M0 34.5h1m1 0h3m1 0h1m1 0h1m1 0h3m1 0h1m3 0h1m2 0h1m2 0h3m1 0h1m4 0h1m1 0h2M0 35.5h1m5 0h1m2 0h2m1 0h3m1 0h1m3 0h2m1 0h1m4 0h3m1 0h2m2 0h1M0 36.5h7m1 0h1m4 0h2m1 0h1m3 0h1m3 0h4m1 0h1m2 0h1m1 0h3"/>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Platform chips (elemento 4) -->
+        <div class="platform-chips">
+          <span class="chip chip-wa">
+            <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            WhatsApp
+          </span>
+          <span class="chip chip-apple">Apple Wallet</span>
+          <span class="chip chip-google">Google Wallet</span>
+          <span class="chip chip-qr">QR Físico</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ RECOMPENSAS ════════════════════════════════════════ -->
+<section id="recompensas" class="section-pad">
+  <div class="container">
+    <div class="fade-up" style="max-width:560px;margin-bottom:0;">
+      <p class="feature-label">03 · C — Recompensas configurables</p>
+      <h2 class="feature-h2">Vos decidís qué<br>vale la lealtad.</h2>
+      <p style="font-size:16px;color:var(--muted);line-height:1.7;margin-bottom:0;">Descuentos, productos gratis, experiencias exclusivas. Cada recompensa se configura a la medida de tu restaurante.</p>
+    </div>
+    <div class="rewards-grid">
+      <div class="reward-card fade-up" style="transition-delay:.05s;">
+        <span class="reward-icon">💸</span>
+        <div class="reward-title">Descuentos</div>
+        <p class="reward-desc">Porcentajes de descuento en la próxima visita o en productos específicos de la carta.</p>
+        <span class="reward-pts">Desde 500 pts</span>
+      </div>
+      <div class="reward-card fade-up" style="transition-delay:.1s;">
+        <span class="reward-icon">🍰</span>
+        <div class="reward-title">Productos gratis</div>
+        <p class="reward-desc">Postre, bebida, entrada o cualquier ítem de tu carta a elección del restaurante.</p>
+        <span class="reward-pts">Desde 800 pts</span>
+      </div>
+      <div class="reward-card fade-up" style="transition-delay:.15s;">
+        <span class="reward-icon">⭐</span>
+        <div class="reward-title">Experiencias VIP</div>
+        <p class="reward-desc">Mesa premium, cena con el chef, visita a la cocina o eventos exclusivos para tus mejores clientes.</p>
+        <span class="reward-pts">Desde 5.000 pts</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CTA ════════════════════════════════════════════════ -->
+<section class="screen" id="cta-fidel" style="background:var(--bg3);text-align:center;">
+  <div class="container" style="width:100%;text-align:center;position:relative;z-index:1;">
+    <div class="section-tag fade-up" style="display:inline-flex;margin-bottom:32px;"><span class="dot"></span>Fidelización gastronómica</div>
+    <h2 class="cta-h2 fade-up" style="transition-delay:.1s;">
+      Más clientes que vuelven.<br><em>Más ventas. Siempre.</em>
+    </h2>
+    <p style="font-size:17px;color:var(--muted);max-width:500px;margin:0 auto 44px;line-height:1.6;" class="fade-up" style="transition-delay:.2s;">
+      El sistema trabaja mientras vos cocinás. Puntos, niveles, reactivación y tarjeta digital — todo automatizado.
+    </p>
+    <div class="cta-btns fade-up" style="transition-delay:.3s;">
+      <a href="app.html" class="btn btn-primary btn-lg">Ver la App →</a>
+      <a href="index.html" class="btn btn-secondary btn-lg">Volver al inicio</a>
+    </div>
+  </div>
+  <span class="bg-num" style="right:50%;transform:translateX(50%);">03</span>
+</section>
+
+<div class="page-nav">
+  <div class="page-nav-inner">
+    <a href="escalabilidad.html" class="page-nav-btn">
+      <span class="nav-arrow">←</span>
+      <div><div class="nav-num">02 — Anterior</div><div class="nav-label">Escalabilidad</div></div>
+    </a>
+    <a href="index.html" class="page-nav-home">⬤ FORNNO</a>
+    <a href="app.html" class="page-nav-btn">
+      <div style="text-align:right;"><div class="nav-num">04 — Siguiente</div><div class="nav-label">App</div></div>
+      <span class="nav-arrow">→</span>
+    </a>
+  </div>
+</div>
+
+<script>
+const nav=document.getElementById('main-nav');
+window.addEventListener('scroll',()=>{nav.classList.toggle('solid',window.scrollY>60);},{passive:true});
+const dots=document.querySelectorAll('.scroll-dot');
+const dotObs=new IntersectionObserver((e)=>{e.forEach(en=>{if(en.isIntersecting&&en.intersectionRatio>=.4){dots.forEach(d=>d.classList.remove('active'));const d=document.querySelector(`.scroll-dot[href="#${en.target.id}"]`);if(d)d.classList.add('active');}});},{threshold:.4});
+document.querySelectorAll('section[id]').forEach(s=>dotObs.observe(s));
+const fuObs=new IntersectionObserver((e)=>{e.forEach(en=>{if(en.isIntersecting){en.target.classList.add('visible');fuObs.unobserve(en.target);}});},{threshold:.12});
+document.querySelectorAll('.fade-up').forEach(el=>fuObs.observe(el));
+// Tilt
+document.querySelectorAll('.tilt-card').forEach(card=>{
+  card.addEventListener('mousemove',e=>{const r=card.getBoundingClientRect();const x=(e.clientX-r.left)/r.width-.5;const y=(e.clientY-r.top)/r.height-.5;card.style.transform=`perspective(800px) rotateY(${x*8}deg) rotateX(${-y*8}deg) translateY(-4px)`;});
+  card.addEventListener('mouseleave',()=>{card.style.transform='';});
+});
+</script>
+</body>
+</html>

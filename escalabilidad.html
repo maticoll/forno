@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Escalabilidad — FORNNO</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+@font-face { font-family:'Brice'; src:url('Brice_Font/Brice-Black.woff2') format('woff2'); font-weight:900; }
+@font-face { font-family:'Brice'; src:url('Brice_Font/Brice-Bold.woff2') format('woff2'); font-weight:700; }
+@font-face { font-family:'Brice'; src:url('Brice_Font/Brice-Semi-Bold.woff2') format('woff2'); font-weight:600; }
+@font-face { font-family:'Brice'; src:url('Brice_Font/Brice-Regular.woff2') format('woff2'); font-weight:400; }
+
+:root {
+  --orange:#D94F1A; --orange-dark:#B83D10; --orange-glow:rgba(217,79,26,.14);
+  --bg:#F5F0E8; --bg2:#EDE8DE; --bg3:#E5DFD3;
+  --border:#D4CCC0; --text:#1A1612; --muted:#7A6F62; --muted2:#A89E94;
+  --green:#2a7a4b; --radius:12px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'Montserrat',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 40px;display:flex;align-items:center;justify-content:space-between;transition:background .35s,backdrop-filter .35s;}
+nav.solid{background:rgba(245,240,232,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);}
+.nav-logo{font-family:'Brice',sans-serif;font-weight:900;font-size:22px;letter-spacing:.04em;color:var(--text);text-decoration:none;display:flex;align-items:center;gap:6px;}
+.nav-logo .dot{color:var(--orange);}
+.nav-back,.nav-next{display:flex;align-items:center;gap:8px;font-family:'Montserrat',sans-serif;font-weight:600;font-size:13px;color:var(--muted);text-decoration:none;letter-spacing:.06em;text-transform:uppercase;transition:color .2s;}
+.nav-back:hover,.nav-next:hover{color:var(--orange);}
+.nav-back:hover svg{transform:translateX(-3px);} .nav-next:hover svg{transform:translateX(3px);}
+.nav-back svg,.nav-next svg{transition:transform .2s;}
+
+.container{max-width:1140px;margin:0 auto;padding:0 40px;}
+.screen{min-height:100vh;display:flex;align-items:center;position:relative;overflow:hidden;}
+
+.bg-num{position:absolute;font-family:'Brice',sans-serif;font-weight:900;font-size:clamp(280px,35vw,520px);line-height:1;color:rgba(26,22,18,.035);right:-1vw;bottom:-6vh;pointer-events:none;user-select:none;}
+
+.section-tag{display:inline-flex;align-items:center;gap:8px;background:var(--orange-glow);border:1px solid rgba(217,79,26,.25);border-radius:100px;padding:7px 16px;font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--orange);margin-bottom:28px;}
+.section-tag .dot{width:7px;height:7px;border-radius:50%;background:var(--orange);animation:pulse-dot 2s ease-in-out infinite;}
+@keyframes pulse-dot{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.5;transform:scale(.75);}}
+
+.btn{display:inline-flex;align-items:center;gap:8px;border-radius:var(--radius);font-family:'Montserrat',sans-serif;font-weight:600;font-size:15px;text-decoration:none;transition:transform .2s,box-shadow .2s,background .2s,color .2s;cursor:pointer;border:none;}
+.btn-primary{background:var(--orange);color:#fff;padding:14px 28px;}
+.btn-primary:hover{background:var(--orange-dark);transform:translateY(-2px);box-shadow:0 10px 40px rgba(255,92,26,.45);}
+.btn-secondary{background:transparent;color:var(--text);padding:13px 26px;border:1.5px solid var(--border);}
+.btn-secondary:hover{border-color:var(--orange);color:var(--orange);}
+.btn-lg{padding:16px 34px;font-size:16px;}
+
+.fade-up{opacity:0;transform:translateY(30px);transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1);}
+.fade-up.visible{opacity:1;transform:translateY(0);}
+
+/* ── HERO ─────────────────────────────────── */
+#hero{background:var(--bg3);padding-top:80px;}
+.hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;width:100%;}
+.hero-label{font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--muted2);margin-bottom:12px;}
+.hero-h1{font-family:'Brice',sans-serif;font-weight:900;font-size:clamp(52px,6vw,80px);line-height:1.0;margin-bottom:24px;}
+.hero-h1 em{font-style:normal;background:linear-gradient(135deg,#FF7040,#FF3B00);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hero-sub{font-size:17px;color:var(--muted);line-height:1.6;max-width:460px;margin-bottom:36px;}
+.hero-btns{display:flex;gap:14px;flex-wrap:wrap;}
+
+/* ── ORDER TERMINAL ─────────────────────── */
+.terminal{background:#1a1612;border-radius:16px;overflow:hidden;box-shadow:0 40px 80px rgba(0,0,0,.4);}
+.terminal-bar{background:#2a2420;padding:12px 16px;display:flex;align-items:center;gap:8px;}
+.t-dot{width:10px;height:10px;border-radius:50%;}
+.t-dot.red{background:#ff5f56;} .t-dot.yellow{background:#ffbd2e;} .t-dot.green{background:#27c93f;}
+.terminal-title{flex:1;text-align:center;font-size:11px;color:#7a6f62;font-weight:500;letter-spacing:.08em;}
+.terminal-body{padding:20px;font-size:12px;font-family:'Montserrat',monospace;line-height:1.8;}
+.t-line{display:block;margin-bottom:4px;}
+.t-muted{color:#7a6f62;}
+.t-orange{color:#D94F1A;}
+.t-green{color:#27c93f;}
+.t-white{color:#f0ece4;}
+.t-blue{color:#4db6ff;}
+.cursor{display:inline-block;width:8px;height:14px;background:#D94F1A;animation:blink .9s step-end infinite;vertical-align:middle;}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:0;}}
+
+.terminal-order{background:#221e1a;border-radius:10px;padding:14px;margin:12px 0;}
+.order-row{display:flex;justify-content:space-between;align-items:center;font-size:11px;color:#f0ece4;padding:4px 0;border-bottom:1px solid rgba(255,255,255,.05);}
+.order-row:last-child{border:none;}
+.order-total{display:flex;justify-content:space-between;align-items:center;font-size:13px;font-weight:700;color:#D94F1A;padding-top:8px;margin-top:4px;}
+.zero-badge{display:inline-block;background:rgba(42,122,75,.2);border:1px solid rgba(42,122,75,.4);border-radius:6px;padding:3px 10px;font-size:10px;font-weight:700;color:#27c93f;margin-top:12px;}
+
+/* ── SECTIONS ────────────────────────────── */
+.section-pad{padding:120px 0;}
+.section-alt{background:var(--bg2);}
+.feature-label{font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--orange);margin-bottom:16px;}
+.feature-h2{font-family:'Brice',sans-serif;font-weight:900;font-size:clamp(36px,4vw,52px);line-height:1.05;margin-bottom:20px;}
+.feature-p{font-size:16px;color:var(--muted);line-height:1.7;margin-bottom:32px;}
+.feature-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;}
+.feature-list{list-style:none;display:flex;flex-direction:column;gap:14px;margin-bottom:36px;}
+.feature-list li{display:flex;align-items:flex-start;gap:12px;font-size:15px;color:var(--text);line-height:1.5;}
+.feature-list li .check{width:22px;height:22px;border-radius:50%;background:rgba(42,122,75,.1);border:1px solid rgba(42,122,75,.25);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;transition:transform .2s;}
+.feature-list li:hover .check{transform:scale(1.2);}
+.feature-list li .check svg{width:11px;height:11px;stroke:var(--green);}
+
+/* Stats row */
+.stats-row{display:flex;gap:32px;margin-bottom:36px;flex-wrap:wrap;}
+.stat-box{flex:1;min-width:120px;}
+.stat-num{font-family:'Brice',sans-serif;font-weight:900;font-size:clamp(36px,4vw,52px);color:var(--orange);display:block;line-height:1;}
+.stat-label{font-size:13px;color:var(--muted);margin-top:6px;font-weight:500;}
+
+/* Campaign cards */
+.campaign-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;}
+.camp-card{background:#fff;border:1px solid var(--border);border-radius:14px;padding:20px;transition:transform .25s,box-shadow .25s;}
+.camp-card:hover{transform:translateY(-3px);box-shadow:0 12px 30px rgba(0,0,0,.08);}
+.camp-icon{font-size:24px;margin-bottom:12px;}
+.camp-title{font-family:'Brice',sans-serif;font-weight:700;font-size:16px;margin-bottom:8px;}
+.camp-desc{font-size:13px;color:var(--muted);line-height:1.5;}
+.camp-metric{margin-top:12px;padding-top:12px;border-top:1px solid var(--border);font-size:12px;font-weight:600;color:var(--orange);}
+
+/* Meta ads visual */
+.ads-visual{background:#fff;border-radius:16px;border:1px solid var(--border);overflow:hidden;box-shadow:0 20px 50px rgba(0,0,0,.07);}
+.ads-header{background:var(--bg2);padding:16px 20px;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--border);}
+.ads-logo{width:28px;height:28px;border-radius:6px;background:linear-gradient(135deg,#833ab4,#fd1d1d,#fcb045);display:flex;align-items:center;justify-content:center;color:#fff;font-size:14px;}
+.ads-hl{font-size:12px;font-weight:600;}
+.ads-sub{font-size:10px;color:var(--muted);}
+.ads-img{width:100%;height:140px;background:linear-gradient(135deg,#1a1612,#3a3028);display:flex;align-items:center;justify-content:center;font-size:36px;}
+.ads-body{padding:16px 20px;}
+.ads-cta-row{display:flex;align-items:center;justify-content:space-between;margin-top:12px;}
+.ads-btn{background:var(--orange);color:#fff;border-radius:8px;padding:8px 16px;font-size:12px;font-weight:600;}
+.ads-reach{font-size:11px;color:var(--muted);}
+.ads-kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border-top:1px solid var(--border);}
+.ads-kpi{background:#fff;padding:12px;text-align:center;}
+.ads-kpi-num{font-family:'Brice',sans-serif;font-weight:900;font-size:20px;color:var(--text);}
+.ads-kpi-label{font-size:10px;color:var(--muted);margin-top:2px;}
+
+/* CTA section */
+#cta-escala{background:var(--bg3);text-align:center;}
+.cta-h2{font-family:'Brice',sans-serif;font-weight:900;font-size:clamp(44px,6vw,72px);line-height:1.05;margin-bottom:24px;max-width:700px;margin-left:auto;margin-right:auto;}
+.cta-h2 em{font-style:normal;background:linear-gradient(135deg,#FF7040,#FF3B00);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.cta-sub{font-size:17px;color:var(--muted);max-width:500px;margin:0 auto 44px;line-height:1.6;}
+.cta-btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;}
+
+/* page nav */
+.page-nav{background:var(--bg);border-top:1px solid var(--border);padding:48px 40px;}
+.page-nav-inner{max-width:1140px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;}
+.page-nav-btn{display:flex;align-items:center;gap:14px;text-decoration:none;padding:18px 24px;border-radius:16px;border:1.5px solid var(--border);background:#fff;transition:border-color .2s,box-shadow .2s,transform .2s;}
+.page-nav-btn:hover{border-color:var(--orange);transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.08);}
+.nav-num{font-size:11px;font-weight:600;letter-spacing:.12em;color:var(--muted2);text-transform:uppercase;}
+.nav-label{font-family:'Brice',sans-serif;font-weight:700;font-size:18px;color:var(--text);margin-top:2px;}
+.nav-arrow{font-size:22px;color:var(--orange);}
+.page-nav-home{font-family:'Montserrat',sans-serif;font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .2s;}
+.page-nav-home:hover{color:var(--orange);}
+
+.scroll-nav{position:fixed;right:28px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:10px;z-index:90;}
+.scroll-dot{width:8px;height:8px;border-radius:50%;background:var(--border);display:block;text-decoration:none;transition:background .25s,transform .25s;}
+.scroll-dot.active{background:var(--orange);transform:scale(1.4);}
+.scroll-dot:hover{background:var(--muted);}
+
+@media(max-width:900px){
+  .hero-grid,.feature-grid{grid-template-columns:1fr;gap:40px;}
+  nav{padding:18px 24px;} .container{padding:0 24px;} .scroll-nav{display:none;}
+  .campaign-grid{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<nav id="main-nav">
+  <a href="secretaria.html" class="nav-back">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+    Secretaría
+  </a>
+  <a href="index.html" class="nav-logo"><span class="dot">●</span> FORNNO</a>
+  <a href="fidelizacion.html" class="nav-next">
+    Fidelización
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+  </a>
+</nav>
+
+<nav class="scroll-nav">
+  <a href="#hero"       class="scroll-dot active" title="Escalabilidad"></a>
+  <a href="#pedidos"    class="scroll-dot" title="Agente de pedidos"></a>
+  <a href="#campanas"   class="scroll-dot" title="Campañas"></a>
+  <a href="#meta-ads"   class="scroll-dot" title="Meta Ads"></a>
+  <a href="#cta-escala" class="scroll-dot" title="Escalar"></a>
+</nav>
+
+<!-- HERO -->
+<section class="screen" id="hero">
+  <div class="container" style="width:100%;">
+    <div class="hero-grid">
+      <div>
+        <p class="hero-label fade-up">02 — Escalabilidad</p>
+        <div class="section-tag fade-up" style="transition-delay:.1s">
+          <span class="dot"></span>
+          Pedidos directos · 0% comisión
+        </div>
+        <h1 class="hero-h1 fade-up" style="transition-delay:.2s">
+          Más pedidos.<br>Menos<br><em>intermediarios.</em>
+        </h1>
+        <p class="hero-sub fade-up" style="transition-delay:.3s">
+          Un agente que toma pedidos de delivery y take away directamente por WhatsApp, los ingresa al sistema y cobra sin ceder comisiones a nadie.
+        </p>
+        <div class="hero-btns fade-up" style="transition-delay:.4s">
+          <a href="#pedidos" class="btn btn-primary btn-lg">Ver el agente →</a>
+          <a href="#campanas" class="btn btn-secondary btn-lg">Campañas automatizadas</a>
+        </div>
+      </div>
+
+      <!-- Terminal visual -->
+      <div class="fade-up" style="transition-delay:.5s;">
+        <div class="terminal">
+          <div class="terminal-bar">
+            <span class="t-dot red"></span>
+            <span class="t-dot yellow"></span>
+            <span class="t-dot green"></span>
+            <span class="terminal-title">Agente FORNNO — Pedidos</span>
+          </div>
+          <div class="terminal-body">
+            <span class="t-line"><span class="t-muted">[10:47]</span> <span class="t-green">Nuevo pedido recibido</span> <span class="t-muted">vía WhatsApp</span></span>
+            <span class="t-line"><span class="t-muted">Cliente:</span> <span class="t-white">Lucía M. · +54 11 4455-****</span></span>
+            <div class="terminal-order">
+              <div class="order-row"><span>2× Milanesa napolitana</span><span class="t-orange">$7.200</span></div>
+              <div class="order-row"><span>1× Ensalada mixta</span><span class="t-orange">$2.400</span></div>
+              <div class="order-row"><span>2× Agua mineral</span><span class="t-orange">$900</span></div>
+              <div class="order-total"><span>TOTAL</span><span>$10.500</span></div>
+            </div>
+            <span class="t-line"><span class="t-muted">Entrega:</span> <span class="t-blue">Delivery — Av. Corrientes 1840</span></span>
+            <span class="t-line"><span class="t-muted">Pago:</span> <span class="t-green">MercadoPago confirmado ✓</span></span>
+            <span class="t-line"><span class="t-muted">Comisión plataforma:</span> <span class="t-green">$0 — directo</span></span>
+            <span class="zero-badge">0% COMISIÓN</span>
+            <span class="t-line" style="margin-top:12px;"><span class="t-orange">›</span> <span class="cursor"></span></span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <span class="bg-num">02</span>
+</section>
+
+<!-- AGENTE DE PEDIDOS -->
+<section id="pedidos" class="section-pad section-alt">
+  <div class="container">
+    <div class="feature-grid">
+      <div class="fade-up">
+        <p class="feature-label">02 · A — Agente de pedidos</p>
+        <h2 class="feature-h2">Tu cajero digital,<br>activo 24/7.</h2>
+        <p class="feature-p">El cliente escribe por WhatsApp, elige del menú, confirma, paga y recibe su pedido. Tu equipo solo se ocupa de prepararlo.</p>
+        <div class="stats-row">
+          <div class="stat-box">
+            <span class="stat-num" data-target="0">0</span>
+            <span class="stat-label">% de comisión a terceros</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-num" data-target="24">0</span>
+            <span class="stat-label">horas activo sin parar</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-num" data-target="3">0</span>
+            <span class="stat-label">minutos por pedido promedio</span>
+          </div>
+        </div>
+        <ul class="feature-list">
+          <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Toma pedidos de delivery y take away directamente</li>
+          <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Ingresa el pedido al sistema de gestión del restaurante</li>
+          <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Procesa el cobro sin intermediarios</li>
+          <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Confirma tiempos de entrega en tiempo real</li>
+          <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Tu data, tus clientes — sin cederlos a plataformas</li>
+        </ul>
+        <a href="#cta-escala" class="btn btn-primary">Activar agente de pedidos →</a>
+      </div>
+      <div class="fade-up" style="transition-delay:.15s;background:#fff;border:1px solid var(--border);border-radius:20px;padding:32px;box-shadow:0 20px 60px rgba(0,0,0,.07);">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:20px;">
+          <div style="width:40px;height:40px;border-radius:10px;background:var(--orange-glow);display:flex;align-items:center;justify-content:center;font-size:18px;">🛵</div>
+          <div><div style="font-family:'Brice',sans-serif;font-weight:700;font-size:16px;">Pedidos del día</div><div style="font-size:11px;color:var(--muted);">Actualización en vivo</div></div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px;">
+          <div style="background:var(--bg2);border-radius:12px;padding:16px;text-align:center;">
+            <span style="font-family:'Brice',sans-serif;font-weight:900;font-size:32px;color:var(--orange);display:block;" data-target="47">0</span>
+            <span style="font-size:11px;color:var(--muted);">Pedidos hoy</span>
+          </div>
+          <div style="background:var(--bg2);border-radius:12px;padding:16px;text-align:center;">
+            <span style="font-family:'Brice',sans-serif;font-weight:900;font-size:32px;color:var(--green);display:block;" data-target="0">$0</span>
+            <span style="font-size:11px;color:var(--muted);">Comisión pagada</span>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:10px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;background:var(--bg);border-radius:10px;padding:12px 16px;font-size:13px;">
+            <span>🛵 Delivery — Av. Corrientes</span>
+            <span style="color:var(--green);font-weight:600;">En camino</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;background:var(--bg);border-radius:10px;padding:12px 16px;font-size:13px;">
+            <span>🥡 Take away — Lucas P.</span>
+            <span style="color:var(--orange);font-weight:600;">Preparando</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;background:var(--bg);border-radius:10px;padding:12px 16px;font-size:13px;">
+            <span>🛵 Delivery — Palermo</span>
+            <span style="color:var(--muted);font-weight:600;">Confirmado</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CAMPAÑAS -->
+<section id="campanas" class="section-pad">
+  <div class="container">
+    <div class="feature-grid">
+      <div class="fade-up">
+        <p class="feature-label">02 · B — Marketing automatizado</p>
+        <h2 class="feature-h2">El mensaje justo<br>en el momento<br>exacto.</h2>
+        <p class="feature-p">El agente segmenta tu base de clientes por comportamiento y dispara campañas personalizadas sin que tengas que hacer nada.</p>
+        <ul class="feature-list">
+          <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Mensajes de cumpleaños con oferta personalizada</li>
+          <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Celebración de hitos de lealtad (pedido 10, 20, 50…)</li>
+          <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Anuncios de nuevos platos y menús de temporada</li>
+          <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Segmentación por ticket promedio, frecuencia y zona</li>
+          <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Todo en WhatsApp — sin email marketing ignorado</li>
+        </ul>
+        <a href="#cta-escala" class="btn btn-primary">Quiero campañas automáticas →</a>
+      </div>
+      <div class="campaign-grid fade-up" style="transition-delay:.15s;">
+        <div class="camp-card">
+          <div class="camp-icon">🎂</div>
+          <div class="camp-title">Cumpleaños</div>
+          <p class="camp-desc">Mensaje automático el día del cumpleaños con un descuento o regalo del restaurante.</p>
+          <div class="camp-metric">↑ 22% conversión promedio</div>
+        </div>
+        <div class="camp-card">
+          <div class="camp-icon">🏆</div>
+          <div class="camp-title">Hitos de lealtad</div>
+          <p class="camp-desc">Celebra cada 10 pedidos con un beneficio exclusivo que refuerza el hábito.</p>
+          <div class="camp-metric">↑ 31% recompra</div>
+        </div>
+        <div class="camp-card">
+          <div class="camp-icon">🍽️</div>
+          <div class="camp-title">Nuevo menú</div>
+          <p class="camp-desc">Lanzá nuevos platos al segmento más receptivo antes de comunicarlo masivamente.</p>
+          <div class="camp-metric">↑ 18% pedidos de lanzamiento</div>
+        </div>
+        <div class="camp-card">
+          <div class="camp-icon">🌿</div>
+          <div class="camp-title">Temporada</div>
+          <p class="camp-desc">Promos de invierno, verano, semana santa y eventos especiales automatizadas.</p>
+          <div class="camp-metric">↑ 27% ticket en temporada</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- META ADS -->
+<section id="meta-ads" class="section-pad section-alt">
+  <div class="container">
+    <div class="feature-grid">
+      <div class="ads-visual fade-up">
+        <div class="ads-header">
+          <div class="ads-logo">f</div>
+          <div>
+            <div class="ads-hl">La Nonna · Publicidad</div>
+            <div class="ads-sub">Patrocinado · Tu zona</div>
+          </div>
+        </div>
+        <div class="ads-img">🍝</div>
+        <div class="ads-body">
+          <div style="font-family:'Brice',sans-serif;font-weight:700;font-size:16px;margin-bottom:6px;">La mejor milanesa de Palermo — Reservá ahora</div>
+          <div style="font-size:12px;color:var(--muted);line-height:1.5;">Pedí delivery directo sin comisiones o visitanos esta semana. Promos de lanzamiento de verano.</div>
+          <div class="ads-cta-row">
+            <div class="ads-btn">Pedir ahora</div>
+            <div class="ads-reach">🎯 Alcance: 8.400 personas</div>
+          </div>
+        </div>
+        <div class="ads-kpis">
+          <div class="ads-kpi"><div class="ads-kpi-num">4.2×</div><div class="ads-kpi-label">ROAS</div></div>
+          <div class="ads-kpi"><div class="ads-kpi-num">$1.4</div><div class="ads-kpi-label">Costo/clic</div></div>
+          <div class="ads-kpi"><div class="ads-kpi-num">8.4K</div><div class="ads-kpi-label">Alcance</div></div>
+        </div>
+      </div>
+      <div class="fade-up" style="transition-delay:.15s;">
+        <p class="feature-label">02 · C — Meta Ads</p>
+        <h2 class="feature-h2">Campañas pagadas<br>que llenan<br>mesas.</h2>
+        <p class="feature-p">Publicidad en Facebook e Instagram gestionada por FORNNO, geolocalizadas para tu zona, orientadas a objetivos concretos: reservas, delivery, eventos y tráfico físico.</p>
+        <ul class="feature-list">
+          <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Geolocalización por radio al restaurante</li>
+          <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Campañas de reservas, delivery y eventos por separado</li>
+          <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Creatives producidos por el equipo de FORNNO</li>
+          <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Reporte mensual de ROAS, alcance y conversiones</li>
+        </ul>
+        <a href="#cta-escala" class="btn btn-primary">Escalar con Meta Ads →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="screen" id="cta-escala" style="background:var(--bg3);">
+  <div class="container" style="width:100%;text-align:center;position:relative;z-index:1;">
+    <div class="section-tag fade-up" style="display:inline-flex;margin-bottom:32px;"><span class="dot"></span>Escalabilidad real</div>
+    <h2 class="cta-h2 fade-up" style="transition-delay:.1s">Más ventas.<br><em>Sin más personal.</em></h2>
+    <p class="cta-sub fade-up" style="transition-delay:.2s">El sistema trabaja mientras vos atendés el salón. Pedidos, campañas y ads — en paralelo, sin fricción.</p>
+    <div class="cta-btns fade-up" style="transition-delay:.3s;">
+      <a href="fidelizacion.html" class="btn btn-primary btn-lg">Ver Fidelización →</a>
+      <a href="index.html" class="btn btn-secondary btn-lg">Volver al inicio</a>
+    </div>
+  </div>
+  <span class="bg-num" style="right:50%;transform:translateX(50%);">02</span>
+</section>
+
+<div class="page-nav">
+  <div class="page-nav-inner">
+    <a href="secretaria.html" class="page-nav-btn">
+      <span class="nav-arrow">←</span>
+      <div><div class="nav-num">01 — Anterior</div><div class="nav-label">Secretaría</div></div>
+    </a>
+    <a href="index.html" class="page-nav-home">⬤ FORNNO</a>
+    <a href="fidelizacion.html" class="page-nav-btn">
+      <div style="text-align:right;"><div class="nav-num">03 — Siguiente</div><div class="nav-label">Fidelización</div></div>
+      <span class="nav-arrow">→</span>
+    </a>
+  </div>
+</div>
+
+<script>
+const nav=document.getElementById('main-nav');
+window.addEventListener('scroll',()=>{nav.classList.toggle('solid',window.scrollY>60);},{passive:true});
+const dots=document.querySelectorAll('.scroll-dot');
+const dotObs=new IntersectionObserver((e)=>{e.forEach(en=>{if(en.isIntersecting&&en.intersectionRatio>=.4){dots.forEach(d=>d.classList.remove('active'));const d=document.querySelector(`.scroll-dot[href="#${en.target.id}"]`);if(d)d.classList.add('active');}});},{threshold:.4});
+document.querySelectorAll('section[id]').forEach(s=>dotObs.observe(s));
+const fuObs=new IntersectionObserver((e)=>{e.forEach(en=>{if(en.isIntersecting){en.target.classList.add('visible');fuObs.unobserve(en.target);}});},{threshold:.12});
+document.querySelectorAll('.fade-up').forEach(el=>fuObs.observe(el));
+function animCounter(el,target){
+  let start=null;const dur=1800;
+  function step(ts){if(!start)start=ts;const p=Math.min((ts-start)/dur,1);const e=1-Math.pow(1-p,3);
+  el.textContent=Math.floor(e*target)+(el.dataset.suffix||'');if(p<1)requestAnimationFrame(step);else el.textContent=target+(el.dataset.suffix||'');}
+  requestAnimationFrame(step);
+}
+const cObs=new IntersectionObserver((e)=>{e.forEach(en=>{if(en.isIntersecting){const t=parseInt(en.target.dataset.target);animCounter(en.target,t);cObs.unobserve(en.target);}});},{threshold:.5});
+document.querySelectorAll('[data-target]').forEach(el=>cObs.observe(el));
+</script>
+</body>
+</html>

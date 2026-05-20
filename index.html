@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>FORNNO — El sistema de crecimiento para restaurantes</title>
+  <meta name="description" content="Secretaría, escalabilidad, fidelización, app, agencia y web en un solo sistema."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    @font-face{font-family:'Brice';font-weight:400;src:url('Brice_Font/Brice-Regular.woff2') format('woff2');font-display:swap;}
+    @font-face{font-family:'Brice';font-weight:600;src:url('Brice_Font/Brice-Semi-Bold.woff2') format('woff2');font-display:swap;}
+    @font-face{font-family:'Brice';font-weight:700;src:url('Brice_Font/Brice-Bold.woff2') format('woff2');font-display:swap;}
+    @font-face{font-family:'Brice';font-weight:900;src:url('Brice_Font/Brice-Black.woff2') format('woff2');font-display:swap;}
+  </style>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    :root{
+      --orange:#D94F1A; --orange-dark:#B83D10;
+      --orange-glow:rgba(217,79,26,0.14);
+      --bg:#F5F0E8; --bg2:#EDE8DE; --bg3:#E5DFD3;
+      --border:#D4CCC0; --text:#1A1612;
+      --muted:#7A6F62; --muted2:#A89E94;
+      --green:#2a7a4b; --radius:12px;
+      --dark:#1A1612; --dark2:#111;
+    }
+    html{scroll-behavior:smooth;}
+    body{
+      background:var(--bg);color:var(--text);
+      font-family:'Montserrat',sans-serif;
+      font-size:16px;line-height:1.6;
+      -webkit-font-smoothing:antialiased;
+      overflow-x:hidden;
+    }
+    h1,h2,h3{font-family:'Brice',sans-serif;line-height:1.0;letter-spacing:-0.02em;}
+
+    /* ── NAV ── */
+    nav{
+      position:fixed;top:0;left:0;right:0;z-index:200;
+      padding:18px 0;
+      transition:background .4s,border-color .4s;
+    }
+    nav.solid{background:rgba(245,240,232,.97);border-bottom:1px solid var(--border);}
+    nav.solid-dark{background:rgba(26,22,18,.97);border-bottom:1px solid rgba(255,255,255,.06);}
+    .nav-inner{
+      display:flex;align-items:center;justify-content:space-between;
+      max-width:1200px;margin:0 auto;padding:0 32px;
+    }
+    .nav-logo{text-decoration:none;display:flex;align-items:center;transition:opacity .2s;}
+    .nav-logo:hover{opacity:.8;}
+    .nav-links{display:flex;align-items:center;gap:28px;}
+    .nav-links a{
+      font-size:13px;font-weight:500;color:var(--muted);
+      text-decoration:none;transition:color .2s;letter-spacing:.01em;
+    }
+    .nav-links a:hover{color:var(--text);}
+    .nav-links.dark a{color:rgba(255,255,255,.5);}
+    .nav-links.dark a:hover{color:#fff;}
+    .btn{
+      display:inline-flex;align-items:center;gap:8px;
+      font-size:14px;font-weight:600;
+      padding:12px 24px;border-radius:8px;
+      border:none;cursor:pointer;text-decoration:none;
+      transition:transform .2s,box-shadow .2s,background .2s,opacity .2s;
+    }
+    .btn-primary{background:var(--orange);color:#fff;}
+    .btn-primary:hover{background:var(--orange-dark);transform:translateY(-2px);box-shadow:0 8px 30px rgba(255,92,26,.4);}
+    .btn-ghost{background:transparent;color:var(--text);border:1.5px solid var(--border);}
+    .btn-ghost:hover{border-color:var(--orange);color:var(--orange);}
+    .btn-ghost-white{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.25);}
+    .btn-ghost-white:hover{border-color:var(--orange);color:var(--orange);}
+    .btn-lg{font-size:17px;padding:16px 36px;border-radius:10px;}
+    .btn-xl{font-size:18px;padding:20px 44px;border-radius:10px;}
+    .btn svg{flex-shrink:0;transition:transform .2s;}
+    .btn:hover svg{transform:translateX(4px);}
+
+    /* ── HAMBURGER ── */
+    .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px;background:none;border:none;}
+    .hamburger span{display:block;width:22px;height:2px;background:var(--text);border-radius:2px;transition:transform .3s,opacity .3s;}
+    .hamburger.dark span{background:#fff;}
+    .hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+    .hamburger.open span:nth-child(2){opacity:0;}
+    .hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+    .mobile-menu{
+      display:none;position:fixed;inset:0;z-index:190;
+      background:var(--bg);padding:88px 28px 32px;
+      flex-direction:column;gap:0;
+      transform:translateY(-100%);transition:transform .4s cubic-bezier(.22,1,.36,1);
+    }
+    .mobile-menu.open{transform:translateY(0);}
+    .mobile-menu a{
+      font-family:'Brice',sans-serif;font-size:36px;font-weight:900;
+      color:var(--text);text-decoration:none;padding:16px 0;
+      border-bottom:1px solid var(--border);
+      transition:color .2s;
+    }
+    .mobile-menu a:hover{color:var(--orange);}
+    .mobile-menu-cta{margin-top:32px;display:flex;gap:12px;flex-wrap:wrap;}
+    @media(max-width:768px){
+      .nav-links,.nav-cta{display:none;}
+      .hamburger{display:flex;}
+      .mobile-menu{display:flex;}
+    }
+
+    /* ── SCROLL DOTS (right rail) ── */
+    .scroll-dots{
+      position:fixed;right:24px;top:50%;transform:translateY(-50%);
+      z-index:150;display:flex;flex-direction:column;gap:10px;
+    }
+    .scroll-dot{
+      width:8px;height:8px;border-radius:50%;
+      background:var(--border);border:none;cursor:pointer;
+      transition:background .3s,transform .3s,width .3s;
+      text-decoration:none;display:block;
+    }
+    .scroll-dot.active{background:var(--orange);transform:scale(1.4);}
+    .scroll-dot.dark-rail{background:rgba(255,255,255,.2);}
+    .scroll-dot.dark-rail.active{background:var(--orange);}
+    @media(max-width:768px){.scroll-dots{display:none;}}
+
+    /* ── FULL SCREEN SECTIONS ── */
+    .screen{
+      min-height:100vh;
+      display:flex;align-items:center;
+      position:relative;overflow:hidden;
+    }
+    .screen-dark{background:var(--dark);color:#fff;}
+    .screen-bg2{background:var(--bg2);}
+    .screen-bg3{background:var(--bg3);}
+
+    /* Big decorative background number */
+    .bg-num{
+      position:absolute;
+      font-family:'Brice',sans-serif;font-weight:900;
+      font-size:clamp(280px,35vw,500px);
+      line-height:1;letter-spacing:-0.04em;
+      color:rgba(0,0,0,0.035);
+      right:-2vw;bottom:-4vh;
+      pointer-events:none;user-select:none;
+    }
+    .screen-dark .bg-num{color:rgba(255,255,255,0.028);}
+
+    .screen-inner{
+      display:grid;grid-template-columns:1fr 1fr;
+      gap:80px;align-items:center;
+      max-width:1200px;margin:0 auto;padding:0 48px;
+      width:100%;position:relative;z-index:1;
+    }
+    @media(max-width:900px){
+      .screen-inner{grid-template-columns:1fr;gap:48px;padding:0 24px;}
+      .screen-visual{display:none;}
+    }
+
+    .screen-eyebrow{
+      font-size:11px;font-weight:700;letter-spacing:.14em;
+      text-transform:uppercase;color:var(--orange);
+      margin-bottom:20px;display:block;
+    }
+    .screen-h2{
+      font-size:clamp(48px,6vw,82px);font-weight:900;
+      margin-bottom:20px;line-height:.95;
+    }
+    .screen-h2 em{font-style:normal;color:var(--orange);}
+    .screen-dark .screen-h2{color:#fff;}
+    .screen-p{
+      font-size:clamp(15px,1.5vw,18px);color:var(--muted);
+      line-height:1.7;max-width:460px;margin-bottom:36px;
+    }
+    .screen-dark .screen-p{color:rgba(255,255,255,.55);}
+
+    .screen-actions{display:flex;gap:14px;flex-wrap:wrap;align-items:center;}
+
+    /* ── SCROLL CUE ── */
+    .scroll-cue{
+      position:absolute;bottom:32px;left:50%;transform:translateX(-50%);
+      display:flex;flex-direction:column;align-items:center;gap:6px;
+      opacity:.4;animation:cue-bounce 2s ease-in-out infinite;
+    }
+    .scroll-cue span{font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;}
+    .scroll-cue svg{width:16px;height:16px;}
+    .screen-dark .scroll-cue{color:#fff;}
+    @keyframes cue-bounce{0%,100%{transform:translateX(-50%) translateY(0);}50%{transform:translateX(-50%) translateY(5px);}}
+
+    /* ── HERO ── */
+    .hero{
+      min-height:100vh;padding:100px 0 60px;
+      text-align:center;position:relative;overflow:hidden;
+      background:var(--bg);display:flex;align-items:center;
+    }
+    .hero-glow{
+      position:absolute;top:-120px;left:50%;transform:translateX(-50%);
+      width:900px;height:900px;
+      background:radial-gradient(ellipse,rgba(255,92,26,.12) 0%,transparent 65%);
+      pointer-events:none;animation:glow-pulse 4s ease-in-out infinite;
+    }
+    @keyframes glow-pulse{
+      0%,100%{opacity:1;transform:translateX(-50%) scale(1);}
+      50%{opacity:.7;transform:translateX(-50%) scale(1.08);}
+    }
+    .hero-particle{
+      position:absolute;border-radius:50%;
+      background:var(--orange);opacity:0;
+      animation:float-particle linear infinite;
+    }
+    @keyframes float-particle{
+      0%{opacity:0;transform:translateY(0) scale(0);}
+      10%{opacity:.4;}90%{opacity:.1;}
+      100%{opacity:0;transform:translateY(-300px) scale(1.5);}
+    }
+    .hero-inner{
+      max-width:1200px;margin:0 auto;padding:0 32px;
+      position:relative;z-index:1;width:100%;
+    }
+    .hero h1{
+      font-size:clamp(54px,8.5vw,110px);font-weight:900;
+      max-width:960px;margin:0 auto 24px;line-height:.93;
+    }
+    .hero h1 em{
+      font-style:normal;
+      background:linear-gradient(135deg,#FF7040,#FF3B00);
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+      background-clip:text;
+    }
+    .hero-sub{
+      font-size:clamp(16px,2vw,20px);color:var(--muted);
+      max-width:540px;margin:0 auto 44px;line-height:1.7;
+    }
+    .hero-actions{display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;}
+    .hero-note{font-size:13px;color:var(--muted2);margin-top:18px;}
+    .fade-up{opacity:0;transform:translateY(28px);transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1);}
+    .fade-up.visible{opacity:1;transform:translateY(0);}
+
+    /* ── IPHONE MINI (for section 01 visual) ── */
+    .iphone-wrap{
+      display:flex;justify-content:center;align-items:center;
+      position:relative;
+    }
+    .iphone{
+      width:230px;height:460px;
+      border:8px solid #1a1a1a;border-radius:38px;
+      background:#f0ece4;position:relative;overflow:hidden;
+      box-shadow:0 0 0 1.5px #333,0 40px 80px rgba(0,0,0,.3),inset 0 0 0 1px rgba(255,255,255,.05);
+    }
+    .iphone::before{/* dynamic island */
+      content:'';position:absolute;top:6px;left:50%;transform:translateX(-50%);
+      width:72px;height:22px;background:#1a1a1a;border-radius:12px;z-index:20;
+    }
+    .iphone-screen{
+      height:100%;background:#f5f0e8;display:flex;
+      flex-direction:column;padding-top:40px;
+    }
+    .iphone-bar{
+      display:flex;align-items:center;gap:10px;
+      padding:10px 14px 10px;border-bottom:1px solid rgba(0,0,0,.07);
+      background:rgba(255,255,255,.8);backdrop-filter:blur(8px);
+    }
+    .iphone-avatar{
+      width:34px;height:34px;border-radius:50%;
+      background:var(--orange-glow);border:1px solid rgba(217,79,26,.3);
+      display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;
+    }
+    .iphone-name{font-size:12px;font-weight:700;color:var(--text);}
+    .iphone-status{font-size:10px;color:var(--green);display:flex;align-items:center;gap:4px;}
+    .iphone-status::before{content:'';width:5px;height:5px;background:var(--green);border-radius:50%;display:inline-block;animation:pulse-dot 2s ease-in-out infinite;}
+    @keyframes pulse-dot{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.5;transform:scale(.7);}}
+    .iphone-msgs{flex:1;padding:12px 10px;display:flex;flex-direction:column;gap:10px;overflow:hidden;}
+    .imsg{
+      border-radius:14px;padding:9px 12px;font-size:11px;line-height:1.5;
+      max-width:82%;opacity:0;
+      animation:imsg-in 9s ease infinite;
+    }
+    .imsg.bot{
+      background:#fff;border:1px solid rgba(0,0,0,.07);
+      border-radius:4px 14px 14px 14px;align-self:flex-start;color:var(--text);
+    }
+    .imsg.user{
+      background:var(--orange);color:#fff;
+      border-radius:14px 4px 14px 14px;align-self:flex-end;
+    }
+    .imsg:nth-child(1){animation-delay:.5s;}
+    .imsg:nth-child(2){animation-delay:2.5s;}
+    .imsg:nth-child(3){animation-delay:4.5s;}
+    .imsg:nth-child(4){animation-delay:6.5s;}
+    @keyframes imsg-in{
+      0%{opacity:0;transform:translateY(8px) scale(.97);}
+      8%{opacity:1;transform:translateY(0) scale(1);}
+      75%{opacity:1;}
+      88%,100%{opacity:0;}
+    }
+    .iphone-confirm{
+      margin:0 10px 12px;padding:8px 12px;
+      background:rgba(42,122,75,.1);border:1px solid rgba(42,122,75,.2);
+      border-radius:8px;display:flex;align-items:center;justify-content:space-between;
+      font-size:10px;font-weight:700;color:var(--green);
+      opacity:0;animation:imsg-in 9s ease infinite;animation-delay:6.8s;
+    }
+    .iphone-confirm span{color:var(--orange);}
+
+    /* glow behind phone */
+    .iphone-glow{
+      position:absolute;width:280px;height:280px;border-radius:50%;
+      background:radial-gradient(circle,rgba(217,79,26,.12),transparent 70%);
+      top:50%;left:50%;transform:translate(-50%,-50%);
+      pointer-events:none;
+    }
+
+    /* ── SECTION 02 VISUAL: floating stats ── */
+    .stat-floats{position:relative;width:280px;height:240px;}
+    .stat-float{
+      position:absolute;
+      background:rgba(255,255,255,.05);
+      border:1px solid rgba(255,255,255,.1);
+      border-radius:14px;padding:20px 24px;
+      backdrop-filter:blur(12px);
+    }
+    .stat-float:nth-child(1){top:0;left:0;}
+    .stat-float:nth-child(2){bottom:0;right:0;}
+    .stat-float-num{
+      font-family:'Brice',sans-serif;font-size:44px;font-weight:900;
+      line-height:1;color:#fff;
+    }
+    .stat-float-num.green{color:#4ade80;}
+    .stat-float-label{font-size:11px;color:rgba(255,255,255,.45);margin-top:6px;font-weight:600;letter-spacing:.04em;}
+    .stat-float-badge{
+      display:inline-flex;margin-top:12px;
+      font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+      color:var(--orange);background:var(--orange-glow);
+      padding:3px 8px;border-radius:4px;border:1px solid rgba(217,79,26,.2);
+    }
+
+    /* ── SECTION 03 VISUAL: mini loyalty card ── */
+    .loyalty-mini{
+      width:280px;
+      background:linear-gradient(145deg,#1a1a1a,#111);
+      border:1px solid #2a2a2a;border-radius:18px;padding:24px;
+      position:relative;overflow:hidden;
+    }
+    .loyalty-mini::before{
+      content:'';position:absolute;top:0;left:0;right:0;height:3px;
+      background:linear-gradient(90deg,var(--orange),#FF3B00);
+    }
+    .loyalty-mini-brand{font-family:'Brice',sans-serif;font-size:15px;font-weight:900;color:#fff;letter-spacing:.04em;text-transform:uppercase;}
+    .loyalty-mini-sub{font-size:9px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--orange);margin-top:3px;}
+    .loyalty-mini-pts{font-family:'Brice',sans-serif;font-size:42px;font-weight:900;color:var(--orange);line-height:1;margin-top:20px;}
+    .loyalty-mini-ptslabel{font-size:10px;color:rgba(255,255,255,.3);margin-top:4px;}
+    .loyalty-mini-bar{height:4px;background:rgba(255,255,255,.1);border-radius:99px;margin-top:16px;overflow:hidden;}
+    .loyalty-mini-fill{height:100%;width:68%;background:linear-gradient(90deg,var(--orange),#FF3B00);border-radius:99px;}
+    .loyalty-mini-chips{display:flex;gap:6px;margin-top:16px;flex-wrap:wrap;}
+    .loyalty-chip{
+      font-size:9px;font-weight:700;padding:3px 8px;border-radius:4px;
+      background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);color:rgba(255,255,255,.4);
+    }
+
+    /* ── SECTION 04 VISUAL: dashboard card ── */
+    .dash-mini{
+      width:280px;
+      background:var(--bg);border:1px solid var(--border);
+      border-radius:14px;overflow:hidden;
+    }
+    .dash-mini-header{
+      background:var(--bg2);border-bottom:1px solid var(--border);
+      padding:14px 18px;display:flex;align-items:center;justify-content:space-between;
+    }
+    .dash-mini-title{font-size:12px;font-weight:700;color:var(--text);}
+    .dash-mini-tag{font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--orange);background:var(--orange-glow);padding:2px 7px;border-radius:4px;}
+    .dash-mini-body{padding:16px;}
+    .dash-mini-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px;}
+    .dash-mini-card{background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:12px;}
+    .dash-mini-card-label{font-size:9px;color:var(--muted);margin-bottom:4px;text-transform:uppercase;letter-spacing:.06em;}
+    .dash-mini-card-val{font-family:'Brice',sans-serif;font-size:22px;font-weight:900;}
+    .dash-mini-card-val.up{color:var(--green);}
+    .dash-mini-card-val.org{color:var(--orange);}
+    .dash-mini-alert{
+      background:rgba(42,122,75,.08);border:1px solid rgba(42,122,75,.15);
+      border-radius:8px;padding:10px 12px;
+      font-size:11px;color:var(--green);font-weight:600;
+    }
+
+    /* ── SECTION 05 VISUAL: agency grid ── */
+    .agency-grid-mini{
+      display:grid;grid-template-columns:repeat(3,1fr);gap:10px;
+      width:260px;
+    }
+    .agency-icon-mini{
+      background:rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:10px;padding:14px 10px;
+      text-align:center;
+      transition:background .3s,border-color .3s;
+      cursor:default;
+    }
+    .agency-icon-mini:hover{background:rgba(217,79,26,.1);border-color:rgba(217,79,26,.25);}
+    .agency-icon-mini .icon{font-size:22px;display:block;margin-bottom:6px;}
+    .agency-icon-mini .label{font-size:9px;font-weight:600;color:rgba(255,255,255,.4);letter-spacing:.04em;text-transform:uppercase;}
+
+    /* ── SECTION 06 VISUAL: search result ── */
+    .search-mock{
+      width:280px;
+      background:var(--bg3);border:1px solid var(--border);
+      border-radius:12px;overflow:hidden;
+    }
+    .search-bar{
+      background:var(--bg2);border-bottom:1px solid var(--border);
+      padding:12px 16px;display:flex;align-items:center;gap:10px;
+    }
+    .search-icon{color:var(--muted);font-size:14px;}
+    .search-query{font-size:12px;color:var(--text);font-weight:500;}
+    .search-result{padding:16px;border-bottom:1px solid var(--border);}
+    .search-result-rank{
+      display:inline-flex;align-items:center;gap:4px;
+      font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;
+      color:var(--green);background:rgba(42,122,75,.1);
+      padding:2px 7px;border-radius:4px;margin-bottom:8px;
+    }
+    .search-result-url{font-size:10px;color:var(--green);margin-bottom:4px;}
+    .search-result-title{font-size:13px;font-weight:700;color:var(--text);margin-bottom:4px;}
+    .search-result-desc{font-size:11px;color:var(--muted);line-height:1.5;}
+    .search-result2{padding:16px;opacity:.5;}
+
+    /* ── FOOTER ── */
+    footer{
+      background:var(--dark);color:rgba(255,255,255,.6);
+      border-top:1px solid rgba(255,255,255,.06);
+      padding:48px 0;
+    }
+    .footer-inner{
+      max-width:1200px;margin:0 auto;padding:0 32px;
+      display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:24px;
+    }
+    .footer-logo{font-family:'Brice',sans-serif;font-size:20px;font-weight:900;color:#fff;text-decoration:none;}
+    .footer-logo span{color:var(--orange);}
+    .footer-links{display:flex;gap:24px;}
+    .footer-links a{font-size:13px;color:rgba(255,255,255,.4);text-decoration:none;transition:color .2s;}
+    .footer-links a:hover{color:#fff;}
+    .footer-copy{font-size:12px;color:rgba(255,255,255,.25);}
+  </style>
+</head>
+<body>
+
+<!-- ─── NAV ─── -->
+<nav id="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo" id="navLogo">
+      <img src="SOLO FUEGO.svg" alt="FORNNO" style="height:52px;width:auto;display:block">
+    </a>
+    <div class="nav-links" id="navLinks">
+      <a href="#secretaria">Secretaría</a>
+      <a href="#escalabilidad">Escalabilidad</a>
+      <a href="#fidelizacion">Fidelización</a>
+      <a href="#agencia">Agencia</a>
+    </div>
+    <div class="nav-cta">
+      <a href="#" class="btn btn-primary">Quiero mi demo</a>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="Menú">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- ─── MOBILE MENU ─── -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="secretaria.html">01 · Secretaría</a>
+  <a href="escalabilidad.html">02 · Escalabilidad</a>
+  <a href="fidelizacion.html">03 · Fidelización</a>
+  <a href="app.html">04 · App</a>
+  <a href="agencia.html">05 · Agencia</a>
+  <a href="web.html">06 · Web</a>
+  <div class="mobile-menu-cta">
+    <a href="#" class="btn btn-primary btn-lg">Quiero mi demo →</a>
+  </div>
+</div>
+
+<!-- ─── SCROLL DOTS ─── -->
+<nav class="scroll-dots" id="scrollDots">
+  <a href="#hero"          class="scroll-dot active"   title="Inicio"></a>
+  <a href="#secretaria"    class="scroll-dot"           title="Secretaría"></a>
+  <a href="#escalabilidad" class="scroll-dot"           title="Escalabilidad"></a>
+  <a href="#fidelizacion"  class="scroll-dot"           title="Fidelización"></a>
+  <a href="#app"           class="scroll-dot"           title="App"></a>
+  <a href="#agencia"       class="scroll-dot"           title="Agencia"></a>
+  <a href="#web"           class="scroll-dot"           title="Web"></a>
+</nav>
+
+<!-- ══ HERO ══════════════════════════════════ -->
+<section class="hero" id="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-particle" style="width:4px;height:4px;left:18%;bottom:18%;animation-duration:6s;animation-delay:0s"></div>
+  <div class="hero-particle" style="width:3px;height:3px;left:32%;bottom:10%;animation-duration:8s;animation-delay:1.5s"></div>
+  <div class="hero-particle" style="width:5px;height:5px;left:54%;bottom:12%;animation-duration:7s;animation-delay:3s"></div>
+  <div class="hero-particle" style="width:3px;height:3px;left:72%;bottom:8%;animation-duration:9s;animation-delay:.8s"></div>
+  <div class="hero-particle" style="width:4px;height:4px;left:82%;bottom:22%;animation-duration:6.5s;animation-delay:2s"></div>
+
+  <div class="hero-inner">
+    <div class="fade-up" style="margin-bottom:20px">
+      <img src="FORNO NEGRO.svg" alt="FORNNO" style="height:100px;width:auto;display:block;margin:0 auto">
+    </div>
+    <h1 class="fade-up" style="transition-delay:.1s">
+      Para los restaurantes<br>que se niegan a<br><em>ser olvidados.</em>
+    </h1>
+    <p class="hero-sub fade-up" style="transition-delay:.2s">
+      Un solo sistema. Seis módulos.<br>Todo lo que tu restaurante necesita para crecer.
+    </p>
+    <div class="hero-actions fade-up" style="transition-delay:.3s">
+      <a href="#" class="btn btn-primary btn-xl">
+        Quiero mi demo
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <a href="https://wa.me/+549XXXXXXXXX" class="btn btn-ghost btn-xl">Hablar por WhatsApp</a>
+    </div>
+    <p class="hero-note fade-up" style="transition-delay:.4s">Sin contratos · Sin comisiones ocultas · Si no funciona, no te cobramos</p>
+  </div>
+
+  <div class="scroll-cue">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+  </div>
+</section>
+
+<!-- ══ 01 · SECRETARÍA ══════════════════════ -->
+<section class="screen screen-bg2" id="secretaria">
+  <div class="bg-num">01</div>
+  <div class="screen-inner">
+    <div class="screen-text fade-up">
+      <span class="screen-eyebrow">01 · Secretaría</span>
+      <h2 class="screen-h2">Nunca<br>cerrás.</h2>
+      <p class="screen-p">Un agente de IA atiende a tus clientes, gestiona reservas y coordina operaciones internas las 24 horas. Sin tu presencia. Sin personal extra.</p>
+      <div class="screen-actions">
+        <a href="secretaria.html" class="btn btn-primary btn-lg">
+          Ver Secretaría
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href="secretaria.html#agentes" class="btn btn-ghost">Ver los agentes</a>
+      </div>
+    </div>
+    <div class="screen-visual fade-up" style="transition-delay:.15s">
+      <div class="iphone-wrap">
+        <div class="iphone-glow"></div>
+        <div class="iphone">
+          <div class="iphone-screen">
+            <div class="iphone-bar">
+              <div class="iphone-avatar">🤖</div>
+              <div>
+                <div class="iphone-name">Agente FORNNO</div>
+                <div class="iphone-status">Online · WhatsApp</div>
+              </div>
+            </div>
+            <div class="iphone-msgs">
+              <div class="imsg bot">¡Hola! ¿En qué te ayudo? Podés reservar, consultar el menú o pedir delivery 🍕</div>
+              <div class="imsg user">Quiero reservar para 4 el sábado a las 21hs</div>
+              <div class="imsg bot">¡Perfecto! Tengo disponibilidad. ¿A nombre de quién? 🙌</div>
+              <div class="imsg user">A nombre de María</div>
+            </div>
+            <div class="iphone-confirm">
+              <span>✓ Reserva confirmada</span>
+              <span>0% comisión</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-cue">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+  </div>
+</section>
+
+<!-- ══ 02 · ESCALABILIDAD ═══════════════════ -->
+<section class="screen screen-dark" id="escalabilidad">
+  <div class="bg-num">02</div>
+  <div class="screen-inner">
+    <div class="screen-text fade-up">
+      <span class="screen-eyebrow">02 · Escalabilidad</span>
+      <h2 class="screen-h2">Más ventas.<br><em>Sin más<br>personal.</em></h2>
+      <p class="screen-p">Pedidos directos por WhatsApp sin comisiones. Campañas que se disparan solas. Ads geolocalizados que llenan mesas.</p>
+      <div class="screen-actions">
+        <a href="escalabilidad.html" class="btn btn-primary btn-lg">
+          Ver Escalabilidad
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href="#" class="btn btn-ghost-white">Agendar llamada</a>
+      </div>
+    </div>
+    <div class="screen-visual fade-up" style="transition-delay:.15s">
+      <div class="stat-floats">
+        <div class="stat-float">
+          <div class="stat-float-num" style="color:var(--orange)">$0</div>
+          <div class="stat-float-label">Comisiones pagadas<br>a terceros</div>
+          <div class="stat-float-badge">0% siempre</div>
+        </div>
+        <div class="stat-float">
+          <div class="stat-float-num green">+28</div>
+          <div class="stat-float-label">Pedidos por WhatsApp<br>en el día de hoy</div>
+          <div class="stat-float-badge">En tiempo real</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-cue">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+  </div>
+</section>
+
+<!-- ══ 03 · FIDELIZACIÓN ═════════════════════ -->
+<section class="screen" id="fidelizacion">
+  <div class="bg-num">03</div>
+  <div class="screen-inner">
+    <div class="screen-text fade-up">
+      <span class="screen-eyebrow">03 · Fidelización</span>
+      <h2 class="screen-h2">Que vuelvan.<br><em>Siempre.</em></h2>
+      <p class="screen-p">Sistema de puntos, niveles VIP y tarjeta digital en WhatsApp, Apple Wallet y Google Wallet. Tu cliente vuelve porque quiere, no porque no tiene alternativa.</p>
+      <div class="screen-actions">
+        <a href="fidelizacion.html" class="btn btn-primary btn-lg">
+          Ver Fidelización
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href="fidelizacion.html#tarjeta" class="btn btn-ghost">Ver la tarjeta</a>
+      </div>
+    </div>
+    <div class="screen-visual fade-up" style="transition-delay:.15s">
+      <div class="loyalty-mini">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start">
+          <div>
+            <div class="loyalty-mini-brand">Tu Restaurante</div>
+            <div class="loyalty-mini-sub">Programa de Lealtad</div>
+          </div>
+          <div style="text-align:right">
+            <div style="font-size:9px;color:#444;text-transform:uppercase;letter-spacing:.08em">Nivel</div>
+            <div style="font-size:12px;font-weight:700;color:#FFD700">🥇 GOLD</div>
+          </div>
+        </div>
+        <div class="loyalty-mini-pts">2.840</div>
+        <div class="loyalty-mini-ptslabel">puntos acumulados</div>
+        <div class="loyalty-mini-bar"><div class="loyalty-mini-fill"></div></div>
+        <div style="font-size:9px;color:rgba(255,255,255,.3);margin-top:6px">68% hacia PLATINUM</div>
+        <div class="loyalty-mini-chips">
+          <div class="loyalty-chip">WhatsApp</div>
+          <div class="loyalty-chip">Apple Wallet</div>
+          <div class="loyalty-chip">Google Wallet</div>
+          <div class="loyalty-chip">QR Físico</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-cue">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+  </div>
+</section>
+
+<!-- ══ 04 · APP ══════════════════════════════ -->
+<section class="screen screen-bg2" id="app">
+  <div class="bg-num">04</div>
+  <div class="screen-inner">
+    <div class="screen-text fade-up">
+      <span class="screen-eyebrow">04 · App</span>
+      <h2 class="screen-h2">Tu data,<br>tuya.<br><em>Siempre.</em></h2>
+      <p class="screen-p">El primer CDP gastronómico para tu restaurante. Conocés a cada cliente mejor que ellos mismos. Métricas reales, decisiones que funcionan.</p>
+      <div class="screen-actions">
+        <a href="app.html" class="btn btn-primary btn-lg">
+          Ver la App
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+    <div class="screen-visual fade-up" style="transition-delay:.15s">
+      <div class="dash-mini">
+        <div class="dash-mini-header">
+          <div class="dash-mini-title">Dashboard · Mayo 2026</div>
+          <div class="dash-mini-tag">Live</div>
+        </div>
+        <div class="dash-mini-body">
+          <div class="dash-mini-row">
+            <div class="dash-mini-card">
+              <div class="dash-mini-card-label">Retención</div>
+              <div class="dash-mini-card-val up">+38%</div>
+            </div>
+            <div class="dash-mini-card">
+              <div class="dash-mini-card-label">Ticket</div>
+              <div class="dash-mini-card-val org">$4.280</div>
+            </div>
+          </div>
+          <div class="dash-mini-row">
+            <div class="dash-mini-card">
+              <div class="dash-mini-card-label">Clientes</div>
+              <div class="dash-mini-card-val org">1.847</div>
+            </div>
+            <div class="dash-mini-card">
+              <div class="dash-mini-card-label">ROI</div>
+              <div class="dash-mini-card-val up">640%</div>
+            </div>
+          </div>
+          <div class="dash-mini-alert">✓ 47 clientes recuperados este mes</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-cue">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+  </div>
+</section>
+
+<!-- ══ 05 · AGENCIA ══════════════════════════ -->
+<section class="screen screen-dark" id="agencia">
+  <div class="bg-num">05</div>
+  <div class="screen-inner">
+    <div class="screen-text fade-up">
+      <span class="screen-eyebrow">05 · Agencia</span>
+      <h2 class="screen-h2">Tu equipo<br>de marketing.<br><em>Sin contratar.</em></h2>
+      <p class="screen-p">Redes sociales, producción audiovisual, identidad visual, reputación online y reportes ejecutivos. El equipo FORNNO trabaja para que vos te concentrés en cocinar.</p>
+      <div class="screen-actions">
+        <a href="agencia.html" class="btn btn-primary btn-lg">
+          Ver Agencia
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href="#" class="btn btn-ghost-white">Agendar llamada</a>
+      </div>
+    </div>
+    <div class="screen-visual fade-up" style="transition-delay:.15s">
+      <div class="agency-grid-mini">
+        <div class="agency-icon-mini"><span class="icon">📱</span><span class="label">Redes</span></div>
+        <div class="agency-icon-mini"><span class="icon">🎬</span><span class="label">Video</span></div>
+        <div class="agency-icon-mini"><span class="icon">🎨</span><span class="label">Identidad</span></div>
+        <div class="agency-icon-mini"><span class="icon">⭐</span><span class="label">Reputación</span></div>
+        <div class="agency-icon-mini"><span class="icon">📊</span><span class="label">Reportes</span></div>
+        <div class="agency-icon-mini"><span class="icon">📸</span><span class="label">UGC</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-cue">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+  </div>
+</section>
+
+<!-- ══ 06 · WEB ═══════════════════════════════ -->
+<section class="screen screen-bg3" id="web">
+  <div class="bg-num">06</div>
+  <div class="screen-inner">
+    <div class="screen-text fade-up">
+      <span class="screen-eyebrow">06 · Web</span>
+      <h2 class="screen-h2">¿Aparecés<br><em>primero?</em></h2>
+      <p class="screen-p">Sitio web optimizado para móvil con menú online, reservas integradas y SEO local para que te encuentren cuando más importa: cuando alguien busca en tu zona.</p>
+      <div class="screen-actions">
+        <a href="web.html" class="btn btn-primary btn-lg">
+          Ver Web
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href="#" class="btn btn-ghost">Quiero mi demo</a>
+      </div>
+    </div>
+    <div class="screen-visual fade-up" style="transition-delay:.15s">
+      <div class="search-mock">
+        <div class="search-bar">
+          <span class="search-icon">🔍</span>
+          <span class="search-query">restaurante cerca de mí</span>
+        </div>
+        <div class="search-result">
+          <div class="search-result-rank">⬆ Posición #1</div>
+          <div class="search-result-url">tu-restaurante.com.ar</div>
+          <div class="search-result-title">Tu Restaurante — Reservas &amp; Menú Online</div>
+          <div class="search-result-desc">Reservá tu mesa directo desde Google. Menú actualizado, pedidos online y delivery sin comisiones.</div>
+        </div>
+        <div class="search-result2">
+          <div class="search-result-url" style="color:var(--muted2)">otrorestaurante.com</div>
+          <div class="search-result-title" style="color:var(--muted)">Otro Restaurante</div>
+          <div class="search-result-desc">Información básica...</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <div class="footer-inner">
+    <a href="index.html" class="footer-logo">●<span> FORNNO</span></a>
+    <div class="footer-links">
+      <a href="secretaria.html">Secretaría</a>
+      <a href="fidelizacion.html">Fidelización</a>
+      <a href="agencia.html">Agencia</a>
+      <a href="#" style="color:rgba(255,255,255,.5)">Garantía</a>
+    </div>
+    <div class="footer-copy">© 2026 FORNNO. Todos los derechos reservados.</div>
+  </div>
+</footer>
+
+<script>
+  /* ── NAV state (light/dark per section) ── */
+  const nav = document.getElementById('nav');
+  const navLinks = document.getElementById('navLinks');
+  const hamburger = document.getElementById('hamburger');
+  const scrollDots = document.querySelectorAll('.scroll-dot');
+  const darkSections = ['escalabilidad','agencia'];
+
+  const screens = document.querySelectorAll('[id]');
+  const sectionObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting && e.intersectionRatio >= .4) {
+        const id = e.target.id;
+        // Update dot
+        scrollDots.forEach(d => d.classList.remove('active'));
+        const dot = document.querySelector(`.scroll-dot[href="#${id}"]`);
+        if (dot) dot.classList.add('active');
+        // Update nav theme
+        if (id === 'hero') {
+          nav.classList.remove('solid','solid-dark');
+          navLinks.classList.remove('dark');
+          hamburger.classList.remove('dark');
+        } else if (darkSections.includes(id)) {
+          nav.classList.remove('solid'); nav.classList.add('solid-dark');
+          navLinks.classList.add('dark');
+          hamburger.classList.add('dark');
+        } else {
+          nav.classList.remove('solid-dark'); nav.classList.add('solid');
+          navLinks.classList.remove('dark');
+          hamburger.classList.remove('dark');
+        }
+      }
+    });
+  }, { threshold: .4 });
+  document.querySelectorAll('.screen, .hero').forEach(s => sectionObs.observe(s));
+
+  /* ── HAMBURGER ── */
+  const mobileMenu = document.getElementById('mobileMenu');
+  hamburger.addEventListener('click', () => {
+    const open = hamburger.classList.toggle('open');
+    mobileMenu.classList.toggle('open', open);
+  });
+  mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    hamburger.classList.remove('open');
+    mobileMenu.classList.remove('open');
+  }));
+
+  /* ── FADE UP ── */
+  const fadeObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: .1 });
+  document.querySelectorAll('.fade-up').forEach(el => fadeObs.observe(el));
+</script>
+</body>
+</html>
