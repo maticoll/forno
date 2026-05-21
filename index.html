@@ -7,12 +7,12 @@
   <meta name="description" content="Secretaría, escalabilidad, fidelización, app, agencia y web en un solo sistema."/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet"/>
   <style>
-    @font-face{font-family:'Brice';font-weight:400;src:url('Brice_Font/Brice-Regular.woff2') format('woff2');font-display:swap;}
-    @font-face{font-family:'Brice';font-weight:600;src:url('Brice_Font/Brice-Semi-Bold.woff2') format('woff2');font-display:swap;}
-    @font-face{font-family:'Brice';font-weight:700;src:url('Brice_Font/Brice-Bold.woff2') format('woff2');font-display:swap;}
-    @font-face{font-family:'Brice';font-weight:900;src:url('Brice_Font/Brice-Black.woff2') format('woff2');font-display:swap;}
+    @font-face{font-family:'Barlow Condensed';font-weight:400;src:url('Brice_Font/Brice-Regular.woff2') format('woff2');font-display:swap;}
+    @font-face{font-family:'Barlow Condensed';font-weight:600;src:url('Brice_Font/Brice-Semi-Bold.woff2') format('woff2');font-display:swap;}
+    @font-face{font-family:'Barlow Condensed';font-weight:700;src:url('Brice_Font/Brice-Bold.woff2') format('woff2');font-display:swap;}
+    @font-face{font-family:'Barlow Condensed';font-weight:900;src:url('Brice_Font/Brice-Black.woff2') format('woff2');font-display:swap;}
   </style>
   <style>
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
@@ -35,11 +35,11 @@
       overflow-x:hidden;
       scroll-behavior:smooth;
       background:var(--bg);color:var(--text);
-      font-family:'Montserrat',sans-serif;
+      font-family:'Barlow',sans-serif;
       font-size:16px;line-height:1.6;
       -webkit-font-smoothing:antialiased;
     }
-    h1,h2,h3{font-family:'Brice',sans-serif;line-height:1.0;letter-spacing:-0.02em;}
+    h1,h2,h3{font-family:'Barlow Condensed',sans-serif;line-height:1.05;letter-spacing:0.01em;}
 
     /* ── NAV ── */
     nav{
@@ -96,7 +96,7 @@
     }
     .mobile-menu.open{transform:translateY(0);}
     .mobile-menu a{
-      font-family:'Brice',sans-serif;font-size:36px;font-weight:900;
+      font-family:'Barlow Condensed',sans-serif;font-size:36px;font-weight:900;
       color:var(--text);text-decoration:none;padding:16px 0;
       border-bottom:1px solid var(--border);
       transition:color .2s;
@@ -138,7 +138,7 @@
     /* Big decorative background number */
     .bg-num{
       position:absolute;
-      font-family:'Brice',sans-serif;font-weight:900;
+      font-family:'Barlow Condensed',sans-serif;font-weight:900;
       font-size:clamp(280px,35vw,500px);
       line-height:1;letter-spacing:-0.04em;
       color:rgba(0,0,0,0.035);
@@ -165,7 +165,7 @@
     }
     .screen-h2{
       font-size:clamp(48px,6vw,82px);font-weight:900;
-      margin-bottom:20px;line-height:.95;
+      margin-bottom:20px;line-height:1.0;
     }
     .screen-h2 em{font-style:normal;color:var(--orange);}
     .screen-dark .screen-h2{color:#fff;}
@@ -222,7 +222,7 @@
     }
     .hero h1{
       font-size:clamp(44px,7vw,96px);font-weight:900;
-      max-width:520px;margin:0 0 24px;line-height:.93;
+      max-width:520px;margin:0 0 24px;line-height:1.0;
     }
     .hero h1 em{
       font-style:normal;
@@ -258,7 +258,7 @@
       margin-bottom:20px;
     }
     .hv-brand{
-      font-family:'Brice',sans-serif;font-size:14px;font-weight:900;color:var(--text);
+      font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:900;color:var(--text);
     }
     .hv-tag-live{
       font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
@@ -274,7 +274,7 @@
       border-radius:10px;padding:12px 8px;text-align:center;
     }
     .hv-val{
-      font-family:'Brice',sans-serif;font-size:22px;
+      font-family:'Barlow Condensed',sans-serif;font-size:22px;
       font-weight:900;color:var(--text);line-height:1;
     }
     .hv-lbl{
@@ -399,7 +399,7 @@
     .stat-float:nth-child(1){top:0;left:0;}
     .stat-float:nth-child(2){bottom:0;right:0;}
     .stat-float-num{
-      font-family:'Brice',sans-serif;font-size:44px;font-weight:900;
+      font-family:'Barlow Condensed',sans-serif;font-size:44px;font-weight:900;
       line-height:1;color:#fff;
     }
     .stat-float-num.green{color:#4ade80;}
@@ -422,9 +422,9 @@
       content:'';position:absolute;top:0;left:0;right:0;height:3px;
       background:linear-gradient(90deg,var(--orange),#FF3B00);
     }
-    .loyalty-mini-brand{font-family:'Brice',sans-serif;font-size:15px;font-weight:900;color:#fff;letter-spacing:.04em;text-transform:uppercase;}
+    .loyalty-mini-brand{font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:900;color:#fff;letter-spacing:.04em;text-transform:uppercase;}
     .loyalty-mini-sub{font-size:9px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--orange);margin-top:3px;}
-    .loyalty-mini-pts{font-family:'Brice',sans-serif;font-size:42px;font-weight:900;color:var(--orange);line-height:1;margin-top:20px;}
+    .loyalty-mini-pts{font-family:'Barlow Condensed',sans-serif;font-size:42px;font-weight:900;color:var(--orange);line-height:1;margin-top:20px;}
     .loyalty-mini-ptslabel{font-size:10px;color:rgba(255,255,255,.3);margin-top:4px;}
     .loyalty-mini-bar{height:4px;background:rgba(255,255,255,.1);border-radius:99px;margin-top:16px;overflow:hidden;}
     .loyalty-mini-fill{height:100%;width:68%;background:linear-gradient(90deg,var(--orange),#FF3B00);border-radius:99px;}
@@ -450,7 +450,7 @@
     .dash-mini-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px;}
     .dash-mini-card{background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:12px;}
     .dash-mini-card-label{font-size:9px;color:var(--muted);margin-bottom:4px;text-transform:uppercase;letter-spacing:.06em;}
-    .dash-mini-card-val{font-family:'Brice',sans-serif;font-size:22px;font-weight:900;}
+    .dash-mini-card-val{font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:900;}
     .dash-mini-card-val.up{color:var(--green);}
     .dash-mini-card-val.org{color:var(--orange);}
     .dash-mini-alert{
@@ -510,7 +510,7 @@
       max-width:1200px;width:100%;margin:0 auto;padding:0 32px;
       display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:24px;
     }
-    .footer-logo{font-family:'Brice',sans-serif;font-size:20px;font-weight:900;color:#fff;text-decoration:none;}
+    .footer-logo{font-family:'Barlow Condensed',sans-serif;font-size:20px;font-weight:900;color:#fff;text-decoration:none;}
     .footer-logo span{color:var(--orange);}
     .footer-links{display:flex;gap:24px;}
     .footer-links a{font-size:13px;color:rgba(255,255,255,.4);text-decoration:none;transition:color .2s;}
