@@ -6,31 +6,31 @@
 <title>Agencia — FORNNO</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-@font-face{font-family:'Brice';src:url('Brice_Font/Brice-Black.woff2') format('woff2');font-weight:900;}
-@font-face{font-family:'Brice';src:url('Brice_Font/Brice-Bold.woff2') format('woff2');font-weight:700;}
-@font-face{font-family:'Brice';src:url('Brice_Font/Brice-Semi-Bold.woff2') format('woff2');font-weight:600;}
-@font-face{font-family:'Brice';src:url('Brice_Font/Brice-Regular.woff2') format('woff2');font-weight:400;}
+@font-face{font-family:'Barlow Condensed';src:url('Brice_Font/Brice-Black.woff2') format('woff2');font-weight:900;}
+@font-face{font-family:'Barlow Condensed';src:url('Brice_Font/Brice-Bold.woff2') format('woff2');font-weight:700;}
+@font-face{font-family:'Barlow Condensed';src:url('Brice_Font/Brice-Semi-Bold.woff2') format('woff2');font-weight:600;}
+@font-face{font-family:'Barlow Condensed';src:url('Brice_Font/Brice-Regular.woff2') format('woff2');font-weight:400;}
 :root{--orange:#D94F1A;--orange-dark:#B83D10;--orange-glow:rgba(217,79,26,.14);--bg:#F5F0E8;--bg2:#EDE8DE;--bg3:#E5DFD3;--border:#D4CCC0;--text:#1A1612;--muted:#7A6F62;--muted2:#A89E94;--green:#2a7a4b;--radius:12px;}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;}
-body{font-family:'Montserrat',sans-serif;background:#1a1612;color:#f0ece4;overflow-x:hidden;}
+body{font-family:'Barlow',sans-serif;background:#1a1612;color:#f0ece4;overflow-x:hidden;}
 nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 40px;display:flex;align-items:center;justify-content:space-between;transition:background .35s;}
 nav.solid{background:rgba(26,22,18,.92);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,.08);}
-.nav-logo{font-family:'Brice',sans-serif;font-weight:900;font-size:22px;letter-spacing:.04em;color:#f0ece4;text-decoration:none;display:flex;align-items:center;gap:6px;}
+.nav-logo{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:22px;letter-spacing:.04em;color:#f0ece4;text-decoration:none;display:flex;align-items:center;gap:6px;}
 .nav-logo .dot{color:var(--orange);}
-.nav-back,.nav-next{display:flex;align-items:center;gap:8px;font-family:'Montserrat',sans-serif;font-weight:600;font-size:13px;color:rgba(240,236,228,.5);text-decoration:none;letter-spacing:.06em;text-transform:uppercase;transition:color .2s;}
+.nav-back,.nav-next{display:flex;align-items:center;gap:8px;font-family:'Barlow',sans-serif;font-weight:600;font-size:13px;color:rgba(240,236,228,.5);text-decoration:none;letter-spacing:.06em;text-transform:uppercase;transition:color .2s;}
 .nav-back:hover,.nav-next:hover{color:var(--orange);}
 .nav-back svg,.nav-next svg{transition:transform .2s;}
 .nav-back:hover svg{transform:translateX(-3px);}.nav-next:hover svg{transform:translateX(3px);}
 .container{max-width:1140px;margin:0 auto;padding:0 40px;}
-.screen{min-height:100vh;display:flex;align-items:center;position:relative;overflow:hidden;}
-.bg-num{position:absolute;font-family:'Brice',sans-serif;font-weight:900;font-size:clamp(280px,35vw,520px);line-height:1;color:rgba(255,255,255,.03);right:-1vw;bottom:-6vh;pointer-events:none;user-select:none;}
+.screen{min-height:100vh;min-height:100svh;display:flex;align-items:center;position:relative;overflow:hidden;}
+.bg-num{position:absolute;font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:clamp(280px,35vw,520px);line-height:1;color:rgba(255,255,255,.03);right:-1vw;bottom:-6vh;pointer-events:none;user-select:none;}
 .section-tag{display:inline-flex;align-items:center;gap:8px;background:var(--orange-glow);border:1px solid rgba(217,79,26,.35);border-radius:100px;padding:7px 16px;font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--orange);margin-bottom:28px;}
 .section-tag .dot{width:7px;height:7px;border-radius:50%;background:var(--orange);animation:pulse-dot 2s ease-in-out infinite;}
 @keyframes pulse-dot{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.5;transform:scale(.75);}}
-.btn{display:inline-flex;align-items:center;gap:8px;border-radius:var(--radius);font-family:'Montserrat',sans-serif;font-weight:600;font-size:15px;text-decoration:none;transition:transform .2s,box-shadow .2s,background .2s,color .2s;cursor:pointer;border:none;}
+.btn{display:inline-flex;align-items:center;gap:8px;border-radius:var(--radius);font-family:'Barlow',sans-serif;font-weight:600;font-size:15px;text-decoration:none;transition:transform .2s,box-shadow .2s,background .2s,color .2s;cursor:pointer;border:none;}
 .btn-primary{background:var(--orange);color:#fff;padding:14px 28px;}
 .btn-primary:hover{background:var(--orange-dark);transform:translateY(-2px);box-shadow:0 10px 40px rgba(255,92,26,.45);}
 .btn-secondary{background:transparent;color:#f0ece4;padding:13px 26px;border:1.5px solid rgba(255,255,255,.2);}
@@ -41,20 +41,20 @@ nav.solid{background:rgba(26,22,18,.92);backdrop-filter:blur(12px);border-bottom
 /* hero */
 #hero{padding-top:80px;}
 .hero-label{font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:rgba(240,236,228,.4);margin-bottom:12px;}
-.hero-h1{font-family:'Brice',sans-serif;font-weight:900;font-size:clamp(52px,6.5vw,90px);line-height:1.0;margin-bottom:24px;color:#f0ece4;}
+.hero-h1{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:clamp(52px,6.5vw,90px);line-height:1.0;margin-bottom:24px;color:#f0ece4;}
 .hero-h1 em{font-style:normal;background:linear-gradient(135deg,#FF7040,#FF3B00);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
 .hero-sub{font-size:17px;color:rgba(240,236,228,.6);line-height:1.6;max-width:560px;margin-bottom:36px;}
 .hero-btns{display:flex;gap:14px;flex-wrap:wrap;}
 /* services grid */
 .services-intro{padding:100px 0 60px;}
-.services-intro h2{font-family:'Brice',sans-serif;font-weight:900;font-size:clamp(36px,4vw,52px);color:#f0ece4;margin-bottom:16px;}
+.services-intro h2{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:clamp(36px,4vw,52px);color:#f0ece4;margin-bottom:16px;}
 .services-intro p{font-size:16px;color:rgba(240,236,228,.55);max-width:560px;line-height:1.7;}
 .services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,255,255,.08);border-radius:20px;overflow:hidden;margin-top:60px;}
 .service-card{background:#1a1612;padding:40px 32px;transition:background .25s;}
 .service-card:hover{background:#221e1a;}
-.service-num{font-family:'Brice',sans-serif;font-weight:900;font-size:48px;color:rgba(217,79,26,.2);line-height:1;margin-bottom:16px;}
+.service-num{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:48px;color:rgba(217,79,26,.2);line-height:1;margin-bottom:16px;}
 .service-icon{font-size:28px;display:block;margin-bottom:16px;}
-.service-title{font-family:'Brice',sans-serif;font-weight:700;font-size:20px;color:#f0ece4;margin-bottom:12px;}
+.service-title{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:20px;color:#f0ece4;margin-bottom:12px;}
 .service-desc{font-size:14px;color:rgba(240,236,228,.55);line-height:1.6;}
 .service-tag{display:inline-block;margin-top:16px;background:rgba(217,79,26,.15);border:1px solid rgba(217,79,26,.25);border-radius:6px;padding:4px 10px;font-size:11px;font-weight:600;color:var(--orange);}
 /* kairo badge */
@@ -69,7 +69,7 @@ nav.solid{background:rgba(26,22,18,.92);backdrop-filter:blur(12px);border-bottom
 .report-val.orange{color:var(--orange);}
 /* CTA dark */
 #cta-agencia{text-align:center;}
-.cta-h2{font-family:'Brice',sans-serif;font-weight:900;font-size:clamp(44px,6vw,72px);line-height:1.05;margin-bottom:24px;max-width:700px;margin-left:auto;margin-right:auto;color:#f0ece4;}
+.cta-h2{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:clamp(44px,6vw,72px);line-height:1.05;margin-bottom:24px;max-width:700px;margin-left:auto;margin-right:auto;color:#f0ece4;}
 .cta-h2 em{font-style:normal;background:linear-gradient(135deg,#FF7040,#FF3B00);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
 .cta-btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;}
 /* page nav */
@@ -78,9 +78,9 @@ nav.solid{background:rgba(26,22,18,.92);backdrop-filter:blur(12px);border-bottom
 .page-nav-btn{display:flex;align-items:center;gap:14px;text-decoration:none;padding:18px 24px;border-radius:16px;border:1.5px solid rgba(255,255,255,.1);background:rgba(255,255,255,.04);transition:border-color .2s,box-shadow .2s,transform .2s;}
 .page-nav-btn:hover{border-color:var(--orange);transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.3);}
 .nav-num{font-size:11px;font-weight:600;letter-spacing:.12em;color:rgba(240,236,228,.35);text-transform:uppercase;}
-.nav-label{font-family:'Brice',sans-serif;font-weight:700;font-size:18px;color:#f0ece4;margin-top:2px;}
+.nav-label{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:18px;color:#f0ece4;margin-top:2px;}
 .nav-arrow{font-size:22px;color:var(--orange);}
-.page-nav-home{font-family:'Montserrat',sans-serif;font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(240,236,228,.4);text-decoration:none;transition:color .2s;}
+.page-nav-home{font-family:'Barlow',sans-serif;font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(240,236,228,.4);text-decoration:none;transition:color .2s;}
 .page-nav-home:hover{color:var(--orange);}
 .scroll-nav{position:fixed;right:28px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:10px;z-index:90;}
 .scroll-dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.2);display:block;text-decoration:none;transition:background .25s,transform .25s;}
@@ -102,7 +102,7 @@ nav.solid{background:rgba(26,22,18,.92);backdrop-filter:blur(12px);border-bottom
 @media(max-width:640px){
   .container{padding:0 16px;}
   .services-grid{grid-template-columns:1fr;}
-  .hero-h1{font-size:36px !important;}
+  .hero-h1{font-size:clamp(24px,7vw,32px);line-height:1.1;}
   .hero-sub{font-size:15px;}
   .hero-btns{gap:10px;}
   .btn-lg{padding:13px 22px;font-size:14px;}
@@ -216,13 +216,13 @@ nav.solid{background:rgba(26,22,18,.92);backdrop-filter:blur(12px);border-bottom
     <div class="reporte-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;">
       <div class="fade-up">
         <p style="font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--orange);margin-bottom:16px;">05 · E — Reporte ejecutivo</p>
-        <h2 style="font-family:'Brice',sans-serif;font-weight:900;font-size:clamp(36px,4vw,52px);line-height:1.05;margin-bottom:20px;color:#f0ece4;">¿Qué pasó este mes?<br>Lo sabés en<br>dos minutos.</h2>
+        <h2 style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:clamp(36px,4vw,52px);line-height:1.05;margin-bottom:20px;color:#f0ece4;">¿Qué pasó este mes?<br>Lo sabés en<br>dos minutos.</h2>
         <p style="font-size:16px;color:rgba(240,236,228,.55);line-height:1.7;margin-bottom:32px;">Cada mes recibís un reporte automático: resultados de campañas, evolución de clientes, contenido que funcionó y acciones para el mes siguiente.</p>
         <a href="#cta-agencia" class="btn btn-primary">Quiero la agencia completa →</a>
       </div>
       <div class="report-card fade-up" style="transition-delay:.15s;">
         <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;">
-          <div style="font-family:'Brice',sans-serif;font-weight:900;font-size:17px;color:#f0ece4;">Reporte Mayo 2026</div>
+          <div style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:17px;color:#f0ece4;">Reporte Mayo 2026</div>
           <div style="background:rgba(42,122,75,.15);border:1px solid rgba(42,122,75,.3);border-radius:6px;padding:4px 10px;font-size:11px;font-weight:700;color:#27c93f;">Generado auto</div>
         </div>
         <div class="report-row"><span class="report-label">Alcance en redes</span><span class="report-val up">+84.2K</span></div>
@@ -230,7 +230,7 @@ nav.solid{background:rgba(26,22,18,.92);backdrop-filter:blur(12px);border-bottom
         <div class="report-row"><span class="report-label">Reseñas respondidas</span><span class="report-val">47 / 47</span></div>
         <div class="report-row"><span class="report-label">Videos publicados</span><span class="report-val">12</span></div>
         <div class="report-row"><span class="report-label">UGC generado</span><span class="report-val orange">8 piezas</span></div>
-        <div class="report-row" style="padding-top:20px;margin-top:8px;border-top:1px solid rgba(255,255,255,.1) !important;"><span class="report-label">ROI estimado del mes</span><span class="report-val up" style="font-size:18px;font-family:'Brice',sans-serif;font-weight:900;">+620%</span></div>
+        <div class="report-row" style="padding-top:20px;margin-top:8px;border-top:1px solid rgba(255,255,255,.1) !important;"><span class="report-label">ROI estimado del mes</span><span class="report-val up" style="font-size:18px;font-family:'Barlow Condensed',sans-serif;font-weight:900;">+620%</span></div>
       </div>
     </div>
   </div>
