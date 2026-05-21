@@ -190,9 +190,9 @@
 
     /* ── HERO ── */
     .hero{
-      height:100vh;padding:100px 0 60px;
+      height:100vh;
       position:relative;overflow:hidden;
-      background:var(--bg);display:flex;align-items:center;
+      background:var(--bg);display:flex;
     }
     .hero-glow{
       position:absolute;top:-120px;left:50%;transform:translateX(-50%);
@@ -217,7 +217,7 @@
     .hero-inner{
       display:grid;grid-template-columns:1fr 1fr;
       gap:60px;align-items:center;
-      max-width:1200px;margin:0 auto;padding:0 48px;
+      max-width:1200px;margin:auto;padding:90px 48px 48px;
       position:relative;z-index:1;width:100%;
     }
     .hero h1{
@@ -237,7 +237,7 @@
     .hero-actions{display:flex;align-items:center;gap:14px;flex-wrap:wrap;}
     .hero-note{font-size:13px;color:var(--muted2);margin-top:18px;}
     @media(max-width:900px){
-      .hero-inner{grid-template-columns:1fr;gap:40px;padding:0 24px;text-align:center;}
+      .hero-inner{grid-template-columns:1fr;gap:40px;padding:90px 24px 40px;text-align:center;}
       .hero h1{max-width:100%;margin:0 auto 24px;}
       .hero-sub{max-width:100%;margin:0 auto 40px;}
       .hero-actions{justify-content:center;}
