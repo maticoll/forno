@@ -25,13 +25,20 @@
       --green:#2a7a4b; --radius:12px;
       --dark:#1A1612; --dark2:#111;
     }
-    html{scroll-behavior:smooth;}
+    html{
+      height:100%;
+      overflow:hidden;
+    }
     body{
+      height:100%;
+      overflow-y:scroll;
+      overflow-x:hidden;
+      scroll-snap-type:y mandatory;
+      scroll-behavior:smooth;
       background:var(--bg);color:var(--text);
       font-family:'Montserrat',sans-serif;
       font-size:16px;line-height:1.6;
       -webkit-font-smoothing:antialiased;
-      overflow-x:hidden;
     }
     h1,h2,h3{font-family:'Brice',sans-serif;line-height:1.0;letter-spacing:-0.02em;}
 
@@ -121,9 +128,11 @@
 
     /* ── FULL SCREEN SECTIONS ── */
     .screen{
-      min-height:100vh;
+      height:100vh;
       display:flex;align-items:center;
       position:relative;overflow:hidden;
+      scroll-snap-align:start;
+      scroll-snap-stop:always;
     }
     .screen-dark{background:var(--dark);color:#fff;}
     .screen-bg2{background:var(--bg2);}
@@ -184,9 +193,11 @@
 
     /* ── HERO ── */
     .hero{
-      min-height:100vh;padding:100px 0 60px;
+      height:100vh;padding:100px 0 60px;
       text-align:center;position:relative;overflow:hidden;
       background:var(--bg);display:flex;align-items:center;
+      scroll-snap-align:start;
+      scroll-snap-stop:always;
     }
     .hero-glow{
       position:absolute;top:-120px;left:50%;transform:translateX(-50%);
@@ -420,12 +431,15 @@
 
     /* ── FOOTER ── */
     footer{
+      min-height:100vh;
+      display:flex;align-items:center;justify-content:center;
       background:var(--dark);color:rgba(255,255,255,.6);
       border-top:1px solid rgba(255,255,255,.06);
-      padding:48px 0;
+      scroll-snap-align:start;
+      scroll-snap-stop:always;
     }
     .footer-inner{
-      max-width:1200px;margin:0 auto;padding:0 32px;
+      max-width:1200px;width:100%;margin:0 auto;padding:0 32px;
       display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:24px;
     }
     .footer-logo{font-family:'Brice',sans-serif;font-size:20px;font-weight:900;color:#fff;text-decoration:none;}
@@ -816,8 +830,8 @@
         }
       }
     });
-  }, { threshold: .4 });
-  document.querySelectorAll('.screen, .hero').forEach(s => sectionObs.observe(s));
+  }, { threshold: .5 });
+  document.querySelectorAll('.screen, .hero, footer').forEach(s => sectionObs.observe(s));
 
   /* ── HAMBURGER ── */
   const mobileMenu = document.getElementById('mobileMenu');
