@@ -87,10 +87,39 @@ nav.solid{background:rgba(26,22,18,.92);backdrop-filter:blur(12px);border-bottom
 .scroll-dot.active{background:var(--orange);transform:scale(1.4);}
 .scroll-dot:hover{background:rgba(255,255,255,.5);}
 @media(max-width:900px){
-  .services-grid{grid-template-columns:1fr 1fr;}
-  nav{padding:18px 24px;}.container{padding:0 24px;}.scroll-nav{display:none;}
+  .services-grid{grid-template-columns:1fr;}
+  nav{padding:18px 24px;}
+  .container{padding:0 24px;}
+  .scroll-nav{display:none;}
+  .reporte-grid{grid-template-columns:1fr !important;gap:40px !important;}
+  .page-nav{padding:32px 24px;}
+  .page-nav-inner{gap:12px;}
+  .page-nav-btn{padding:14px 16px;}
+  .nav-label{font-size:15px;}
+  #reporte{padding:80px 0 !important;}
+  .services-intro{padding:60px 0 40px;}
 }
-@media(max-width:640px){.services-grid{grid-template-columns:1fr;}.hero-h1{font-size:42px;}}
+@media(max-width:640px){
+  .container{padding:0 16px;}
+  .services-grid{grid-template-columns:1fr;}
+  .hero-h1{font-size:36px !important;}
+  .hero-sub{font-size:15px;}
+  .hero-btns{gap:10px;}
+  .btn-lg{padding:13px 22px;font-size:14px;}
+  .services-intro{padding:48px 0 32px;}
+  .services-intro h2{font-size:28px;}
+  .service-card{padding:28px 20px;}
+  .cta-h2{font-size:32px !important;}
+  #reporte{padding:60px 0 !important;}
+  .report-card{padding:20px 16px;}
+  .reporte-grid{grid-template-columns:1fr !important;gap:32px !important;}
+  .page-nav{padding:24px 16px;}
+  .page-nav-inner{flex-direction:column;align-items:stretch;gap:12px;}
+  .page-nav-btn{justify-content:flex-start;}
+  .page-nav-home{text-align:center;padding:8px 0;}
+  nav{padding:14px 16px;}
+  .section-tag{font-size:11px;padding:6px 12px;}
+}
 </style>
 </head>
 <body>
@@ -184,7 +213,7 @@ nav.solid{background:rgba(26,22,18,.92);backdrop-filter:blur(12px);border-bottom
 <!-- REPORTE -->
 <section id="reporte" style="padding:120px 0;background:rgba(255,255,255,.02);">
   <div class="container">
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;">
+    <div class="reporte-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;">
       <div class="fade-up">
         <p style="font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--orange);margin-bottom:16px;">05 · E — Reporte ejecutivo</p>
         <h2 style="font-family:'Brice',sans-serif;font-weight:900;font-size:clamp(36px,4vw,52px);line-height:1.05;margin-bottom:20px;color:#f0ece4;">¿Qué pasó este mes?<br>Lo sabés en<br>dos minutos.</h2>

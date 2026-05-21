@@ -108,7 +108,62 @@ nav.solid{background:rgba(245,240,232,.92);backdrop-filter:blur(12px);border-bot
 .scroll-dot{width:8px;height:8px;border-radius:50%;background:var(--border);display:block;text-decoration:none;transition:background .25s,transform .25s;}
 .scroll-dot.active{background:var(--orange);transform:scale(1.4);}
 .scroll-dot:hover{background:var(--muted);}
-@media(max-width:900px){.hero-grid,.feature-grid{grid-template-columns:1fr;gap:40px;}nav{padding:18px 24px;}.container{padding:0 24px;}.scroll-nav{display:none;}}
+@media(max-width:900px){
+  .hero-grid,.feature-grid{grid-template-columns:1fr;gap:40px;}
+  nav{padding:18px 24px;}
+  .container{padding:0 24px;}
+  .scroll-nav{display:none;}
+  .web-content{grid-template-columns:1fr 1fr;}
+  .section-pad{padding:80px 0;}
+  .final-cta{padding:72px 0;}
+  .page-nav{padding:36px 24px;}
+}
+@media(max-width:640px){
+  .container{padding:0 16px;}
+  /* Grids → 1 columna */
+  .hero-grid,.feature-grid{grid-template-columns:1fr;gap:28px;}
+  /* Grid de 3 col en SEO panel */
+  [style*="grid-template-columns:repeat(3,1fr)"]{grid-template-columns:1fr!important;gap:8px!important;}
+  /* web-content 2col → 1col */
+  .web-content{grid-template-columns:1fr 1fr;gap:6px;}
+  /* Font-sizes headings */
+  .hero-h1{font-size:clamp(36px,10vw,52px);}
+  .feature-h2{font-size:clamp(28px,7vw,38px);}
+  .cta-h2{font-size:clamp(32px,8vw,44px);}
+  .final-h2{font-size:clamp(36px,10vw,56px);}
+  /* Gaps reducidos */
+  .section-pad{padding:56px 0;}
+  .final-cta{padding:56px 0;}
+  .hero-btns{gap:10px;}
+  .feature-list{gap:10px;}
+  /* Nav */
+  nav{padding:14px 16px;}
+  .nav-back,.nav-next{font-size:11px;gap:5px;}
+  .nav-logo{font-size:18px;}
+  /* SERP card */
+  .serp-card{width:100%;max-width:100%;}
+  .serp-results{padding:12px;}
+  .serp-result{padding:10px;margin-bottom:8px;}
+  .serp-snippet{font-size:12px;line-height:1.45;}
+  .serp-title{font-size:13px;}
+  .serp-domain{font-size:11px;}
+  /* Web preview */
+  .web-preview{width:100%;max-width:100%;}
+  .web-content{grid-template-columns:1fr 1fr;gap:6px;}
+  /* Page nav */
+  .page-nav{padding:28px 16px;}
+  .page-nav-inner{flex-direction:column;gap:16px;align-items:stretch;}
+  .page-nav-btn{justify-content:center;}
+  .page-nav-home{text-align:center;}
+  /* Buttons */
+  .btn-lg{padding:14px 24px;font-size:14px;}
+  /* Secciones hero */
+  #hero{padding-top:70px;}
+  /* bg-num menos intrusivo */
+  .bg-num{font-size:clamp(160px,40vw,280px);}
+  /* SEO feature panel */
+  .fade-up[style*="background:#fff"]{padding:20px!important;}
+}
 </style>
 </head>
 <body>

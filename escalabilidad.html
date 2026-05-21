@@ -153,6 +153,71 @@ nav.solid{background:rgba(245,240,232,.92);backdrop-filter:blur(12px);border-bot
   .hero-grid,.feature-grid{grid-template-columns:1fr;gap:40px;}
   nav{padding:18px 24px;} .container{padding:0 24px;} .scroll-nav{display:none;}
   .campaign-grid{grid-template-columns:1fr;}
+  .section-pad{padding:80px 0;}
+  .page-nav{padding:32px 24px;}
+  .page-nav-inner{gap:16px;}
+}
+
+@media(max-width:640px){
+  /* Container */
+  .container{padding:0 16px;}
+
+  /* Nav */
+  nav{padding:14px 16px;}
+  .nav-back span, .nav-next span{display:none;}
+
+  /* Hero font sizes */
+  .hero-h1{font-size:clamp(36px,10vw,52px);}
+  .hero-sub{font-size:15px;margin-bottom:28px;}
+  .hero-grid{gap:28px;}
+  .hero-btns{gap:10px;}
+  .btn-lg{padding:13px 22px;font-size:14px;}
+
+  /* Sections */
+  .section-pad{padding:60px 0;}
+  .feature-grid{gap:28px;}
+  .feature-h2{font-size:clamp(28px,8vw,40px);}
+  .feature-p{font-size:14px;margin-bottom:24px;}
+
+  /* Stats row */
+  .stats-row{gap:16px;}
+  .stat-num{font-size:clamp(28px,8vw,40px);}
+
+  /* Campaign grid: 2 cols → 1 col */
+  .campaign-grid{grid-template-columns:1fr;gap:12px;}
+
+  /* Terminal */
+  .terminal{font-size:11px;overflow-x:auto;}
+  .terminal-body{font-size:11px;overflow-x:auto;padding:14px;}
+  .terminal-title{font-size:10px;}
+
+  /* Ads visual KPIs grid — mantiene 3 cols pero ajusta */
+  .ads-kpis{grid-template-columns:repeat(3,1fr);}
+  .ads-kpi-num{font-size:16px;}
+
+  /* Fixed-width elements → max-width 100% */
+  .ads-visual{max-width:100%;}
+  .terminal{max-width:100%;}
+  .hero-sub{max-width:100%;}
+  .cta-h2{max-width:100%;font-size:clamp(32px,9vw,52px);}
+  .cta-sub{max-width:100%;font-size:15px;}
+
+  /* CTA section */
+  .cta-btns{gap:10px;}
+
+  /* Page nav */
+  .page-nav{padding:24px 16px;}
+  .page-nav-inner{flex-direction:column;gap:12px;align-items:stretch;}
+  .page-nav-btn{justify-content:flex-start;}
+  .page-nav-home{text-align:center;}
+
+  /* Pedidos del día inner grid: 2 cols → 1 col */
+  .pedidos-mini-grid{
+    grid-template-columns:1fr;
+  }
+
+  /* bg-num scale down */
+  .bg-num{font-size:clamp(140px,35vw,260px);}
 }
 </style>
 </head>
@@ -268,7 +333,7 @@ nav.solid{background:rgba(245,240,232,.92);backdrop-filter:blur(12px);border-bot
           <div style="width:40px;height:40px;border-radius:10px;background:var(--orange-glow);display:flex;align-items:center;justify-content:center;font-size:18px;">🛵</div>
           <div><div style="font-family:'Brice',sans-serif;font-weight:700;font-size:16px;">Pedidos del día</div><div style="font-size:11px;color:var(--muted);">Actualización en vivo</div></div>
         </div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px;">
+        <div class="pedidos-mini-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px;">
           <div style="background:var(--bg2);border-radius:12px;padding:16px;text-align:center;">
             <span style="font-family:'Brice',sans-serif;font-weight:900;font-size:32px;color:var(--orange);display:block;" data-target="47">0</span>
             <span style="font-size:11px;color:var(--muted);">Pedidos hoy</span>

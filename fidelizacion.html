@@ -160,13 +160,45 @@ nav.solid{background:rgba(245,240,232,.92);backdrop-filter:blur(12px);border-bot
 
 @media(max-width:900px){
   .hero-grid,.feature-grid{grid-template-columns:1fr;gap:40px;}
-  nav{padding:18px 24px;} .container{padding:0 24px;} .scroll-nav{display:none;}
-  .levels-grid{grid-template-columns:repeat(2,1fr);}
-  .rewards-grid{grid-template-columns:1fr 1fr;}
+  nav{padding:18px 24px;}
+  .container{padding:0 24px;}
+  .scroll-nav{display:none;}
+  .levels-grid{grid-template-columns:repeat(2,1fr);gap:8px;}
+  .rewards-grid{grid-template-columns:1fr 1fr;gap:16px;}
+  .section-pad{padding:80px 0;}
+  .page-nav{padding:32px 24px;}
+  .loyalty-card-dark{padding:16px;}
+  .points-hero{padding:20px;}
+  .reactivation-card{padding:20px;}
+  .feature-grid{gap:40px;}
+  .hero-grid{gap:40px;}
 }
 @media(max-width:640px){
+  .container{padding:0 16px;}
+  .rewards-grid{grid-template-columns:1fr;gap:12px;}
+  .hero-h1{font-size:clamp(36px,10vw,48px);}
+  .feature-h2{font-size:clamp(30px,8vw,40px);}
+  .cta-h2{font-size:clamp(36px,9vw,52px);}
+  .section-pad{padding:60px 0;}
+  .loyalty-card-dark{padding:14px;}
+  .btn-lg{padding:14px 22px;font-size:15px;}
+  .hero-btns{gap:10px;}
+  .cta-btns{gap:10px;}
+  .page-nav-inner{flex-direction:column;gap:16px;align-items:stretch;}
+  .page-nav-btn{justify-content:flex-start;}
+  .page-nav-home{text-align:center;}
+  .platform-chips{gap:6px;}
+  .rcv-row{flex-direction:column;gap:8px;align-items:flex-start;}
+  .levels-grid{gap:8px;}
+}
+@media(max-width:480px){
+  .levels-grid{grid-template-columns:1fr 1fr;}
   .rewards-grid{grid-template-columns:1fr;}
-  .hero-h1{font-size:42px;}
+  .hero-h1{font-size:clamp(32px,9vw,42px);}
+  .section-pad{padding:48px 0;}
+  .points-hero{padding:16px;}
+  .reactivation-card{padding:16px;}
+  .page-nav{padding:24px 16px;}
 }
 </style>
 </head>

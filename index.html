@@ -157,6 +157,13 @@
       .screen-inner{grid-template-columns:1fr;gap:48px;padding:0 24px;}
       .screen-visual{display:none;}
     }
+    @media(max-width:640px){
+      .screen-inner{gap:32px;padding:0 16px;}
+      .screen-h2{font-size:clamp(36px,9vw,56px);}
+      .screen-p{font-size:15px;}
+      .screen-actions{gap:10px;}
+      .btn-lg{font-size:15px;padding:13px 24px;}
+    }
 
     .screen-eyebrow{
       font-size:11px;font-weight:700;letter-spacing:.14em;
@@ -243,6 +250,14 @@
       .hero-sub{max-width:100%;margin:0 auto 40px;}
       .hero-actions{justify-content:center;}
       .hv-wrap{display:none;}
+    }
+    @media(max-width:640px){
+      .hero-inner{padding:80px 16px 32px;gap:28px;}
+      .hero h1{font-size:clamp(36px,10vw,56px);}
+      .hero-sub{font-size:15px;margin:0 auto 28px;}
+      .hero-actions{flex-direction:column;align-items:center;gap:10px;}
+      .btn-xl{font-size:15px;padding:14px 28px;width:100%;justify-content:center;}
+      .hero-note{font-size:12px;}
     }
 
     /* ── HERO VISUAL (derecha) ── */
