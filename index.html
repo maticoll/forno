@@ -4,7 +4,21 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>FORNNO — El sistema de crecimiento para restaurantes</title>
-  <meta name="description" content="Secretaría, escalabilidad, fidelización, app, agencia y web en un solo sistema."/>
+  <meta name="description" content="Un solo sistema. Seis módulos. Secretaría IA, ventas sin comisiones, fidelización, app y agencia digital para que tu restaurante crezca. Sin contratos, sin sorpresas."/>
+  <meta name="theme-color" content="#D94F1A"/>
+  <meta name="robots" content="index, follow"/>
+  <link rel="canonical" href="https://fornno.com/"/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:site_name" content="FORNNO"/>
+  <meta property="og:title" content="FORNNO — El sistema de crecimiento para restaurantes"/>
+  <meta property="og:description" content="Un solo sistema. Seis módulos. Secretaría IA, ventas directas, fidelización, app, agencia y web. Todo lo que tu restaurante necesita para crecer."/>
+  <meta property="og:image" content="https://fornno.com/fornno-home.png"/>
+  <meta property="og:url" content="https://fornno.com/"/>
+  <meta property="og:locale" content="es_AR"/>
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:title" content="FORNNO — El sistema de crecimiento para restaurantes"/>
+  <meta name="twitter:description" content="Un solo sistema. Seis módulos. Todo lo que tu restaurante necesita para crecer. Sin contratos. Sin comisiones."/>
+  <link rel="icon" type="image/svg+xml" href="SOLO FUEGO.svg"/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet"/>
@@ -40,6 +54,10 @@
       -webkit-font-smoothing:antialiased;
     }
     h1,h2,h3{font-family:'Barlow Condensed',sans-serif;line-height:1.05;letter-spacing:0.01em;}
+
+    /* ── NAV active link ── */
+    .nav-links a.nav-active{color:var(--text);font-weight:600;}
+    .nav-links.dark a.nav-active{color:#fff;}
 
     /* ── NAV ── */
     nav{
@@ -246,6 +264,16 @@
     }
     .hero-actions{display:flex;align-items:center;gap:14px;flex-wrap:wrap;}
     .hero-note{font-size:13px;color:var(--muted2);margin-top:18px;}
+    /* trust badges */
+    .hero-trust{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px;}
+    .trust-badge{
+      display:inline-flex;align-items:center;gap:6px;
+      font-size:12px;font-weight:600;color:var(--muted);
+      background:rgba(42,122,75,.06);border:1px solid rgba(42,122,75,.18);
+      border-radius:6px;padding:5px 10px;
+    }
+    .trust-badge svg{color:var(--green);flex-shrink:0;}
+    @media(max-width:640px){.hero-trust{gap:8px;}.trust-badge{font-size:11px;}}
     @media(max-width:900px){
       .hero-inner{grid-template-columns:1fr;gap:40px;padding:90px 24px 40px;text-align:center;}
       .hero h1{max-width:100%;margin:0 auto 24px;}
@@ -510,7 +538,8 @@
       cursor:default;
     }
     .agency-icon-mini:hover{background:rgba(217,79,26,.1);border-color:rgba(217,79,26,.25);}
-    .agency-icon-mini .icon{font-size:22px;display:block;margin-bottom:6px;}
+    .agency-icon-mini .icon{width:22px;height:22px;display:block;margin:0 auto 8px;color:rgba(255,255,255,.5);transition:color .3s;}
+    .agency-icon-mini:hover .icon{color:var(--orange);}
     .agency-icon-mini .label{font-size:9px;font-weight:600;color:rgba(255,255,255,.4);letter-spacing:.04em;text-transform:uppercase;}
 
     /* ── SECTION 06 VISUAL: search result ── */
@@ -570,7 +599,7 @@
       <a href="#agencia">Agencia</a>
     </div>
     <div class="nav-cta">
-      <a href="#" class="btn btn-primary">Quiero mi demo</a>
+      <a href="https://wa.me/549XXXXXXXXX?text=Quiero%20mi%20demo%20de%20FORNNO" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Quiero mi demo</a>
     </div>
     <button class="hamburger" id="hamburger" aria-label="Menú">
       <span></span><span></span><span></span>
@@ -587,19 +616,19 @@
   <a href="agencia.html">05 · Agencia</a>
   <a href="web.html">06 · Web</a>
   <div class="mobile-menu-cta">
-    <a href="#" class="btn btn-primary btn-lg">Quiero mi demo →</a>
+    <a href="https://wa.me/549XXXXXXXXX?text=Quiero%20mi%20demo%20de%20FORNNO" class="btn btn-primary btn-lg" target="_blank" rel="noopener noreferrer">Quiero mi demo →</a>
   </div>
 </div>
 
 <!-- ─── SCROLL DOTS ─── -->
-<nav class="scroll-dots" id="scrollDots">
-  <a href="#hero"          class="scroll-dot active"   title="Inicio"></a>
-  <a href="#secretaria"    class="scroll-dot"           title="Secretaría"></a>
-  <a href="#escalabilidad" class="scroll-dot"           title="Escalabilidad"></a>
-  <a href="#fidelizacion"  class="scroll-dot"           title="Fidelización"></a>
-  <a href="#app"           class="scroll-dot"           title="App"></a>
-  <a href="#agencia"       class="scroll-dot"           title="Agencia"></a>
-  <a href="#web"           class="scroll-dot"           title="Web"></a>
+<nav class="scroll-dots" id="scrollDots" aria-label="Navegación por secciones">
+  <a href="#hero"          class="scroll-dot active"   title="Inicio"         aria-label="Ir al inicio"></a>
+  <a href="#secretaria"    class="scroll-dot"           title="Secretaría"     aria-label="Ir a Secretaría"></a>
+  <a href="#escalabilidad" class="scroll-dot"           title="Escalabilidad"  aria-label="Ir a Escalabilidad"></a>
+  <a href="#fidelizacion"  class="scroll-dot"           title="Fidelización"   aria-label="Ir a Fidelización"></a>
+  <a href="#app"           class="scroll-dot"           title="App"            aria-label="Ir a App"></a>
+  <a href="#agencia"       class="scroll-dot"           title="Agencia"        aria-label="Ir a Agencia"></a>
+  <a href="#web"           class="scroll-dot"           title="Web"            aria-label="Ir a Web"></a>
 </nav>
 
 <!-- ══ HERO ══════════════════════════════════ -->
@@ -621,13 +650,26 @@
         Un solo sistema. Seis módulos.<br>Todo lo que tu restaurante necesita para crecer.
       </p>
       <div class="hero-actions fade-up" style="transition-delay:.2s">
-        <a href="#" class="btn btn-primary btn-xl">
+        <a href="https://wa.me/549XXXXXXXXX?text=Quiero%20mi%20demo%20de%20FORNNO" class="btn btn-primary btn-xl" target="_blank" rel="noopener noreferrer"><!-- TODO: reemplazar XXXXXXXXX con número real -->
           Quiero mi demo
           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </a>
-        <a href="https://wa.me/+549XXXXXXXXX" class="btn btn-ghost btn-xl">Hablar por WhatsApp</a>
+        <a href="https://wa.me/549XXXXXXXXX?text=Quiero%20hablar%20con%20FORNNO" class="btn btn-ghost btn-xl" target="_blank" rel="noopener noreferrer">Hablar por WhatsApp</a>
       </div>
-      <p class="hero-note fade-up" style="transition-delay:.3s">Sin contratos · Sin comisiones ocultas · Si no funciona, no te cobramos</p>
+      <div class="hero-trust fade-up" style="transition-delay:.3s">
+        <span class="trust-badge">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          Sin contratos
+        </span>
+        <span class="trust-badge">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          0% comisiones ocultas
+        </span>
+        <span class="trust-badge">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          Si no funciona, no te cobramos
+        </span>
+      </div>
     </div>
 
     <!-- Columna derecha: visual -->
@@ -679,7 +721,7 @@
           Ver Secretaría
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </a>
-        <a href="secretaria.html#agentes" class="btn btn-ghost">Ver los agentes</a>
+        <a href="secretaria.html#cta-agentes" class="btn btn-ghost">Ver los agentes</a>
       </div>
     </div>
     <div class="screen-visual fade-up" style="transition-delay:.15s">
@@ -727,7 +769,7 @@
           Ver Escalabilidad
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </a>
-        <a href="#" class="btn btn-ghost-white">Agendar llamada</a>
+        <a href="https://wa.me/549XXXXXXXXX?text=Quiero%20agendar%20una%20llamada%20sobre%20FORNNO" class="btn btn-ghost-white" target="_blank" rel="noopener noreferrer">Agendar llamada</a>
       </div>
     </div>
     <div class="screen-visual fade-up" style="transition-delay:.15s">
@@ -763,7 +805,7 @@
           Ver Fidelización
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </a>
-        <a href="fidelizacion.html#tarjeta" class="btn btn-ghost">Ver la tarjeta</a>
+        <a href="fidelizacion.html#tarjeta-lealtad" class="btn btn-ghost">Ver la tarjeta</a>
       </div>
     </div>
     <div class="screen-visual fade-up" style="transition-delay:.15s">
@@ -861,17 +903,35 @@
           Ver Agencia
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </a>
-        <a href="#" class="btn btn-ghost-white">Agendar llamada</a>
+        <a href="https://wa.me/549XXXXXXXXX?text=Quiero%20agendar%20una%20llamada%20sobre%20FORNNO" class="btn btn-ghost-white" target="_blank" rel="noopener noreferrer">Agendar llamada</a>
       </div>
     </div>
     <div class="screen-visual fade-up" style="transition-delay:.15s">
       <div class="agency-grid-mini">
-        <div class="agency-icon-mini"><span class="icon">📱</span><span class="label">Redes</span></div>
-        <div class="agency-icon-mini"><span class="icon">🎬</span><span class="label">Video</span></div>
-        <div class="agency-icon-mini"><span class="icon">🎨</span><span class="label">Identidad</span></div>
-        <div class="agency-icon-mini"><span class="icon">⭐</span><span class="label">Reputación</span></div>
-        <div class="agency-icon-mini"><span class="icon">📊</span><span class="label">Reportes</span></div>
-        <div class="agency-icon-mini"><span class="icon">📸</span><span class="label">UGC</span></div>
+        <div class="agency-icon-mini">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.28h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.87a16 16 0 0 0 6 6l1.95-1.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 15.25z"/></svg>
+          <span class="label">Redes</span>
+        </div>
+        <div class="agency-icon-mini">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+          <span class="label">Video</span>
+        </div>
+        <div class="agency-icon-mini">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+          <span class="label">Identidad</span>
+        </div>
+        <div class="agency-icon-mini">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <span class="label">Reputación</span>
+        </div>
+        <div class="agency-icon-mini">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+          <span class="label">Reportes</span>
+        </div>
+        <div class="agency-icon-mini">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+          <span class="label">UGC</span>
+        </div>
       </div>
     </div>
   </div>
@@ -893,7 +953,7 @@
           Ver Web
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </a>
-        <a href="#" class="btn btn-ghost">Quiero mi demo</a>
+        <a href="https://wa.me/549XXXXXXXXX?text=Quiero%20mi%20demo%20de%20FORNNO" class="btn btn-ghost" target="_blank" rel="noopener noreferrer">Quiero mi demo</a>
       </div>
     </div>
     <div class="screen-visual fade-up" style="transition-delay:.15s">
@@ -926,7 +986,7 @@
       <a href="secretaria.html">Secretaría</a>
       <a href="fidelizacion.html">Fidelización</a>
       <a href="agencia.html">Agencia</a>
-      <a href="#" style="color:rgba(255,255,255,.5)">Garantía</a>
+      <a href="https://wa.me/549XXXXXXXXX?text=Quiero%20info%20sobre%20la%20garant%C3%ADa%20de%20FORNNO" style="color:rgba(255,255,255,.5)" target="_blank" rel="noopener noreferrer">Garantía</a>
     </div>
     <div class="footer-copy">© 2026 FORNNO. Todos los derechos reservados.</div>
   </div>
@@ -949,6 +1009,10 @@
         scrollDots.forEach(d => d.classList.remove('active'));
         const dot = document.querySelector(`.scroll-dot[href="#${id}"]`);
         if (dot) dot.classList.add('active');
+        // Update nav active link
+        navLinks.querySelectorAll('a').forEach(a => a.classList.remove('nav-active'));
+        const activeNavLink = navLinks.querySelector(`a[href="#${id}"]`);
+        if (activeNavLink) activeNavLink.classList.add('nav-active');
         // Update nav theme
         if (id === 'hero') {
           nav.classList.remove('solid','solid-dark');
