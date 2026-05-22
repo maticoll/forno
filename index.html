@@ -121,13 +121,18 @@
     }
     .mobile-menu.open{transform:translateY(0);}
     .mobile-menu a{
-      font-family:'Barlow Condensed',sans-serif;font-size:36px;font-weight:900;
-      color:var(--text);text-decoration:none;padding:16px 0;
+      font-family:'Barlow Condensed',sans-serif;font-size:24px;font-weight:900;
+      color:var(--text);text-decoration:none;padding:12px 0;
       border-bottom:1px solid var(--border);
       transition:color .2s;
+      display:flex;align-items:center;justify-content:space-between;
     }
     .mobile-menu a:hover{color:var(--orange);}
-    .mobile-menu-cta{margin-top:32px;display:flex;gap:12px;flex-wrap:wrap;}
+    .mobile-menu a .mm-num{font-size:11px;font-weight:600;color:var(--muted2);letter-spacing:.08em;}
+    .mobile-menu a:hover .mm-num{color:var(--orange);}
+    .mobile-menu-cta{margin-top:28px;display:flex;gap:12px;flex-wrap:wrap;}
+    /* Intro: solo desktop */
+    @media(max-width:768px){#intro-overlay{display:none !important;}}
     @media(max-width:768px){
       .nav-links,.nav-cta{display:none;}
       .hamburger{display:flex;}
@@ -282,11 +287,13 @@
     .trust-badge svg{color:var(--green);flex-shrink:0;}
     @media(max-width:640px){.hero-trust{gap:8px;}.trust-badge{font-size:11px;}}
     @media(max-width:900px){
-      .hero-inner{grid-template-columns:1fr;gap:40px;padding:90px 24px 40px;text-align:center;}
-      .hero h1{max-width:100%;margin:0 auto 24px;}
-      .hero-sub{max-width:100%;margin:0 auto 40px;}
-      .hero-actions{justify-content:center;}
+      .hero-inner{grid-template-columns:1fr;gap:32px;padding:90px 24px 40px;}
+      .hero h1{max-width:100%;margin:0 0 16px;text-align:left;}
+      .hero-sub{max-width:100%;margin:0 0 28px;text-align:left;}
+      .hero-actions{justify-content:flex-start;}
+      .hero-trust{justify-content:flex-start;}
       .hv-wrap{display:none;}
+      .hero-visual{display:none;}
     }
     @media(max-width:640px){
       /* Hero: fix iOS viewport height + layout */
@@ -699,14 +706,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <!-- ─── MOBILE MENU ─── -->
 <div class="mobile-menu" id="mobileMenu">
-  <a href="secretaria.html">01 · Secretaría</a>
-  <a href="escalabilidad.html">02 · Escalabilidad</a>
-  <a href="fidelizacion.html">03 · Fidelización</a>
-  <a href="app.html">04 · App</a>
-  <a href="agencia.html">05 · Agencia</a>
-  <a href="web.html">06 · Web</a>
+  <a href="secretaria.html">Secretaría<span class="mm-num">01</span></a>
+  <a href="escalabilidad.html">Escalabilidad<span class="mm-num">02</span></a>
+  <a href="fidelizacion.html">Fidelización<span class="mm-num">03</span></a>
+  <a href="app.html">App<span class="mm-num">04</span></a>
+  <a href="agencia.html">Agencia<span class="mm-num">05</span></a>
+  <a href="web.html">Web<span class="mm-num">06</span></a>
   <div class="mobile-menu-cta">
-    <a href="https://wa.me/549XXXXXXXXX?text=Quiero%20mi%20demo%20de%20FORNNO" class="btn btn-primary btn-lg" target="_blank" rel="noopener noreferrer">Quiero mi demo →</a>
+    <a href="https://wa.me/549XXXXXXXXX?text=Quiero%20mi%20demo%20de%20FORNNO" class="btn btn-primary btn-lg" target="_blank" rel="noopener noreferrer" style="width:100%;justify-content:center;">Quiero mi demo →</a>
   </div>
 </div>
 
