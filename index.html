@@ -573,6 +573,67 @@
     .search-result-desc{font-size:11px;color:var(--muted);line-height:1.5;}
     .search-result2{padding:16px;opacity:.5;}
 
+    /* ── INTRO OVERLAY ── */
+    body.intro-active{overflow:hidden;}
+    body.intro-active #nav,
+    body.intro-active .scroll-dots,
+    body.intro-active .mobile-menu{opacity:0;pointer-events:none;}
+
+    #intro-overlay{
+      position:fixed;inset:0;z-index:9999;
+      background:#080604;overflow:hidden;
+    }
+    #intro-video{
+      position:absolute;inset:0;
+      width:100%;height:100%;
+      object-fit:cover;display:block;
+    }
+    #intro-image-wrap{
+      position:absolute;inset:0;
+      opacity:0;overflow:hidden;
+      transition:opacity .4s ease;
+    }
+    #intro-img{
+      width:100%;height:100%;
+      object-fit:cover;object-position:center center;
+      transform:scale(1.14);
+    }
+    #intro-image-wrap.active{opacity:1;}
+    #intro-image-wrap.active #intro-img{
+      animation:intro-zoom 2s cubic-bezier(.22,1,.36,1) forwards;
+    }
+    @keyframes intro-zoom{
+      from{transform:scale(1.14);}
+      to{transform:scale(1.0);}
+    }
+    #intro-overlay.fade-out{
+      animation:intro-fade-out .85s ease-in-out forwards;
+    }
+    @keyframes intro-fade-out{
+      0%{opacity:1;}
+      100%{opacity:0;pointer-events:none;}
+    }
+    #intro-skip{
+      position:absolute;bottom:28px;right:28px;
+      background:rgba(255,255,255,.09);
+      backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+      color:rgba(255,255,255,.55);
+      border:1px solid rgba(255,255,255,.16);
+      border-radius:6px;padding:9px 20px;
+      font-size:11px;font-weight:700;
+      letter-spacing:.12em;text-transform:uppercase;
+      cursor:pointer;font-family:'Barlow',sans-serif;
+      transition:background .2s,color .2s,border-color .2s;
+      z-index:10;
+    }
+    #intro-skip:hover{
+      background:rgba(255,255,255,.18);
+      color:#fff;border-color:rgba(255,255,255,.32);
+    }
+    @media(max-width:768px){
+      #intro-skip{bottom:20px;right:20px;}
+    }
+
     /* ── FOOTER ── */
     footer{
       background:var(--dark);color:rgba(255,255,255,.6);
@@ -596,6 +657,17 @@
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P78TDFFF"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
+
+<!-- ─── INTRO OVERLAY ─── -->
+<div id="intro-overlay">
+  <video id="intro-video" autoplay muted playsinline preload="auto">
+    <source src="intro.mp4" type="video/mp4">
+  </video>
+  <div id="intro-image-wrap">
+    <img src="forno2-home.png" alt="FORNNO" id="intro-img">
+  </div>
+  <button id="intro-skip" aria-label="Saltar intro">Saltar</button>
+</div>
 
 <!-- ─── NAV ─── -->
 <nav id="nav">
@@ -1150,6 +1222,43 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         if(inFooter)goTo(sections.length-1);
         else goTo(currentIdx-1);
       }
+    });
+  })();
+
+  /* ── INTRO OVERLAY ── */
+  (function(){
+    const overlay = document.getElementById('intro-overlay');
+    const video   = document.getElementById('intro-video');
+    const imgWrap = document.getElementById('intro-image-wrap');
+    const skip    = document.getElementById('intro-skip');
+
+    document.body.classList.add('intro-active');
+
+    function showImage(){
+      imgWrap.classList.add('active');
+    }
+
+    function dismissIntro(){
+      overlay.classList.add('fade-out');
+      overlay.addEventListener('animationend', function(){
+        overlay.remove();
+        document.body.classList.remove('intro-active');
+      }, { once: true });
+    }
+
+    // Video termina → mostrar imagen con zoom-in, luego salir
+    video.addEventListener('ended', function(){
+      showImage();
+      setTimeout(dismissIntro, 2400);
+    });
+
+    // Fallback si el video no carga
+    video.addEventListener('error', dismissIntro);
+
+    // Botón saltar
+    skip.addEventListener('click', function(){
+      showImage();
+      setTimeout(dismissIntro, 600);
     });
   })();
 </script>
