@@ -590,20 +590,28 @@
     }
     #intro-image-wrap{
       position:absolute;inset:0;
-      opacity:0;
-      background:url('forno2-home.png') center center / cover no-repeat;
-      transform:scale(0.11);
-      transform-origin:center center;
-      border-radius:16px;
-      will-change:transform,opacity;
+      pointer-events:none;
     }
-    #intro-image-wrap.active{
-      animation:intro-reveal 1.5s cubic-bezier(.22,1,.36,1) forwards;
+    #intro-img{
+      position:absolute;
+      top:0;left:0;
+      width:100%;height:100%;
+      object-fit:cover;
+      object-position:center center;
+      transform:scale(0.13);
+      transform-origin:center center;
+      opacity:0;
+      /* glow anaranjado como luz del horno */
+      filter:drop-shadow(0 0 60px rgba(217,79,26,0.7));
+    }
+    #intro-img.reveal{
+      animation:intro-reveal 1.8s cubic-bezier(.16,1,.3,1) forwards;
     }
     @keyframes intro-reveal{
-      0%  {opacity:0;transform:scale(0.11);border-radius:16px;}
-      18% {opacity:1;}
-      100%{opacity:1;transform:scale(1.0);border-radius:0px;}
+      0%  {transform:scale(0.13);opacity:0;filter:drop-shadow(0 0 60px rgba(217,79,26,0.7));}
+      14% {opacity:1;}
+      70% {filter:drop-shadow(0 0 20px rgba(217,79,26,0.2));}
+      100%{transform:scale(1.0);opacity:1;filter:drop-shadow(0 0 0px rgba(217,79,26,0));}
     }
     #intro-overlay.fade-out{
       animation:intro-fade-out .85s ease-in-out forwards;
@@ -662,7 +670,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <video id="intro-video" autoplay muted playsinline preload="auto">
     <source src="intro.mp4" type="video/mp4">
   </video>
-  <div id="intro-image-wrap"></div>
+  <div id="intro-image-wrap">
+    <img id="intro-img" src="forno2-home.png" alt="FORNNO">
+  </div>
   <button id="intro-skip" aria-label="Saltar intro">Saltar</button>
 </div>
 
@@ -1231,7 +1241,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     document.body.classList.add('intro-active');
 
-    let dismissed = false;
+    var introImg = document.getElementById('intro-img');
+    var dismissed = false;
 
     function dismissIntro(){
       if(dismissed) return;
@@ -1244,19 +1255,22 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     }
 
     function showImageThenDismiss(delay){
-      imgWrap.classList.add('active');
-      setTimeout(dismissIntro, delay || 2600);
+      // void offsetHeight fuerza reflow: garantiza que el browser
+      // pinte el estado inicial (scale 0.13, opacity 0) ANTES de la animación
+      void introImg.offsetHeight;
+      introImg.classList.add('reveal');
+      setTimeout(dismissIntro, delay || 2100);
     }
 
-    // Video termina → imagen pequeña zoom-in a 100% → salir al hero
+    // Video termina → imagen pequeña zoom-in a 100% → pasa al hero
     video.addEventListener('ended', function(){
-      showImageThenDismiss(1900);
+      showImageThenDismiss(2100);
     });
 
-    // Video falla o no puede reproducirse
+    // Video falla
     video.addEventListener('error', dismissIntro);
 
-    // Fallback: si el video no inicia en 10s (bloqueado por browser), saltar
+    // Fallback: si el video no inicia en 10s, saltar
     var autoFallback = setTimeout(function(){
       if(!dismissed) dismissIntro();
     }, 10000);
