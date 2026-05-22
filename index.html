@@ -592,17 +592,18 @@
       position:absolute;inset:0;
       opacity:0;
       background:url('forno2-home.png') center center / cover no-repeat;
-      transform:scale(1.14);
-      transition:opacity .5s ease;
+      transform:scale(0.11);
+      transform-origin:center center;
+      border-radius:16px;
       will-change:transform,opacity;
     }
     #intro-image-wrap.active{
-      opacity:1;
-      animation:intro-zoom 2.2s cubic-bezier(.22,1,.36,1) forwards;
+      animation:intro-reveal 1.5s cubic-bezier(.22,1,.36,1) forwards;
     }
-    @keyframes intro-zoom{
-      from{transform:scale(1.14);}
-      to{transform:scale(1.0);}
+    @keyframes intro-reveal{
+      0%  {opacity:0;transform:scale(0.11);border-radius:16px;}
+      18% {opacity:1;}
+      100%{opacity:1;transform:scale(1.0);border-radius:0px;}
     }
     #intro-overlay.fade-out{
       animation:intro-fade-out .85s ease-in-out forwards;
@@ -1247,9 +1248,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       setTimeout(dismissIntro, delay || 2600);
     }
 
-    // Video termina → imagen con zoom-in → salir
+    // Video termina → imagen pequeña zoom-in a 100% → salir al hero
     video.addEventListener('ended', function(){
-      showImageThenDismiss(2600);
+      showImageThenDismiss(1900);
     });
 
     // Video falla o no puede reproducirse
@@ -1273,7 +1274,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     // Botón saltar
     skip.addEventListener('click', function(){
       clearTimeout(autoFallback);
-      showImageThenDismiss(700);
+      showImageThenDismiss(800);
     });
   })();
 </script>
