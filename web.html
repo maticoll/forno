@@ -31,14 +31,35 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;}
 body{font-family:'Barlow',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;}
-nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 40px;display:flex;align-items:center;justify-content:space-between;transition:background .35s;}
-nav.solid{background:rgba(245,240,232,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);}
-.nav-logo{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:22px;letter-spacing:.04em;color:var(--text);text-decoration:none;display:flex;align-items:center;gap:6px;}
-.nav-logo .dot{color:var(--orange);}
-.nav-back,.nav-next{display:flex;align-items:center;gap:8px;font-family:'Barlow',sans-serif;font-weight:600;font-size:13px;color:var(--muted);text-decoration:none;letter-spacing:.06em;text-transform:uppercase;transition:color .2s;}
-.nav-back:hover,.nav-next:hover{color:var(--orange);}
-.nav-back svg,.nav-next svg{transition:transform .2s;}
-.nav-back:hover svg{transform:translateX(-3px);}.nav-next:hover svg{transform:translateX(3px);}
+nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:18px 0;transition:background .4s,border-color .4s;}
+nav.solid{background:rgba(245,240,232,.97);border-bottom:1px solid var(--border);}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;max-width:1200px;margin:0 auto;padding:0 32px;}
+.nav-logo{text-decoration:none;display:flex;align-items:center;transition:opacity .2s;}
+.nav-logo:hover{opacity:.8;}
+.nav-links{display:flex;align-items:center;gap:28px;}
+.nav-links a{font-size:13px;font-weight:500;color:var(--muted);text-decoration:none;transition:color .2s;letter-spacing:.01em;}
+.nav-links a:hover{color:var(--text);}
+.nav-links a.nav-active{color:var(--text);font-weight:600;}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px;background:none;border:none;}
+.hamburger span{display:block;width:22px;height:2px;background:var(--text);border-radius:2px;transition:transform .3s,opacity .3s;}
+.hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.hamburger.open span:nth-child(2){opacity:0;}
+.hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+.mobile-menu{display:none;position:fixed;inset:0;z-index:190;background:var(--bg);padding:88px 28px 32px;flex-direction:column;gap:0;transform:translateY(-100%);transition:transform .4s cubic-bezier(.22,1,.36,1);}
+.mobile-menu.open{transform:translateY(0);}
+.mobile-menu a{font-family:'Barlow Condensed',sans-serif;font-size:24px;font-weight:900;color:var(--text);text-decoration:none;padding:12px 0;border-bottom:1px solid var(--border);transition:color .2s;display:flex;align-items:center;justify-content:space-between;}
+.mobile-menu a:hover{color:var(--orange);}
+.mobile-menu a .mm-num{font-size:11px;font-weight:600;color:var(--muted2);letter-spacing:.08em;}
+.mobile-menu-cta{margin-top:28px;}
+footer{background:#1A1612;padding:48px 0;}
+.footer-inner{max-width:1200px;width:100%;margin:0 auto;padding:0 32px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:24px;}
+.footer-logo{font-family:'Barlow Condensed',sans-serif;font-size:20px;font-weight:900;color:#fff;text-decoration:none;}
+.footer-logo span{color:var(--orange);}
+.footer-links{display:flex;gap:24px;flex-wrap:wrap;}
+.footer-links a{font-size:13px;color:rgba(255,255,255,.4);text-decoration:none;transition:color .2s;}
+.footer-links a:hover{color:#fff;}
+.footer-copy{font-size:12px;color:rgba(255,255,255,.25);}
+@media(max-width:768px){.nav-links,.nav-cta{display:none;}.hamburger{display:flex;}.mobile-menu{display:flex;}.footer-links{gap:16px;}}
 .container{max-width:1140px;margin:0 auto;padding:0 40px;}
 .screen{min-height:100vh;min-height:100svh;display:flex;align-items:center;position:relative;overflow:hidden;}
 .bg-num{position:absolute;font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:clamp(280px,35vw,520px);line-height:1;color:rgba(26,22,18,.035);right:-1vw;bottom:-6vh;pointer-events:none;user-select:none;}
@@ -186,11 +207,36 @@ nav.solid{background:rgba(245,240,232,.92);backdrop-filter:blur(12px);border-bot
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P78TDFFF"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
-<nav id="main-nav">
-  <a href="agencia.html" class="nav-back"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>Agencia</a>
-  <a href="index.html" class="nav-logo"><span class="dot">●</span> FORNNO</a>
-  <a href="index.html" class="nav-next">Inicio<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></a>
+<nav id="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <img src="SOLO FUEGO.svg" alt="FORNNO" style="height:52px;width:auto;display:block">
+    </a>
+    <div class="nav-links">
+      <a href="secretaria.html">Secretaría</a>
+      <a href="escalabilidad.html">Escalabilidad</a>
+      <a href="fidelizacion.html">Fidelización</a>
+      <a href="app.html">App</a>
+      <a href="agencia.html">Agencia</a>
+      <a href="web.html" class="nav-active">Web</a>
+    </div>
+    <div class="nav-cta">
+      <a href="https://wa.me/549XXXXXXXXX?text=Quiero%20mi%20demo%20de%20FORNNO" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Quiero mi demo</a>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="Menú"><span></span><span></span><span></span></button>
+  </div>
 </nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="secretaria.html">Secretaría<span class="mm-num">01</span></a>
+  <a href="escalabilidad.html">Escalabilidad<span class="mm-num">02</span></a>
+  <a href="fidelizacion.html">Fidelización<span class="mm-num">03</span></a>
+  <a href="app.html">App<span class="mm-num">04</span></a>
+  <a href="agencia.html">Agencia<span class="mm-num">05</span></a>
+  <a href="web.html">Web<span class="mm-num">06</span></a>
+  <div class="mobile-menu-cta">
+    <a href="https://wa.me/549XXXXXXXXX?text=Quiero%20mi%20demo%20de%20FORNNO" class="btn btn-primary" target="_blank" rel="noopener noreferrer" style="width:100%;justify-content:center;">Quiero mi demo →</a>
+  </div>
+</div>
 <nav class="scroll-nav">
   <a href="#hero" class="scroll-dot active" title="Web"></a>
   <a href="#sitio-web" class="scroll-dot" title="Sitio web"></a>
@@ -358,11 +404,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <section class="screen" id="cta-web" style="background:var(--bg3);text-align:center;">
   <div class="container" style="width:100%;text-align:center;position:relative;z-index:1;">
     <div class="section-tag fade-up" style="display:inline-flex;margin-bottom:32px;"><span class="dot"></span>06 · Web & SEO</div>
-    <h2 style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:clamp(44px,6vw,72px);line-height:1.05;margin-bottom:24px;" class="fade-up" style="transition-delay:.1s;">
+    <h2 style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:clamp(44px,6vw,72px);line-height:1.05;margin-bottom:24px;transition-delay:.1s;" class="fade-up">
       Presencia online<br><em>que trabaja por vos.</em>
     </h2>
     <p style="font-size:17px;color:var(--muted);max-width:500px;margin:0 auto 44px;line-height:1.6;" class="fade-up">Sitio web + SEO local + Google Business. Todo incluido y optimizado por FORNNO.</p>
-    <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;" class="fade-up" style="transition-delay:.3s;">
+    <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;transition-delay:.3s;" class="fade-up">
       <a href="index.html" class="btn btn-secondary btn-lg">← Volver al inicio</a>
     </div>
   </div>
@@ -395,8 +441,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </div>
 
 <script>
-const nav=document.getElementById('main-nav');
-window.addEventListener('scroll',()=>{nav.classList.toggle('solid',window.scrollY>60);},{passive:true});
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>{nav.classList.toggle('solid',window.scrollY>40);},{passive:true});
+(function(){const h=document.getElementById('hamburger'),m=document.getElementById('mobileMenu');h.addEventListener('click',()=>{h.classList.toggle('open');m.classList.toggle('open');});m.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{h.classList.remove('open');m.classList.remove('open');}));})();
 const dots=document.querySelectorAll('.scroll-dot');
 const dotObs=new IntersectionObserver((e)=>{e.forEach(en=>{if(en.isIntersecting&&en.intersectionRatio>=.4){dots.forEach(d=>d.classList.remove('active'));const d=document.querySelector(`.scroll-dot[href="#${en.target.id}"]`);if(d)d.classList.add('active');}});},{threshold:.4});
 document.querySelectorAll('section[id]').forEach(s=>dotObs.observe(s));
@@ -412,5 +459,20 @@ const cObs=new IntersectionObserver((e)=>{e.forEach(en=>{if(en.isIntersecting&&e
 document.querySelectorAll('[data-target]').forEach(el=>{if(el!==posEl)cObs.observe(el);});
 }
 </script>
+
+<footer>
+  <div class="footer-inner">
+    <a href="index.html" class="footer-logo">●<span> FORNNO</span></a>
+    <div class="footer-links">
+      <a href="secretaria.html">Secretaría</a>
+      <a href="escalabilidad.html">Escalabilidad</a>
+      <a href="fidelizacion.html">Fidelización</a>
+      <a href="app.html">App</a>
+      <a href="agencia.html">Agencia</a>
+      <a href="web.html">Web</a>
+    </div>
+    <div class="footer-copy">© 2026 FORNNO. Todos los derechos reservados.</div>
+  </div>
+</footer>
 </body>
 </html>
