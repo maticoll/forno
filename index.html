@@ -658,6 +658,137 @@
     .footer-links a:hover{color:#fff;}
     .footer-copy{font-size:12px;color:rgba(255,255,255,.25);}
   </style>
+  <style>
+  /* ══ FOOD ORDERING — sección 03 ══ */
+  .fo-panel{
+    width:100%;max-width:300px;background:#fff;
+    border:1px solid var(--border);border-radius:var(--radius);
+    overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,.06);position:relative;
+  }
+  .fo-panel-header{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:14px 18px 12px;border-bottom:1px solid var(--border);background:#fff;
+  }
+  .fo-panel-title{
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:13px;font-weight:700;color:var(--text);text-transform:uppercase;letter-spacing:.06em;
+  }
+  .fo-live-badge{
+    display:flex;align-items:center;gap:5px;
+    background:rgba(42,122,75,.08);border:1px solid rgba(42,122,75,.2);
+    border-radius:100px;padding:3px 9px;
+    font-size:9px;font-weight:700;color:var(--green);text-transform:uppercase;letter-spacing:.06em;
+  }
+  .fo-live-dot{width:6px;height:6px;border-radius:50%;background:var(--green);animation:fo-pulse 1.5s ease-in-out infinite;}
+  @keyframes fo-pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.5;transform:scale(.8);}}
+  .fo-cards-list{padding:10px 12px;display:flex;flex-direction:column;gap:6px;background:var(--bg2);}
+  .fo-card-wrapper{overflow:hidden;transition:max-height .32s ease,margin-bottom .32s ease,opacity .32s ease;max-height:90px;}
+  .fo-card-wrapper.collapsing{max-height:0 !important;margin-bottom:-6px;}
+  .fo-card{
+    background:#fff;border:1.5px solid var(--border);border-radius:10px;padding:9px 11px;
+    display:flex;align-items:center;gap:9px;
+    transition:border-color .2s,box-shadow .2s,transform .2s,opacity .25s;
+  }
+  .fo-card.being-ordered{border-color:var(--green);box-shadow:0 0 0 3px rgba(42,122,75,.1);}
+  .fo-card.flying-out{transform:translateX(28px);opacity:0;}
+  .fo-emoji{width:32px;height:32px;background:var(--bg2);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;}
+  .fo-info{flex:1;}
+  .fo-name{font-size:11px;font-weight:600;color:var(--text);display:flex;align-items:center;gap:5px;}
+  .fo-tag{font-size:8px;font-weight:700;padding:2px 5px;border-radius:100px;}
+  .fo-tag-popular{background:rgba(217,79,26,.1);color:var(--orange);}
+  .fo-tag-new{background:rgba(42,122,75,.08);color:var(--green);}
+  .fo-pts{font-size:10px;color:var(--muted);margin-top:1px;}
+  .fo-right{display:flex;flex-direction:column;align-items:flex-end;gap:4px;}
+  .fo-price{font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;color:var(--text);}
+  .fo-add-btn{
+    width:24px;height:24px;border-radius:50%;border:1.5px solid var(--border);
+    background:#fff;font-size:14px;line-height:1;display:flex;align-items:center;justify-content:center;
+    cursor:pointer;color:var(--text);font-weight:300;
+    transition:background .15s,border-color .15s,transform .12s;user-select:none;
+  }
+  .fo-add-btn.auto-press{background:var(--orange);color:#fff;border-color:var(--orange);transform:scale(.85);}
+  .fo-cart-bar{
+    background:var(--dark);display:flex;align-items:center;justify-content:space-between;
+    overflow:hidden;max-height:0;padding:0 18px;
+    transition:max-height .4s ease,padding .4s ease;
+  }
+  .fo-cart-bar.show{max-height:68px;padding:11px 18px;}
+  .fo-cart-left{display:flex;flex-direction:column;gap:2px;}
+  .fo-cart-items{font-size:9px;color:rgba(255,255,255,.45);font-weight:600;text-transform:uppercase;letter-spacing:.06em;}
+  .fo-cart-pts-label{font-size:8px;color:rgba(255,255,255,.3);text-transform:uppercase;letter-spacing:.08em;}
+  .fo-cart-pts-display{display:flex;align-items:baseline;gap:4px;}
+  .fo-pts-value{font-family:'Barlow Condensed',sans-serif;font-size:26px;font-weight:900;color:#fff;letter-spacing:-0.02em;white-space:nowrap;will-change:contents;}
+  .fo-cart-pts-unit{font-size:11px;font-weight:600;color:rgba(255,255,255,.5);}
+  .fo-cart-cta{
+    background:var(--orange);color:#fff;border:none;border-radius:8px;padding:7px 12px;
+    font-family:'Barlow',sans-serif;font-size:10px;font-weight:700;cursor:pointer;white-space:nowrap;
+    text-transform:uppercase;letter-spacing:.04em;
+  }
+  .fo-pts-badge{
+    position:absolute;right:22px;pointer-events:none;
+    font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;color:var(--green);opacity:0;z-index:20;
+  }
+  .fo-pts-badge.animate{animation:fo-badgeFloat .75s cubic-bezier(.2,0,.3,1) forwards;}
+  @keyframes fo-badgeFloat{
+    0%{opacity:1;transform:translateY(0) scale(.85);}
+    25%{opacity:1;transform:translateY(-11px) scale(1.1);}
+    100%{opacity:0;transform:translateY(-34px) scale(.9);}
+  }
+
+  /* ══ SMART SEARCH — sección 06 ══ */
+  .ss-panel{
+    width:100%;max-width:300px;background:#fff;
+    border:1px solid var(--border);border-radius:var(--radius);
+    overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,.06);
+  }
+  .ss-search-top{padding:14px 18px 12px;border-bottom:1px solid var(--border);background:#fff;}
+  .ss-panel-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:11px;}
+  .ss-panel-title{font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;color:var(--text);text-transform:uppercase;letter-spacing:.06em;}
+  .ss-ai-badge{
+    background:rgba(217,79,26,.08);border:1px solid rgba(217,79,26,.2);
+    border-radius:100px;padding:3px 9px;font-size:9px;font-weight:700;color:var(--orange);letter-spacing:.04em;
+  }
+  .ss-search-bar{
+    display:flex;align-items:center;gap:8px;border:1.5px solid var(--orange);
+    border-radius:8px;padding:8px 11px;background:#fff;
+    box-shadow:0 0 0 3px rgba(217,79,26,.07);
+  }
+  .ss-search-icon{font-size:12px;flex-shrink:0;}
+  .ss-search-text{font-size:12px;color:var(--text);font-weight:400;flex:1;font-family:'Barlow',sans-serif;}
+  .ss-search-cursor{width:2px;height:13px;background:var(--orange);display:inline-block;margin-left:1px;animation:ss-blink .9s step-end infinite;vertical-align:middle;}
+  @keyframes ss-blink{0%,100%{opacity:1;}50%{opacity:0;}}
+  .ss-maps-results{background:#fff;opacity:0;transition:opacity .3s ease;}
+  .ss-maps-header{
+    padding:7px 16px 6px;font-size:9px;font-weight:700;color:var(--muted);
+    text-transform:uppercase;letter-spacing:.08em;border-bottom:1px solid var(--border);
+    display:flex;align-items:center;justify-content:space-between;
+  }
+  .ss-rankings-list{position:relative;margin:8px 10px 10px;}
+  .ss-rank-item{
+    position:absolute;left:0;right:0;
+    display:flex;align-items:center;gap:7px;padding:7px 9px;
+    border-radius:8px;border:1.5px solid transparent;background:#fff;
+    transition:top .32s cubic-bezier(.4,0,.2,1),border-color .4s ease,background .4s ease;
+  }
+  .ss-rank-item.target-restaurant{border-color:transparent;}
+  .ss-rank-item.target-restaurant.is-top{border-color:var(--green);background:rgba(42,122,75,.05);}
+  .ss-rank-num{width:16px;font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;color:var(--muted);text-align:center;flex-shrink:0;transition:color .4s ease;}
+  .ss-rank-item.target-restaurant .ss-rank-num{color:var(--green);}
+  .ss-rank-pin{width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0;background:rgba(217,79,26,.1);transition:background .4s ease;}
+  .ss-rank-item.target-restaurant .ss-rank-pin{background:rgba(42,122,75,.1);}
+  .ss-rank-info{flex:1;min-width:0;}
+  .ss-rank-name{font-size:11px;font-weight:600;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-family:'Barlow',sans-serif;}
+  .ss-rank-meta{font-size:9px;color:var(--muted);margin-top:1px;}
+  .ss-rank-stars{color:#F59E0B;}
+  .ss-rank-right{display:flex;flex-direction:column;align-items:flex-end;gap:3px;}
+  .ss-rank-dist{font-size:9px;color:var(--muted);}
+  .ss-top-badge{
+    background:var(--orange);color:#fff;border-radius:100px;padding:2px 6px;
+    font-size:8px;font-weight:700;letter-spacing:.04em;
+    opacity:0;transform:scale(.6);transition:opacity .35s .1s ease,transform .35s .1s ease;white-space:nowrap;
+  }
+  .ss-rank-item.target-restaurant.is-top .ss-top-badge{opacity:1;transform:scale(1);}
+  </style>
 </head>
 <body>
 <!-- Google Tag Manager (noscript) -->
@@ -899,27 +1030,80 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
     </div>
     <div class="screen-visual fade-up" style="transition-delay:.15s">
-      <div class="loyalty-mini">
-        <div style="display:flex;justify-content:space-between;align-items:flex-start">
-          <div>
-            <div class="loyalty-mini-brand">Tu Restaurante</div>
-            <div class="loyalty-mini-sub">Programa de Lealtad</div>
+      <!-- Food Ordering animado — columna derecha -->
+      <div class="fo-panel" id="foPanel">
+        <div style="background:var(--bg2)">
+          <div class="fo-panel-header" style="background:#fff">
+            <span class="fo-panel-title">Pedidos de hoy</span>
+            <span class="fo-live-badge"><span class="fo-live-dot"></span>En vivo</span>
           </div>
-          <div style="text-align:right">
-            <div style="font-size:9px;color:#444;text-transform:uppercase;letter-spacing:.08em">Nivel</div>
-            <div style="font-size:12px;font-weight:700;color:#FFD700">🥇 GOLD</div>
+          <div class="fo-cards-list">
+            <div class="fo-card-wrapper" id="fo-wrap-1">
+              <div class="fo-card" id="fo-fcard-1">
+                <div class="fo-emoji">🍝</div>
+                <div class="fo-info">
+                  <div class="fo-name">Pasta al pesto <span class="fo-tag fo-tag-popular">Popular</span></div>
+                  <div class="fo-pts">1.200 pts</div>
+                </div>
+                <div class="fo-right">
+                  <span class="fo-price">$480</span>
+                  <button class="fo-add-btn" id="fo-btn-1">+</button>
+                </div>
+              </div>
+            </div>
+            <div class="fo-card-wrapper" id="fo-wrap-2">
+              <div class="fo-card" id="fo-fcard-2">
+                <div class="fo-emoji">🍕</div>
+                <div class="fo-info">
+                  <div class="fo-name">Pizza cuatro quesos</div>
+                  <div class="fo-pts">1.550 pts</div>
+                </div>
+                <div class="fo-right">
+                  <span class="fo-price">$620</span>
+                  <button class="fo-add-btn" id="fo-btn-2">+</button>
+                </div>
+              </div>
+            </div>
+            <div class="fo-card-wrapper" id="fo-wrap-3">
+              <div class="fo-card" id="fo-fcard-3">
+                <div class="fo-emoji">🥗</div>
+                <div class="fo-info">
+                  <div class="fo-name">Ensalada caprese <span class="fo-tag fo-tag-new">Nuevo</span></div>
+                  <div class="fo-pts">875 pts</div>
+                </div>
+                <div class="fo-right">
+                  <span class="fo-price">$350</span>
+                  <button class="fo-add-btn" id="fo-btn-3">+</button>
+                </div>
+              </div>
+            </div>
+            <div class="fo-card-wrapper" id="fo-wrap-4">
+              <div class="fo-card" id="fo-fcard-4">
+                <div class="fo-emoji">🍮</div>
+                <div class="fo-info">
+                  <div class="fo-name">Tiramisú</div>
+                  <div class="fo-pts">725 pts</div>
+                </div>
+                <div class="fo-right">
+                  <span class="fo-price">$290</span>
+                  <button class="fo-add-btn" id="fo-btn-4">+</button>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="loyalty-mini-pts">2.840</div>
-        <div class="loyalty-mini-ptslabel">puntos acumulados</div>
-        <div class="loyalty-mini-bar"><div class="loyalty-mini-fill"></div></div>
-        <div style="font-size:9px;color:rgba(255,255,255,.3);margin-top:6px">68% hacia PLATINUM</div>
-        <div class="loyalty-mini-chips">
-          <div class="loyalty-chip">WhatsApp</div>
-          <div class="loyalty-chip">Apple Wallet</div>
-          <div class="loyalty-chip">Google Wallet</div>
-          <div class="loyalty-chip">QR Físico</div>
+        <div class="fo-cart-bar" id="foCartBar">
+          <div class="fo-cart-left">
+            <span class="fo-cart-items" id="foCartItems">1 item</span>
+            <div class="fo-cart-pts-display">
+              <span class="fo-pts-value" id="foPtsValue">0</span>
+              <span class="fo-cart-pts-unit">pts</span>
+            </div>
+            <span class="fo-cart-pts-label">Puntos acumulados</span>
+          </div>
+          <button class="fo-cart-cta">Ver Carrito →</button>
         </div>
+        <div id="foPtsBadge" class="fo-pts-badge"></div>
       </div>
     </div>
   </div>
@@ -1047,21 +1231,24 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
     </div>
     <div class="screen-visual fade-up" style="transition-delay:.15s">
-      <div class="search-mock">
-        <div class="search-bar">
-          <span class="search-icon">🔍</span>
-          <span class="search-query">restaurante cerca de mí</span>
+      <!-- Smart Search animado — columna derecha -->
+      <div class="ss-panel" id="ssPanel">
+        <div class="ss-search-top">
+          <div class="ss-panel-header">
+            <span class="ss-panel-title">Google Maps</span>
+            <span class="ss-ai-badge">✦ SEO en tiempo real</span>
+          </div>
+          <div class="ss-search-bar">
+            <span class="ss-search-icon">🔍</span>
+            <span class="ss-search-text" id="ssSearchText"></span><span class="ss-search-cursor"></span>
+          </div>
         </div>
-        <div class="search-result">
-          <div class="search-result-rank">⬆ Posición #1</div>
-          <div class="search-result-url">tu-restaurante.com.ar</div>
-          <div class="search-result-title">Tu Restaurante — Reservas &amp; Menú Online</div>
-          <div class="search-result-desc">Reservá tu mesa directo desde Google. Menú actualizado, pedidos online y delivery sin comisiones.</div>
-        </div>
-        <div class="search-result2">
-          <div class="search-result-url" style="color:var(--muted2)">otrorestaurante.com</div>
-          <div class="search-result-title" style="color:var(--muted)">Otro Restaurante</div>
-          <div class="search-result-desc">Información básica...</div>
+        <div class="ss-maps-results" id="ssMapsResults">
+          <div class="ss-maps-header">
+            <span>Resultados locales · Google Maps</span>
+            <span id="ssMapsStatus" style="color:var(--green);font-size:9px;font-weight:700;letter-spacing:.02em;"></span>
+          </div>
+          <div class="ss-rankings-list" id="ssRankingsList"></div>
         </div>
       </div>
     </div>
@@ -1369,6 +1556,242 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     items.forEach(reset);
     timers.push(setTimeout(cycle,400));
+  })();
+
+  /* ══ FOOD ORDERING — animación sección 03 ══ */
+  (function(){
+    const FO_ITEMS = [
+      { wrapId:'fo-wrap-1', cardId:'fo-fcard-1', btnId:'fo-btn-1', pts:1200 },
+      { wrapId:'fo-wrap-2', cardId:'fo-fcard-2', btnId:'fo-btn-2', pts:1550 },
+      { wrapId:'fo-wrap-3', cardId:'fo-fcard-3', btnId:'fo-btn-3', pts: 875 },
+      { wrapId:'fo-wrap-4', cardId:'fo-fcard-4', btnId:'fo-btn-4', pts: 725 },
+    ];
+    let foTotalPts=0, foOrderCount=0, foTOs=[], foAniFrame=null, foStarted=false;
+
+    function clearFoTOs(){ foTOs.forEach(clearTimeout); foTOs=[]; if(foAniFrame) cancelAnimationFrame(foAniFrame); }
+
+    function foStartOrdering(){
+      clearFoTOs();
+      foTotalPts=0; foOrderCount=0;
+      FO_ITEMS.forEach(item=>{
+        const wrap=document.getElementById(item.wrapId);
+        const card=document.getElementById(item.cardId);
+        const btn =document.getElementById(item.btnId);
+        if(!wrap||!card||!btn) return;
+        wrap.classList.remove('collapsing'); wrap.style.maxHeight='';
+        card.classList.remove('being-ordered','flying-out');
+        btn.classList.remove('auto-press');
+      });
+      const cartBar=document.getElementById('foCartBar');
+      const ptsEl  =document.getElementById('foPtsValue');
+      const itemsEl=document.getElementById('foCartItems');
+      if(cartBar) cartBar.classList.remove('show');
+      if(foAniFrame) cancelAnimationFrame(foAniFrame);
+      if(ptsEl)   ptsEl.textContent='0';
+      if(itemsEl) itemsEl.textContent='1 item';
+      [...FO_ITEMS].reverse().forEach((item,i)=>{
+        foTOs.push(setTimeout(()=>foAnimateOrder(item), 900+i*2200));
+      });
+      foTOs.push(setTimeout(foStartOrdering, 900+FO_ITEMS.length*2200+1800));
+    }
+
+    function foAnimateOrder(item){
+      const card=document.getElementById(item.cardId);
+      const btn =document.getElementById(item.btnId);
+      const wrap=document.getElementById(item.wrapId);
+      if(!card||!btn||!wrap) return;
+      card.classList.add('being-ordered');
+      foTOs.push(setTimeout(()=>{
+        btn.classList.add('auto-press');
+        foTOs.push(setTimeout(()=>{
+          btn.classList.remove('auto-press');
+          foOrderCount++;
+          const from=foTotalPts; foTotalPts+=item.pts;
+          const cartBar=document.getElementById('foCartBar');
+          const itemsEl=document.getElementById('foCartItems');
+          if(cartBar) cartBar.classList.add('show');
+          if(itemsEl) itemsEl.textContent=foOrderCount===1?'1 item':foOrderCount+' items';
+          foShowBadge(item.pts, btn);
+          foAnimateCounter(from, foTotalPts);
+          card.classList.remove('being-ordered'); card.classList.add('flying-out');
+          foTOs.push(setTimeout(()=>{
+            wrap.style.maxHeight=wrap.offsetHeight+'px';
+            void wrap.offsetWidth;
+            wrap.classList.add('collapsing');
+          },260));
+        },180));
+      },350));
+    }
+
+    function foShowBadge(pts, btn){
+      const badge=document.getElementById('foPtsBadge');
+      const panel=document.getElementById('foPanel');
+      if(!badge||!panel) return;
+      const panelRect=panel.getBoundingClientRect();
+      const btnRect  =btn.getBoundingClientRect();
+      badge.textContent='+'+pts.toLocaleString('es-AR')+' pts';
+      badge.style.top=(btnRect.top-panelRect.top-8)+'px';
+      badge.style.right='22px';
+      badge.classList.remove('animate');
+      void badge.offsetWidth;
+      badge.classList.add('animate');
+      badge.addEventListener('animationend',()=>badge.classList.remove('animate'),{once:true});
+    }
+
+    function foAnimateCounter(from, to){
+      if(foAniFrame) cancelAnimationFrame(foAniFrame);
+      const el=document.getElementById('foPtsValue');
+      if(!el) return;
+      const DURATION=900, SCRAMBLE=0.55, startTime=performance.now(), range=to-from;
+      function step(now){
+        const t=Math.min((now-startTime)/DURATION,1);
+        const eased=t===1?1:1-Math.pow(2,-10*t);
+        const smooth=Math.round(from+range*eased);
+        let display;
+        if(t<SCRAMBLE){ const noise=Math.round((Math.random()-.3)*range*(1-t/SCRAMBLE)*.45); display=Math.max(from,Math.min(to,smooth+noise)); }
+        else { display=smooth; }
+        el.textContent=display.toLocaleString('es-AR');
+        if(t<1){ foAniFrame=requestAnimationFrame(step); } else { el.textContent=to.toLocaleString('es-AR'); }
+      }
+      foAniFrame=requestAnimationFrame(step);
+    }
+
+    const foObs=new IntersectionObserver(entries=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting&&e.intersectionRatio>=.4){
+          if(!foStarted){ foStarted=true; setTimeout(foStartOrdering,500); }
+        } else if(!e.isIntersecting&&foStarted){
+          clearFoTOs(); foStarted=false;
+        }
+      });
+    },{threshold:.4});
+    const foSection=document.getElementById('fidelizacion');
+    if(foSection) foObs.observe(foSection);
+  })();
+
+  /* ══ SMART SEARCH — animación sección 06 ══ */
+  (function(){
+    const SS_R=[
+      {id:'sr0',name:'La Trattoria',  stars:'4.2',reviews:'320',dist:'1.2 km',isTarget:false},
+      {id:'sr1',name:'Bella Napoli',  stars:'3.8',reviews:'180',dist:'0.8 km',isTarget:false},
+      {id:'sr2',name:'Da Mario',      stars:'4.1',reviews:'245',dist:'2.1 km',isTarget:false},
+      {id:'sr3',name:'Il Forno',      stars:'3.9',reviews:'92', dist:'1.5 km',isTarget:false},
+      {id:'sr4',name:'Osteria Roma',  stars:'4.0',reviews:'167',dist:'3.0 km',isTarget:false},
+      {id:'sr5',name:'Pasta & Basta', stars:'3.7',reviews:'88', dist:'2.4 km',isTarget:false},
+      {id:'sr6',name:'Mi Restaurante',stars:'4.8',reviews:'512',dist:'0.5 km',isTarget:true },
+    ];
+    const ITEM_H=42, ITEM_GAP=4;
+    let ssRankOrder=[], ssTOs=[], ssStarted=false;
+
+    function clearSsTOs(){ ssTOs.forEach(clearTimeout); ssTOs=[]; }
+    function ssItemTop(idx){ return idx*(ITEM_H+ITEM_GAP); }
+
+    function ssMakeRankEl(r,pos){
+      const div=document.createElement('div');
+      div.className='ss-rank-item'+(r.isTarget?' target-restaurant':'');
+      div.id='ssRankEl-'+r.id;
+      div.innerHTML=`
+        <div class="ss-rank-num">${pos}</div>
+        <div class="ss-rank-pin">${r.isTarget?'🏠':'📍'}</div>
+        <div class="ss-rank-info">
+          <div class="ss-rank-name">${r.name}</div>
+          <div class="ss-rank-meta"><span class="ss-rank-stars">⭐ ${r.stars}</span> · ${r.reviews} reseñas</div>
+        </div>
+        <div class="ss-rank-right">
+          <span class="ss-rank-dist">${r.dist}</span>
+          <span class="ss-top-badge">#1 Zona</span>
+        </div>`;
+      return div;
+    }
+
+    function ssUpdateNumbers(){
+      ssRankOrder.forEach((r,idx)=>{
+        const el=document.getElementById('ssRankEl-'+r.id);
+        if(el) el.querySelector('.ss-rank-num').textContent=idx+1;
+      });
+    }
+
+    function ssReset(){
+      const st=document.getElementById('ssSearchText');
+      const mr=document.getElementById('ssMapsResults');
+      const ms=document.getElementById('ssMapsStatus');
+      const rl=document.getElementById('ssRankingsList');
+      if(st) st.textContent='';
+      if(mr) mr.style.opacity='0';
+      if(ms) ms.textContent='';
+      if(rl) rl.innerHTML='';
+      ssRankOrder=[];
+    }
+
+    function ssBuildList(){
+      ssRankOrder=[...SS_R];
+      const list=document.getElementById('ssRankingsList');
+      if(!list) return;
+      list.innerHTML='';
+      list.style.height=(SS_R.length*ITEM_H+(SS_R.length-1)*ITEM_GAP)+'px';
+      ssRankOrder.forEach((r,idx)=>{
+        const el=ssMakeRankEl(r,idx+1);
+        el.style.top=ssItemTop(idx)+'px';
+        el.style.opacity='0'; el.style.transition='opacity .25s ease';
+        list.appendChild(el);
+      });
+      const mr=document.getElementById('ssMapsResults');
+      if(mr) mr.style.opacity='1';
+      list.querySelectorAll('.ss-rank-item').forEach((el,i)=>{
+        ssTOs.push(setTimeout(()=>{ el.style.opacity='1'; },i*75));
+      });
+      ssTOs.push(setTimeout(ssStartRising, SS_R.length*75+850));
+    }
+
+    function ssStartRising(){
+      const RISE_MS=1100;
+      const ms=document.getElementById('ssMapsStatus');
+      if(ms) ms.textContent='Subiendo posición...';
+      document.querySelectorAll('.ss-rank-item').forEach(el=>{
+        el.style.transition=`top ${RISE_MS}ms cubic-bezier(.4,0,.15,1),border-color .4s ease,background .4s ease`;
+      });
+      const target=ssRankOrder.find(r=>r.isTarget);
+      const newOrder=[target,...ssRankOrder.filter(r=>!r.isTarget)];
+      newOrder.forEach((r,newIdx)=>{
+        const el=document.getElementById('ssRankEl-'+r.id);
+        if(el) el.style.top=ssItemTop(newIdx)+'px';
+      });
+      ssTOs.push(setTimeout(()=>{
+        ssRankOrder=newOrder; ssUpdateNumbers();
+        const targetEl=document.getElementById('ssRankEl-'+target.id);
+        if(targetEl) targetEl.classList.add('is-top');
+        if(ms) ms.textContent='🏆 Posición #1 alcanzada';
+        // restart loop
+        ssTOs.push(setTimeout(()=>{ clearSsTOs(); ssReset(); ssTOs.push(setTimeout(ssRunAnim,400)); }, 3200));
+      },RISE_MS+80));
+    }
+
+    function ssRunAnim(){
+      const query='Pizza cerca';
+      const st=document.getElementById('ssSearchText');
+      if(!st) return;
+      let i=0;
+      function typeChar(){
+        st.textContent+=query[i++];
+        if(i<query.length) ssTOs.push(setTimeout(typeChar,120));
+        else ssTOs.push(setTimeout(ssBuildList,400));
+      }
+      typeChar();
+    }
+
+    function ssStart(){ clearSsTOs(); ssReset(); ssTOs.push(setTimeout(ssRunAnim,400)); }
+
+    const ssObs=new IntersectionObserver(entries=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting&&e.intersectionRatio>=.4){
+          if(!ssStarted){ ssStarted=true; ssStart(); }
+        } else if(!e.isIntersecting&&ssStarted){
+          clearSsTOs(); ssStarted=false;
+        }
+      });
+    },{threshold:.4});
+    const ssSection=document.getElementById('web');
+    if(ssSection) ssObs.observe(ssSection);
   })();
 </script>
 </body>
