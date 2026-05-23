@@ -439,22 +439,15 @@
       background:var(--orange);color:#fff;
       border-radius:14px 4px 14px 14px;align-self:flex-end;
     }
-    .imsg:nth-child(1){animation-delay:.5s;}
-    .imsg:nth-child(2){animation-delay:2.5s;}
-    .imsg:nth-child(3){animation-delay:4.5s;}
-    .imsg:nth-child(4){animation-delay:6.5s;}
-    @keyframes imsg-in{
-      0%{opacity:0;transform:translateY(8px) scale(.97);}
-      8%{opacity:1;transform:translateY(0) scale(1);}
-      75%{opacity:1;}
-      88%,100%{opacity:0;}
-    }
+    /* Chat animation — controlada por JS */
+    .imsg{transition:opacity .4s ease,transform .4s ease;}
     .iphone-confirm{
       margin:0 10px 12px;padding:8px 12px;
       background:rgba(42,122,75,.1);border:1px solid rgba(42,122,75,.2);
       border-radius:8px;display:flex;align-items:center;justify-content:space-between;
       font-size:10px;font-weight:700;color:var(--green);
-      opacity:0;animation:imsg-in 9s ease infinite;animation-delay:6.8s;
+      opacity:0;transform:translateY(8px) scale(.97);
+      transition:opacity .4s ease,transform .4s ease;
     }
     .iphone-confirm span{color:var(--orange);}
 
@@ -1297,6 +1290,50 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       clearTimeout(autoFallback);
       showImageThenDismiss(800);
     });
+  })();
+
+  /* ── Chat animation loop (sección Secretaría) ──── */
+  (function(){
+    const msgs    = document.querySelectorAll('.iphone-msgs .imsg');
+    const confirm = document.querySelector('.iphone-confirm');
+    if(!msgs.length) return;
+
+    // Tiempos (ms) en que aparece cada elemento desde el inicio del ciclo
+    const items   = [...msgs, confirm];
+    const SHOW_AT = [500, 2500, 4500, 6500, 6800];
+    const HOLD    = 2800;   // ms todos visibles
+    const FADE    = 700;    // ms fade-out
+    const PAUSE   = 500;    // ms pantalla limpia
+
+    function show(el){
+      el.style.transition='opacity .4s ease,transform .4s ease';
+      el.style.opacity='1'; el.style.transform='translateY(0) scale(1)';
+    }
+    function fade(el){
+      el.style.transition=`opacity ${FADE}ms ease`;
+      el.style.opacity='0';
+    }
+    function reset(el){
+      el.style.transition='none';
+      el.style.opacity='0'; el.style.transform='translateY(8px) scale(.97)';
+    }
+
+    const timers=[];
+    function clearAll(){ timers.forEach(clearTimeout); timers.length=0; }
+
+    function cycle(){
+      clearAll();
+      SHOW_AT.forEach((d,i)=>timers.push(setTimeout(()=>show(items[i]),d)));
+      const fadeAt=SHOW_AT[SHOW_AT.length-1]+HOLD;
+      timers.push(setTimeout(()=>items.forEach(fade),fadeAt));
+      timers.push(setTimeout(()=>{
+        items.forEach(reset);
+        requestAnimationFrame(()=>requestAnimationFrame(cycle));
+      },fadeAt+FADE+PAUSE));
+    }
+
+    items.forEach(reset);
+    timers.push(setTimeout(cycle,400));
   })();
 </script>
 </body>
