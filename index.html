@@ -822,7 +822,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <div class="iphone-bar">
               <div class="iphone-avatar">🤖</div>
               <div>
-                <div class="iphone-name">Agente FORNNO</div>
+                <div class="iphone-name">Agente Restaurante</div>
                 <div class="iphone-status">Online · WhatsApp</div>
               </div>
             </div>
@@ -1298,12 +1298,34 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     const confirm = document.querySelector('.iphone-confirm');
     if(!msgs.length) return;
 
-    // Tiempos (ms) en que aparece cada elemento desde el inicio del ciclo
-    const items   = [...msgs, confirm];
-    const SHOW_AT = [500, 2500, 4500, 6500, 6800];
-    const HOLD    = 2800;   // ms todos visibles
-    const FADE    = 700;    // ms fade-out
-    const PAUSE   = 500;    // ms pantalla limpia
+    // Dos conversaciones que se alternan en cada ciclo
+    const CONVS = [
+      {
+        msgs: [
+          { cls:'user', text:'Hola, me gustaría reservar 🙋' },
+          { cls:'bot',  text:'¡Claro! ¿Para cuántas personas y qué día? 📅' },
+          { cls:'user', text:'Para 4 el sábado a las 21hs' },
+          { cls:'bot',  text:'¡Perfecto! ¿A nombre de quién? 🙌' },
+        ],
+        confirm: ['✓ Reserva confirmada','0% comisión']
+      },
+      {
+        msgs: [
+          { cls:'user', text:'Hola, me gustaría ver el menú 🍽️' },
+          { cls:'bot',  text:'¡Con gusto! Tenemos pasta, carnes y opciones veganas 🍝' },
+          { cls:'user', text:'¿Tienen opciones sin TACC?' },
+          { cls:'bot',  text:'¡Sí! Te mando la carta completa ahora 📋' },
+        ],
+        confirm: ['✓ Menú enviado','WhatsApp']
+      }
+    ];
+
+    const SHOW_AT = [500, 2200, 4000, 5800, 6100];
+    const HOLD    = 2800;
+    const FADE    = 700;
+    const PAUSE   = 500;
+
+    const items = [...msgs, confirm];
 
     function show(el){
       el.style.transition='opacity .4s ease,transform .4s ease';
@@ -1321,9 +1343,22 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     const timers=[];
     function clearAll(){ timers.forEach(clearTimeout); timers.length=0; }
 
+    let convIdx=0;
     function cycle(){
       clearAll();
+
+      // Cargar contenido de la conversación actual
+      const conv=CONVS[convIdx % CONVS.length];
+      convIdx++;
+      msgs.forEach((el,i)=>{
+        el.className='imsg '+conv.msgs[i].cls;
+        el.textContent=conv.msgs[i].text;
+      });
+      confirm.querySelectorAll('span')[0].textContent=conv.confirm[0];
+      confirm.querySelectorAll('span')[1].textContent=conv.confirm[1];
+
       SHOW_AT.forEach((d,i)=>timers.push(setTimeout(()=>show(items[i]),d)));
+
       const fadeAt=SHOW_AT[SHOW_AT.length-1]+HOLD;
       timers.push(setTimeout(()=>items.forEach(fade),fadeAt));
       timers.push(setTimeout(()=>{
