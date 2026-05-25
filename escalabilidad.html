@@ -607,11 +607,12 @@ document.querySelectorAll('[data-target]').forEach(el=>cObs.observe(el));
   if (!waMessages) return;
 
   const messages = [
-    { from: 'bot',  text: '¡Hola! ¿Querés hacer un pedido? 🛵\nTe paso el menú o pedime directo.' },
-    { from: 'user', text: 'Quiero 2 pizzas napolitanas y una coca cola grande' },
+    { from: 'user', text: 'Hola! Quiero hacer un pedido 🍕' },
+    { from: 'bot',  text: '¡Hola! Con gusto. ¿Qué querés pedir?' },
+    { from: 'user', text: '2 pizzas napolitanas y una coca cola grande' },
     { from: 'bot',  text: '📋 Tu pedido:\n\n・ 2× Pizza Napolitana\n・ 1× Coca Cola 500ml\n\n💰 Total: $8.500\n\n¿Retirás o delivery?' },
     { from: 'user', text: 'Delivery. Av. Corrientes 1234, 3°B' },
-    { from: 'bot',  text: '✅ ¡Pedido confirmado!\n\n⏱ 30–35 minutos\n🏠 Corrientes 1234, 3°B\n\n🚫 Sin comisión de plataforma 🔥' },
+    { from: 'bot',  text: '✅ ¡Pedido confirmado!\n\n⏱ 30–35 minutos\n🏠 Corrientes 1234, 3°B\n\n🚫 Sin comisión 🔥' },
   ];
 
   function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
