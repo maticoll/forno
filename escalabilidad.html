@@ -256,6 +256,45 @@ footer{background:#1A1612;padding:48px 0;}
   /* bg-num scale down */
   .bg-num{font-size:clamp(140px,35vw,260px);}
 }
+
+/* ── iPHONE MOCKUP + CHAT (dark WhatsApp) ─────────────── */
+.iphone-wrap{display:flex;justify-content:center;align-items:center;position:relative;}
+.iphone-wrap::before{content:'';position:absolute;width:340px;height:340px;border-radius:50%;background:radial-gradient(circle,rgba(217,79,26,.15) 0%,transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;}
+.iphone{width:300px;height:620px;background:#0a0a0a;border-radius:50px;border:1.5px solid #2a2a2a;position:relative;overflow:hidden;flex-shrink:0;box-shadow:0 0 0 1px #111,0 50px 100px rgba(0,0,0,.7),0 0 80px rgba(255,92,26,.05),inset 0 0 0 1px rgba(255,255,255,.04);}
+.iphone::before{content:'';position:absolute;left:-3px;top:110px;width:3px;height:56px;background:#1e1e1e;border-radius:2px 0 0 2px;box-shadow:0 70px 0 #1e1e1e;}
+.iphone::after{content:'';position:absolute;right:-3px;top:140px;width:3px;height:72px;background:#1e1e1e;border-radius:0 2px 2px 0;}
+.iphone-di{position:absolute;top:14px;left:50%;transform:translateX(-50%);width:100px;height:28px;background:#000;border-radius:20px;z-index:20;box-shadow:0 0 0 1px rgba(255,255,255,.05);}
+.iphone-screen{position:absolute;inset:8px;border-radius:44px;background:#111b21;overflow:hidden;display:flex;flex-direction:column;}
+.wa-statusbar{padding:14px 20px 4px;display:flex;justify-content:space-between;align-items:center;font-size:10px;font-weight:700;color:#e9edef;flex-shrink:0;}
+.wa-statusbar-right{display:flex;gap:5px;align-items:center;}
+.wa-topbar{background:#1f2c34;padding:6px 12px 10px;display:flex;align-items:center;gap:8px;flex-shrink:0;}
+.wa-back-btn{background:none;border:none;color:#aebac1;font-size:22px;line-height:1;padding:0 2px;flex-shrink:0;}
+.wa-avatar{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,var(--orange),#c43a00);display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;}
+.wa-contact{flex:1;min-width:0;}
+.wa-contact-name{font-size:12.5px;font-weight:600;color:#e9edef;}
+.wa-contact-status{font-size:10px;color:#8696a0;display:flex;align-items:center;gap:4px;}
+.wa-status-dot{width:5px;height:5px;background:var(--green);border-radius:50%;animation:pulse-dot 2s ease-in-out infinite;}
+@keyframes pulse-dot{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.5;transform:scale(.7);}}
+.wa-more{color:#aebac1;flex-shrink:0;}
+.wa-messages{flex:1;padding:10px 8px;overflow-y:auto;display:flex;flex-direction:column;gap:3px;background:#0d1117;scroll-behavior:smooth;transition:opacity .25s ease;}
+.wa-messages::-webkit-scrollbar{width:2px;}
+.wa-messages::-webkit-scrollbar-thumb{background:#333;border-radius:999px;}
+.wa-date-sep{text-align:center;margin:6px 0;}
+.wa-date-sep span{font-size:9px;background:rgba(255,255,255,.06);color:#8696a0;padding:3px 8px;border-radius:5px;}
+.wa-bubble{max-width:84%;padding:6px 10px;border-radius:10px;font-size:11px;line-height:1.55;position:relative;word-break:break-word;animation:bubble-pop .28s cubic-bezier(.22,1,.36,1) both;}
+@keyframes bubble-pop{from{opacity:0;transform:scale(.88) translateY(6px);}to{opacity:1;transform:none;}}
+.wa-bubble.bot{background:#202c33;border-radius:0 10px 10px 10px;align-self:flex-start;color:#e9edef;margin-right:auto;}
+.wa-bubble.user{background:#005c4b;border-radius:10px 0 10px 10px;align-self:flex-end;color:#e9edef;margin-left:auto;}
+.bubble-time{font-size:8.5px;color:rgba(255,255,255,.38);float:right;margin-left:8px;margin-top:2px;line-height:1;}
+.bubble-check{color:rgba(255,255,255,.55);font-size:10px;}
+.wa-typing{display:flex;gap:3px;align-items:center;padding:10px 14px;width:52px;background:#202c33;border-radius:0 10px 10px 10px;align-self:flex-start;animation:bubble-pop .28s cubic-bezier(.22,1,.36,1) both;}
+.t-dot{width:6px;height:6px;border-radius:50%;background:#8696a0;animation:tdot 1.2s ease-in-out infinite;}
+.t-dot:nth-child(2){animation-delay:.18s;}
+.t-dot:nth-child(3){animation-delay:.36s;}
+@keyframes tdot{0%,60%,100%{transform:translateY(0);opacity:.45;}30%{transform:translateY(-4px);opacity:1;}}
+.wa-input-row{background:#1f2c34;padding:8px 10px 28px;display:flex;align-items:center;gap:8px;flex-shrink:0;}
+.wa-input-box{flex:1;background:#2a3942;border-radius:20px;padding:8px 14px;font-size:10.5px;color:#8696a0;}
+.wa-send{width:32px;height:32px;border-radius:50%;background:var(--orange);border:none;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 4px 12px rgba(255,92,26,.35);}
 </style>
 </head>
 <body>
@@ -358,69 +397,73 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </section>
 
 <!-- AGENTE DE PEDIDOS -->
-<section id="pedidos" class="section-pad section-alt">
+<section id="pedidos" class="section-pad">
   <div class="container">
     <div class="feature-grid">
-      <div class="fade-up">
+
+      <!-- iPhone -->
+      <div class="iphone-wrap fade-up" style="transition-delay:.1s">
+        <div class="iphone">
+          <div class="iphone-di"></div>
+          <div class="iphone-screen">
+
+            <div class="wa-statusbar">
+              <span id="phoneTime">9:41</span>
+              <div class="wa-statusbar-right">
+                <svg width="11" height="9" viewBox="0 0 24 20" fill="#e9edef"><rect x="0" y="14" width="4" height="6" rx="1"/><rect x="7" y="9" width="4" height="11" rx="1"/><rect x="14" y="4" width="4" height="16" rx="1"/><rect x="21" y="0" width="4" height="20" rx="1"/></svg>
+                <svg width="13" height="9" viewBox="0 0 28 20" fill="#e9edef"><path d="M14 2C7.4 2 1.8 5.6 0 11c1.8 5.4 7.4 9 14 9s12.2-3.6 14-9c-1.8-5.4-7.4-9-14-9zm0 15c-3.3 0-6-2.7-6-6s2.7-6 6-6 6 2.7 6 6-2.7 6-6 6zm0-10c-2.2 0-4 1.8-4 4s1.8 4 4 4 4-1.8 4-4-1.8-4-4-4z"/></svg>
+                <svg width="18" height="9" viewBox="0 0 40 18" fill="#e9edef"><rect x="0" y="2" width="34" height="14" rx="3" stroke="#e9edef" stroke-width="1.5" fill="none"/><rect x="35" y="5" width="4" height="8" rx="2" fill="#e9edef"/><rect x="2" y="4" width="24" height="10" rx="2" fill="#e9edef"/></svg>
+              </div>
+            </div>
+
+            <div class="wa-topbar">
+              <span class="wa-back-btn">‹</span>
+              <div class="wa-avatar">🛵</div>
+              <div class="wa-contact">
+                <div class="wa-contact-name">Pedidos FORNNO</div>
+                <div class="wa-contact-status">
+                  <span class="wa-status-dot"></span>
+                  en línea
+                </div>
+              </div>
+              <div class="wa-more">
+                <svg width="14" height="4" viewBox="0 0 24 6" fill="#aebac1"><circle cx="3" cy="3" r="2.5"/><circle cx="12" cy="3" r="2.5"/><circle cx="21" cy="3" r="2.5"/></svg>
+              </div>
+            </div>
+
+            <div class="wa-messages" id="waMessages">
+              <div class="wa-date-sep"><span>HOY</span></div>
+            </div>
+
+            <div class="wa-input-row">
+              <div class="wa-input-box">Escribir mensaje...</div>
+              <button class="wa-send">
+                <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13"/><path d="M22 2L15 22 11 13 2 9l20-7z"/></svg>
+              </button>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- Text -->
+      <div class="fade-up" style="transition-delay:.2s">
         <p class="feature-label">02 · A — Agente de pedidos</p>
-        <h2 class="feature-h2">Tu cajero digital,<br>activo 24/7.</h2>
-        <p class="feature-p">El cliente escribe por WhatsApp, elige del menú, confirma, paga y recibe su pedido. Tu equipo solo se ocupa de prepararlo.</p>
-        <div class="stats-row">
-          <div class="stat-box">
-            <span class="stat-num" data-target="0">0</span>
-            <span class="stat-label">% de comisión a terceros</span>
-          </div>
-          <div class="stat-box">
-            <span class="stat-num" data-target="24">0</span>
-            <span class="stat-label">horas activo sin parar</span>
-          </div>
-          <div class="stat-box">
-            <span class="stat-num" data-target="3">0</span>
-            <span class="stat-label">minutos por pedido promedio</span>
-          </div>
-        </div>
+        <h2 class="feature-h2">Pedidos directos.<br>Sin comisión.</h2>
+        <p class="feature-p">Tu cliente escribe por WhatsApp, el agente toma el pedido, lo ingresa al sistema y confirma la entrega. Sin apps de terceros. Sin ceder el 30%.</p>
         <ul class="feature-list">
-          <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Toma pedidos de delivery y take away directamente</li>
-          <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Ingresa el pedido al sistema de gestión del restaurante</li>
-          <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Procesa el cobro sin intermediarios</li>
-          <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Confirma tiempos de entrega en tiempo real</li>
-          <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Tu data, tus clientes — sin cederlos a plataformas</li>
+          <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Delivery y take away por WhatsApp</li>
+          <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>0% de comisión — el ingreso es 100% tuyo</li>
+          <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Ingreso automático al sistema de cocina</li>
+          <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Cobro integrado con MercadoPago</li>
         </ul>
-        <a href="#cta-escala" class="btn btn-primary">Activar agente de pedidos →</a>
+        <a href="#cta-escala" class="btn btn-primary">Quiero este agente →</a>
       </div>
-      <div class="fade-up" style="transition-delay:.15s;background:#fff;border:1px solid var(--border);border-radius:20px;padding:32px;box-shadow:0 20px 60px rgba(0,0,0,.07);">
-        <div style="display:flex;align-items:center;gap:10px;margin-bottom:20px;">
-          <div style="width:40px;height:40px;border-radius:10px;background:var(--orange-glow);display:flex;align-items:center;justify-content:center;font-size:18px;">🛵</div>
-          <div><div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:16px;">Pedidos del día</div><div style="font-size:11px;color:var(--muted);">Actualización en vivo</div></div>
-        </div>
-        <div class="pedidos-mini-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px;">
-          <div style="background:var(--bg2);border-radius:12px;padding:16px;text-align:center;">
-            <span style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:32px;color:var(--orange);display:block;" data-target="47">0</span>
-            <span style="font-size:11px;color:var(--muted);">Pedidos hoy</span>
-          </div>
-          <div style="background:var(--bg2);border-radius:12px;padding:16px;text-align:center;">
-            <span style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:32px;color:var(--green);display:block;" data-target="0">$0</span>
-            <span style="font-size:11px;color:var(--muted);">Comisión pagada</span>
-          </div>
-        </div>
-        <div style="display:flex;flex-direction:column;gap:10px;">
-          <div style="display:flex;justify-content:space-between;align-items:center;background:var(--bg);border-radius:10px;padding:12px 16px;font-size:13px;">
-            <span>🛵 Delivery — Av. Corrientes</span>
-            <span style="color:var(--green);font-weight:600;">En camino</span>
-          </div>
-          <div style="display:flex;justify-content:space-between;align-items:center;background:var(--bg);border-radius:10px;padding:12px 16px;font-size:13px;">
-            <span>🥡 Take away — Lucas P.</span>
-            <span style="color:var(--orange);font-weight:600;">Preparando</span>
-          </div>
-          <div style="display:flex;justify-content:space-between;align-items:center;background:var(--bg);border-radius:10px;padding:12px 16px;font-size:13px;">
-            <span>🛵 Delivery — Palermo</span>
-            <span style="color:var(--muted);font-weight:600;">Confirmado</span>
-          </div>
-        </div>
-      </div>
+
     </div>
   </div>
 </section>
+
 
 <!-- CAMPAÑAS -->
 <section id="campanas" class="section-pad">
@@ -557,6 +600,71 @@ function animCounter(el,target){
 }
 const cObs=new IntersectionObserver((e)=>{e.forEach(en=>{if(en.isIntersecting){const t=parseInt(en.target.dataset.target);animCounter(en.target,t);cObs.unobserve(en.target);}});},{threshold:.5});
 document.querySelectorAll('[data-target]').forEach(el=>cObs.observe(el));
+
+/* ── Chat animation — Agente de pedidos ──────────────── */
+(function () {
+  const waMessages = document.getElementById('waMessages');
+  if (!waMessages) return;
+
+  const messages = [
+    { from: 'bot',  text: '¡Hola! ¿Querés hacer un pedido? 🛵\nTe paso el menú o pedime directo.' },
+    { from: 'user', text: 'Quiero 2 pizzas napolitanas y una coca cola grande' },
+    { from: 'bot',  text: '📋 Tu pedido:\n\n・ 2× Pizza Napolitana\n・ 1× Coca Cola 500ml\n\n💰 Total: $8.500\n\n¿Retirás o delivery?' },
+    { from: 'user', text: 'Delivery. Av. Corrientes 1234, 3°B' },
+    { from: 'bot',  text: '✅ ¡Pedido confirmado!\n\n⏱ 30–35 minutos\n🏠 Corrientes 1234, 3°B\n\n🚫 Sin comisión de plataforma 🔥' },
+  ];
+
+  function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
+  function getTimeStr() {
+    const d = new Date();
+    return d.getHours() + ':' + String(d.getMinutes()).padStart(2, '0');
+  }
+  function makeTyping() {
+    const el = document.createElement('div');
+    el.className = 'wa-typing';
+    el.innerHTML = '<div class="t-dot"></div><div class="t-dot"></div><div class="t-dot"></div>';
+    return el;
+  }
+  function makeBubble(msg) {
+    const el = document.createElement('div');
+    el.className = 'wa-bubble ' + msg.from;
+    const txt = document.createElement('span');
+    txt.innerHTML = msg.text.replace(/\n/g, '<br>');
+    const time = document.createElement('span');
+    time.className = 'bubble-time';
+    time.textContent = getTimeStr();
+    if (msg.from === 'user') time.innerHTML += ' <span class="bubble-check">✓✓</span>';
+    el.appendChild(txt);
+    el.appendChild(time);
+    return el;
+  }
+  (function tick() {
+    const el = document.getElementById('phoneTime');
+    if (el) { const d = new Date(); el.textContent = d.getHours() + ':' + String(d.getMinutes()).padStart(2, '0'); }
+    setTimeout(tick, 30000);
+  })();
+  async function runChat() {
+    waMessages.style.opacity = '0';
+    await sleep(220);
+    waMessages.innerHTML = '<div class="wa-date-sep"><span>HOY</span></div>';
+    waMessages.style.opacity = '1';
+    for (let i = 0; i < messages.length; i++) {
+      const msg = messages[i];
+      await sleep(i === 0 ? 600 : msg.from === 'user' ? 500 : 600);
+      if (msg.from === 'bot') {
+        const typing = makeTyping();
+        waMessages.appendChild(typing);
+        waMessages.scrollTop = waMessages.scrollHeight;
+        await sleep(Math.min(600 + msg.text.length * 14, 1800));
+        typing.remove();
+      }
+      waMessages.appendChild(makeBubble(msg));
+      waMessages.scrollTop = waMessages.scrollHeight;
+    }
+    setTimeout(runChat, 4000);
+  }
+  setTimeout(runChat, 500);
+})();
 </script>
 
 <footer>
