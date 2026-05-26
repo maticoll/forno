@@ -123,6 +123,9 @@ footer{background:#111;padding:48px 0;border-top:1px solid rgba(255,255,255,.06)
 .scroll-dot.active{background:var(--orange);transform:scale(1.4);}
 .scroll-dot:hover{background:rgba(255,255,255,.5);}
 @media(max-width:900px){
+  /* En mobile las secciones tienen altura natural — el min-height:100svh + center
+     de desktop dejaba ~200px de espacio vacío arriba del contenido del hero y CTA. */
+  .screen{min-height:auto;height:auto;align-items:flex-start;padding:80px 0 60px;}
   .services-grid{grid-template-columns:1fr;}
   nav{padding:18px 24px;}
   .container{padding:0 24px;}
