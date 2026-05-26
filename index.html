@@ -1504,6 +1504,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     const imgWrap = document.getElementById('intro-image-wrap');
     const skip    = document.getElementById('intro-skip');
 
+    /* En mobile el overlay está display:none por CSS (línea 138).
+       Si agregáramos intro-active al body, el scroll quedaría bloqueado
+       hasta el fallback de 10s porque el video está en un padre oculto
+       y nunca dispara 'ended'. Salteamos todo el flow del intro. */
+    if(window.matchMedia('(max-width: 768px)').matches){
+      if(overlay) overlay.style.display = 'none';
+      return;
+    }
+
     document.body.classList.add('intro-active');
 
     var introImg = document.getElementById('intro-img');
