@@ -140,6 +140,10 @@
       .nav-links,.nav-cta{display:none;}
       .hamburger{display:flex;}
       .mobile-menu{display:flex;}
+      .nav-inner{padding:0 20px;}
+    }
+    @media(max-width:640px){
+      nav{padding:12px 0;}
     }
 
     /* ── SCROLL DOTS (right rail) ── */
@@ -180,6 +184,12 @@
       pointer-events:none;user-select:none;
     }
     .screen-dark .bg-num{color:rgba(255,255,255,0.028);}
+    @media(max-width:640px){
+      .bg-num{
+        font-size:clamp(120px,40vw,180px);
+        right:-1vw;bottom:-2vh;
+      }
+    }
 
     .screen-inner{
       display:grid;grid-template-columns:1fr 1fr;
@@ -188,15 +198,24 @@
       width:100%;position:relative;z-index:1;
     }
     @media(max-width:900px){
-      .screen-inner{grid-template-columns:1fr;gap:48px;padding:0 24px;}
+      .screen-inner{grid-template-columns:1fr;gap:40px;padding:0 24px;}
       .screen-visual{display:none;}
     }
     @media(max-width:640px){
-      .screen-inner{gap:32px;padding:0 16px;}
-      .screen-h2{font-size:clamp(36px,9vw,56px);}
-      .screen-p{font-size:15px;}
-      .screen-actions{gap:10px;}
-      .btn-lg{font-size:15px;padding:13px 24px;}
+      /* Sections: allow content to breathe vertically */
+      .screen{
+        height:auto;
+        min-height:100svh;
+        min-height:-webkit-fill-available;
+        padding:0;
+        align-items:center;
+      }
+      .screen-inner{gap:24px;padding:72px 20px 56px;}
+      .screen-eyebrow{margin-bottom:14px;}
+      .screen-h2{font-size:clamp(36px,9vw,52px);}
+      .screen-p{font-size:15px;max-width:100%;margin-bottom:28px;}
+      .screen-actions{gap:10px;flex-direction:column;align-items:stretch;}
+      .btn-lg{font-size:15px;padding:14px 22px;width:100%;justify-content:center;}
     }
 
     .screen-eyebrow{
@@ -228,6 +247,7 @@
     .scroll-cue svg{width:16px;height:16px;}
     .screen-dark .scroll-cue{color:#fff;}
     @keyframes cue-bounce{0%,100%{transform:translateX(-50%) translateY(0);}50%{transform:translateX(-50%) translateY(5px);}}
+    @media(max-width:640px){.scroll-cue{display:none;}}
 
     /* ── HERO ── */
     .hero{
@@ -308,22 +328,25 @@
         overflow-y:visible;
       }
       .hero-inner{
-        padding:88px 20px 48px;
-        gap:24px;
+        padding:80px 20px 40px;
+        gap:20px;
         margin:0 auto;
         align-items:flex-start;
       }
       /* H1: tamaño legible + sin justify en mobile */
       .hero h1{
-        font-size:clamp(26px,8vw,36px);
+        font-size:clamp(40px,11vw,56px);
         text-align:left;
-        line-height:1.05;
-        margin:0 0 16px;
+        line-height:1.0;
+        margin:0 0 14px;
       }
-      .hero-sub{font-size:15px;margin:0 0 24px;text-align:left;}
+      .hero-sub{font-size:15px;margin:0 0 22px;text-align:left;line-height:1.6;}
       .hero-actions{flex-direction:column;align-items:stretch;gap:10px;width:100%;}
-      .btn-xl{font-size:15px;padding:14px 20px;width:100%;justify-content:center;}
+      .btn-xl{font-size:16px;padding:14px 22px;width:100%;justify-content:center;}
       .hero-note{font-size:12px;text-align:left;}
+      /* Trust badges: wrap nicely on mobile */
+      .hero-trust{gap:8px;}
+      .trust-badge{font-size:11px;padding:5px 9px;}
     }
 
     /* ── HERO VISUAL (derecha) ── */
@@ -660,6 +683,18 @@
     .footer-links a{font-size:13px;color:rgba(255,255,255,.4);text-decoration:none;transition:color .2s;}
     .footer-links a:hover{color:#fff;}
     .footer-copy{font-size:12px;color:rgba(255,255,255,.25);}
+    @media(max-width:640px){
+      footer{padding:40px 0;}
+      .footer-inner{
+        padding:0 20px;
+        flex-direction:column;
+        align-items:flex-start;
+        gap:20px;
+      }
+      .footer-links{flex-wrap:wrap;gap:14px 20px;}
+      .footer-links a{font-size:13px;padding:4px 0;/* tap target */}
+      .footer-copy{font-size:11px;}
+    }
   </style>
   <style>
   /* ══ FOOD ORDERING — sección 03 ══ */
