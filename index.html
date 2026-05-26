@@ -1124,7 +1124,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="screen-text fade-up">
       <span class="screen-eyebrow">04 · App</span>
       <h2 class="screen-h2">Tu data,<br>tuya.<br><em>Siempre.</em></h2>
-      <p class="screen-p">El primer CDP gastronómico para tu restaurante. Conocés a cada cliente mejor que ellos mismos. Métricas reales, decisiones que funcionan.</p>
+      <p class="screen-p">El mejor CDP gastronómico para tu restaurante. Conocés a cada cliente mejor que ellos mismos. Métricas reales, decisiones que funcionan.</p>
       <div class="screen-actions">
         <a href="app.html" class="btn btn-primary btn-lg">
           Ver la App
@@ -1405,6 +1405,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     },{passive:false});
 
     /* Touch */
+    function blockMove(e){e.preventDefault();}
+    function snapTo(idx){window.addEventListener('touchmove',blockMove,{passive:false});goTo(idx);setTimeout(()=>window.removeEventListener('touchmove',blockMove),900);}
     let ty=0;
     window.addEventListener('touchstart',e=>{ty=e.touches[0].clientY;},{passive:true});
     window.addEventListener('touchend',e=>{
@@ -1416,10 +1418,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       const inFooter=lastTop<-20;
       if(diff>0){ // swipe up = bajar
         if(inFooter||currentIdx===sections.length-1)return;
-        goTo(currentIdx+1);
+        snapTo(currentIdx+1);
       } else { // swipe down = subir
-        if(inFooter)goTo(sections.length-1);
-        else goTo(currentIdx-1);
+        if(inFooter)snapTo(sections.length-1);
+        else snapTo(currentIdx-1);
       }
     },{passive:true});
 
