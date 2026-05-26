@@ -209,25 +209,75 @@ footer{background:#1A1612;padding:48px 0;}
   .reactivation-card{padding:20px;}
   .feature-grid{gap:40px;}
   .hero-grid{gap:40px;}
+  /* iPhone mockup — tablet */
+  .iphone-wrap::before{width:260px;height:260px;}
+  .iphone{width:260px;height:auto;aspect-ratio:300/620;border-radius:44px;}
+  .iphone-screen{border-radius:37px;}
 }
 @media(max-width:640px){
   .container{padding:0 16px;}
-  .rewards-grid{grid-template-columns:1fr;gap:12px;}
+
+  /* Hero */
+  #hero{padding-top:72px;}
   .hero-h1{font-size:clamp(40px,11vw,56px);line-height:1.0;}
-  .section-tag{margin-bottom:16px;}
+  .hero-sub{font-size:15px;max-width:100%;}
+  .hero-btns{flex-direction:column;gap:10px;}
+  .hero-btns .btn{width:100%;justify-content:center;padding:14px 22px;}
+
+  /* iPhone mockup — mobile */
+  .iphone-wrap{overflow:visible;justify-content:center;}
+  .iphone-wrap::before{width:min(220px,65vw);height:min(220px,65vw);}
+  .iphone{
+    width:min(280px,80vw);
+    height:auto;
+    min-height:0;
+    aspect-ratio:300/620;
+    border-radius:clamp(32px,8vw,50px);
+    margin:0 auto;
+    flex-shrink:0;
+  }
+  .iphone-screen{border-radius:clamp(24px,6vw,44px);}
+  .iphone-di{width:clamp(70px,22vw,100px);}
+
+  /* Points hero card */
+  .points-hero{padding:16px;}
+  .levels-grid{grid-template-columns:repeat(2,1fr);gap:8px;}
+
+  /* Sections */
+  .section-tag{margin-bottom:16px;font-size:11px;padding:6px 12px;}
   .feature-h2{font-size:clamp(32px,9vw,48px);}
-  .cta-h2{font-size:clamp(36px,9vw,52px);}
-  .section-pad{padding:60px 0;}
+  .feature-p{font-size:15px;}
+  .section-pad{padding:56px 0;}
+
+  /* Rewards grid */
+  .rewards-grid{grid-template-columns:1fr;gap:12px;}
+
+  /* Loyalty card */
   .loyalty-card-dark{padding:14px;}
-  .btn-lg{padding:14px 22px;font-size:15px;}
-  .hero-btns{gap:10px;}
-  .cta-btns{gap:10px;}
-  .page-nav-inner{flex-direction:column;gap:16px;align-items:stretch;}
-  .page-nav-btn{justify-content:flex-start;}
-  .page-nav-home{text-align:center;}
-  .platform-chips{gap:6px;}
+  .platform-chips{gap:6px;flex-wrap:wrap;}
+  .chip{font-size:11px;padding:5px 8px;}
+
+  /* Levels detail cards in #puntos */
+  .feature-grid > div[style*="background:#fff"]{padding:20px !important;}
+
+  /* Reactivation card rows */
   .rcv-row{flex-direction:column;gap:8px;align-items:flex-start;}
-  .levels-grid{gap:8px;}
+  .reactivation-card{padding:16px;}
+
+  /* CTA */
+  .cta-h2{font-size:clamp(36px,9vw,52px);}
+  .cta-btns{flex-direction:column;gap:10px;align-items:center;}
+  .cta-btns .btn{width:100%;max-width:320px;justify-content:center;padding:14px 22px;}
+  .btn-lg{padding:14px 22px;font-size:15px;}
+
+  /* Page nav */
+  .page-nav{padding:24px 16px;}
+  .page-nav-inner{flex-direction:column;gap:12px;align-items:stretch;}
+  .page-nav-btn{width:100%;justify-content:space-between;}
+  .page-nav-home{text-align:center;}
+
+  /* bg-num: ocultar para evitar overflow */
+  .bg-num{display:none;}
 }
 @media(max-width:480px){
   .levels-grid{grid-template-columns:1fr 1fr;}
@@ -237,6 +287,10 @@ footer{background:#1A1612;padding:48px 0;}
   .points-hero{padding:16px;}
   .reactivation-card{padding:16px;}
   .page-nav{padding:24px 16px;}
+  /* Nivel rows en puntos — stack en pantallas muy pequeñas */
+  .feature-grid > div[style*="background:#fff"] > div > div[style*="justify-content:space-between"]{
+    flex-direction:column;gap:6px;align-items:flex-start;
+  }
 }
 
 /* ── iPHONE MOCKUP + CHAT (dark WhatsApp) ─────────────── */
