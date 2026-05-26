@@ -1344,11 +1344,29 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       return best;
     }
 
+    function updateNavFor(id){
+      scrollDots.forEach(d=>d.classList.remove('active'));
+      const dot=document.querySelector(`.scroll-dot[href="#${id}"]`);
+      if(dot)dot.classList.add('active');
+      if(id==='hero'){
+        nav.classList.remove('solid','solid-dark');
+        navLinks.classList.remove('dark');
+        hamburger.classList.remove('dark');
+      } else if(darkSections.includes(id)){
+        nav.classList.remove('solid');nav.classList.add('solid-dark');
+        navLinks.classList.add('dark');hamburger.classList.add('dark');
+      } else {
+        nav.classList.remove('solid-dark');nav.classList.add('solid');
+        navLinks.classList.remove('dark');hamburger.classList.remove('dark');
+      }
+    }
+
     function goTo(idx){
       if(idx<0||idx>=sections.length)return;
       locked=true;
       currentIdx=idx;
       sections[idx].scrollIntoView({behavior:'smooth',block:'start'});
+      updateNavFor(sections[idx].id);
       setTimeout(()=>{locked=false;},900);
     }
 
