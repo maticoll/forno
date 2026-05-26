@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Owner — Hero</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --black: #000000;
+  --white: #FFFFFF;
+  --bg: #F9F9F9;
+  --green: #7CB688;
+  --border: #E5E7EB;
+  --muted: #6B7280;
+  --grad-start: #6366F1;
+  --grad-end: #A855F7;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--white);
+  overflow: hidden;
+  height: 100vh;
+  width: 100vw;
+}
+
+/* ── NAVBAR ── */
+.navbar {
+  height: 72px;
+  padding: 0 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--border);
+  background: var(--white);
+  z-index: 10;
+  animation: fadeDown 0.5s ease forwards;
+}
+.logo { display: flex; align-items: center; gap: 8px; font-weight: 700; font-size: 17px; color: var(--black); }
+.logo-mark { width: 26px; height: 26px; background: var(--green); border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+.logo-mark svg { width: 12px; height: 12px; }
+.nav-links { display: flex; gap: 28px; list-style: none; }
+.nav-links a { text-decoration: none; font-size: 14px; font-weight: 500; color: var(--muted); }
+.nav-actions { display: flex; align-items: center; gap: 10px; }
+.btn-ghost { background: none; border: none; font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 500; color: var(--black); cursor: pointer; padding: 8px 14px; }
+.btn-primary { background: var(--black); color: var(--white); border: none; border-radius: 8px; font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 600; padding: 9px 18px; cursor: pointer; }
+
+/* ── TAB STRIP ── */
+.tab-strip {
+  display: flex; justify-content: center;
+  border-bottom: 1px solid var(--border);
+  background: var(--white);
+  position: relative;
+  animation: fadeDown 0.5s 0.15s ease both;
+}
+.tab { position: relative; padding: 14px 28px; font-size: 14px; font-weight: 500; color: var(--muted); cursor: pointer; transition: color 0.25s; user-select: none; }
+.tab.active { color: var(--black); font-weight: 600; }
+.tab-indicator { position: absolute; bottom: -1px; height: 2px; background: var(--black); border-radius: 2px 2px 0 0; transition: left 0.35s cubic-bezier(0.4,0,0.2,1), width 0.35s cubic-bezier(0.4,0,0.2,1); }
+
+/* ── HERO LAYOUT ── */
+.hero { display: flex; align-items: center; padding: 0 60px; height: calc(100vh - 72px - 49px); gap: 48px; }
+
+/* ── LEFT COLUMN ── */
+.left-col { width: 38%; flex-shrink: 0; display: flex; flex-direction: column; gap: 20px; }
+.tagline-chip { display: inline-flex; align-items: center; gap: 7px; background: #F0F7F1; border: 1px solid #C5DEC9; border-radius: 100px; padding: 5px 13px; font-size: 13px; font-weight: 500; color: #3A7A47; width: fit-content; animation: fadeUp 0.5s 0.4s ease both; }
+.tagline-chip::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--green); }
+.heading { font-size: 38px; font-weight: 700; line-height: 1.15; color: var(--black); letter-spacing: -0.02em; animation: fadeUp 0.5s 0.55s ease both; }
+.sub-copy { font-size: 16px; line-height: 1.65; color: var(--muted); max-width: 400px; animation: fadeUp 0.5s 0.7s ease both; }
+.cta-row { display: flex; align-items: center; gap: 10px; animation: fadeUp 0.5s 0.85s ease both; }
+.cta-primary { background: var(--black); color: var(--white); border: none; border-radius: 10px; font-family: 'Inter', sans-serif; font-size: 15px; font-weight: 600; padding: 13px 26px; cursor: pointer; }
+.cta-secondary { background: none; border: 1.5px solid var(--border); border-radius: 10px; font-family: 'Inter', sans-serif; font-size: 15px; font-weight: 500; color: var(--black); padding: 12px 22px; cursor: pointer; }
+.social-proof { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--muted); font-weight: 500; animation: fadeUp 0.5s 1s ease both; }
+.stars { color: var(--green); font-size: 15px; letter-spacing: 1px; }
+
+/* ── RIGHT COLUMN ── */
+.right-col { flex: 1; display: flex; align-items: center; justify-content: center; position: relative; height: 100%; animation: fadeUp 0.5s 0.3s ease both; }
+
+.panel {
+  width: 100%; max-width: 600px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 4px 28px rgba(0,0,0,0.07);
+  position: absolute; top: 50%;
+  transform: translateY(-50%);
+  transition: opacity 0.35s ease, transform 0.35s cubic-bezier(0.4,0,0.2,1);
+}
+.panel.hidden { opacity: 0; pointer-events: none; transform: translateY(calc(-50% + 16px)); }
+.panel.visible { opacity: 1; transform: translateY(-50%); }
+
+/* ══════════════════════════════════
+   FOOD ORDERING — AUTO ANIMATED
+══════════════════════════════════ */
+.panel-header { display: flex; align-items: center; justify-content: space-between; padding: 18px 22px 14px; border-bottom: 1px solid var(--border); background: var(--white); }
+.panel-title { font-size: 15px; font-weight: 600; color: var(--black); }
+.live-badge { display: flex; align-items: center; gap: 5px; background: #ECFDF5; border: 1px solid #A7F3D0; border-radius: 100px; padding: 3px 9px; font-size: 11px; font-weight: 600; color: #065F46; }
+.live-dot { width: 6px; height: 6px; border-radius: 50%; background: #10B981; animation: pulse 1.5s ease-in-out infinite; }
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1);} 50%{opacity:0.5;transform:scale(0.8);} }
+
+.cards-list { padding: 12px 16px; display: flex; flex-direction: column; gap: 8px; background: var(--bg); }
+
+.food-card-wrapper { overflow: hidden; transition: max-height 0.32s ease, margin-bottom 0.32s ease, opacity 0.32s ease; max-height: 100px; }
+.food-card-wrapper.collapsing { max-height: 0 !important; margin-bottom: -8px; }
+
+.food-card {
+  background: var(--white);
+  border: 1.5px solid var(--border);
+  border-radius: 12px;
+  padding: 12px 14px;
+  display: flex; align-items: center; gap: 12px;
+  transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s, opacity 0.25s;
+}
+/* Simulated hover/press state for the card being ordered */
+.food-card.being-ordered { border-color: var(--green); box-shadow: 0 0 0 3px rgba(124,182,136,0.15); }
+.food-card.flying-out { transform: translateX(40px); opacity: 0; }
+
+.food-emoji { width: 40px; height: 40px; background: var(--bg); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; }
+.food-info { flex: 1; }
+.food-name { font-size: 13px; font-weight: 600; color: var(--black); display: flex; align-items: center; gap: 6px; }
+.food-tag { font-size: 10px; font-weight: 600; padding: 2px 6px; border-radius: 100px; }
+.tag-popular { background: #FEF3C7; color: #92400E; }
+.tag-new { background: #EDE9FE; color: #5B21B6; }
+.food-pts { font-size: 12px; color: var(--muted); margin-top: 2px; }
+.food-right { display: flex; flex-direction: column; align-items: flex-end; gap: 6px; }
+.food-price { font-size: 14px; font-weight: 700; color: var(--black); }
+
+.add-btn {
+  width: 30px; height: 30px;
+  border-radius: 50%; border: 1.5px solid var(--border);
+  background: var(--white); font-size: 18px; line-height: 1;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; color: var(--black); font-weight: 300;
+  transition: background 0.15s, border-color 0.15s, transform 0.12s;
+  user-select: none;
+}
+.add-btn.auto-press {
+  background: var(--black); color: var(--white); border-color: var(--black);
+  transform: scale(0.85);
+}
+
+/* Cart bar */
+.cart-bar { background: var(--black); display: flex; align-items: center; justify-content: space-between; overflow: hidden; max-height: 0; padding: 0 22px; transition: max-height 0.4s ease, padding 0.4s ease; }
+.cart-bar.show { max-height: 70px; padding: 14px 22px; }
+.cart-left { display: flex; flex-direction: column; gap: 2px; }
+.cart-items { font-size: 11px; color: rgba(255,255,255,0.45); font-weight: 500; }
+.cart-pts-label { font-size: 10px; color: rgba(255,255,255,0.35); text-transform: uppercase; letter-spacing: 0.07em; }
+
+/* Odometer — rolls bottom to top */
+.cart-points-display { display: flex; align-items: baseline; gap: 6px; }
+.pts-value {
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--white);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+  will-change: contents;
+}
+.cart-pts-unit { font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.6); }
+.cart-cta { background: var(--green); color: var(--white); border: none; border-radius: 8px; padding: 9px 16px; font-family:'Inter',sans-serif; font-size: 13px; font-weight: 600; cursor: pointer; white-space: nowrap; }
+
+/* Floating +pts badge */
+.pts-badge { position: absolute; right: 36px; pointer-events: none; font-size: 13px; font-weight: 700; color: var(--green); opacity: 0; z-index: 20; }
+.pts-badge.animate { animation: badgeFloat 0.75s cubic-bezier(0.2,0,0.3,1) forwards; }
+@keyframes badgeFloat { 0%{opacity:1;transform:translateY(0) scale(0.85);} 25%{opacity:1;transform:translateY(-14px) scale(1.1);} 100%{opacity:0;transform:translateY(-40px) scale(0.9);} }
+
+/* ══════════════════════════════════
+   ANALYTICS PANEL
+══════════════════════════════════ */
+.analytics-header { display: flex; align-items: center; justify-content: space-between; padding: 18px 22px 14px; border-bottom: 1px solid var(--border); }
+.analytics-title { font-size: 15px; font-weight: 600; color: var(--black); }
+.timeframe { font-size: 12px; color: var(--muted); font-weight: 500; }
+.kpi-row { display: grid; grid-template-columns: repeat(3, 1fr); border-bottom: 1px solid var(--border); }
+.kpi-card { padding: 16px 18px; border-right: 1px solid var(--border); opacity: 0; transform: translateY(10px); }
+.kpi-card:last-child { border-right: none; }
+.kpi-card.show { animation: fadeUp 0.4s ease forwards; }
+.kpi-label { font-size: 11px; font-weight: 500; color: var(--muted); margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.04em; }
+.kpi-value { font-size: 22px; font-weight: 700; color: var(--black); letter-spacing: -0.02em; }
+.kpi-delta { font-size: 11px; font-weight: 600; margin-top: 4px; }
+.delta-pos { color: #059669; }
+.delta-neg { color: #DC2626; }
+.flow-section { padding: 18px 22px; background: var(--bg); }
+.flow-section-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+.flow-section-title { font-size: 13px; font-weight: 600; color: var(--black); }
+.flow-avg { font-size: 12px; color: var(--muted); }
+.flow-node { display: flex; align-items: center; gap: 12px; padding: 11px 14px; border-radius: 11px; border: 1px solid var(--border); background: var(--white); margin-bottom: 7px; opacity: 0; transform: translateY(10px); }
+.flow-node.show { animation: fadeUp 0.35s ease forwards; }
+.node-icon { width: 32px; height: 32px; background: var(--bg); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; }
+.node-text { flex: 1; }
+.node-title { font-size: 13px; font-weight: 600; color: var(--black); }
+.node-sub { font-size: 11px; color: var(--muted); margin-top: 1px; }
+.node-badge { padding: 2px 8px; border-radius: 100px; font-size: 11px; font-weight: 600; background: var(--bg); color: var(--muted); border: 1px solid var(--border); }
+
+/* ══════════════════════════════════
+   SMART SEARCH — SEO RANKING
+══════════════════════════════════ */
+.search-top { padding: 18px 22px 14px; border-bottom: 1px solid var(--border); background: var(--white); }
+.search-panel-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+.search-panel-title { font-size: 15px; font-weight: 600; color: var(--black); }
+.ai-badge { background: linear-gradient(135deg,#EEF2FF,#F5F3FF); border: 1px solid #C7D2FE; border-radius: 100px; padding: 3px 10px; font-size: 11px; font-weight: 600; color: var(--grad-start); }
+.search-bar { display: flex; align-items: center; gap: 10px; border: 1.5px solid var(--grad-start); border-radius: 10px; padding: 10px 14px; background: var(--white); box-shadow: 0 0 0 3px rgba(99,102,241,0.08); }
+.search-icon { font-size: 14px; flex-shrink: 0; }
+.search-text { font-size: 14px; color: var(--black); font-weight: 400; flex: 1; }
+.search-cursor { width: 2px; height: 16px; background: var(--grad-start); display: inline-block; margin-left: 1px; animation: blink 0.9s step-end infinite; vertical-align: middle; }
+@keyframes blink { 0%,100%{opacity:1;} 50%{opacity:0;} }
+
+.maps-results { background: var(--white); opacity: 0; transition: opacity 0.3s ease; }
+.maps-header { padding: 9px 22px 7px; font-size: 10px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.07em; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
+
+/* Absolute-positioned ranking list for smooth step animation */
+.rankings-list {
+  position: relative;
+  margin: 10px 14px;
+  /* height set by JS */
+}
+
+.rank-item {
+  position: absolute;
+  left: 0; right: 0;
+  display: flex; align-items: center; gap: 10px;
+  padding: 9px 10px;
+  border-radius: 10px;
+  border: 1.5px solid transparent;
+  background: var(--white);
+  /* top set by JS */
+  transition: top 0.32s cubic-bezier(0.4,0,0.2,1), border-color 0.4s ease, background 0.4s ease;
+}
+
+.rank-item.target-restaurant {
+  border-color: transparent;
+}
+.rank-item.target-restaurant.is-top {
+  border-color: var(--green);
+  background: #F0FDF4;
+}
+
+.rank-num { width: 20px; font-size: 12px; font-weight: 700; color: var(--muted); text-align: center; flex-shrink: 0; transition: color 0.4s ease; }
+.rank-item.target-restaurant .rank-num { color: var(--green); }
+
+.rank-pin { width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0; background: #FEE2E2; transition: background 0.4s ease; }
+.rank-item.target-restaurant .rank-pin { background: #DCFCE7; }
+
+.rank-info { flex: 1; min-width: 0; }
+.rank-name { font-size: 13px; font-weight: 600; color: var(--black); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.rank-meta { font-size: 11px; color: var(--muted); margin-top: 1px; }
+.rank-stars { color: #F59E0B; }
+
+.rank-right { display: flex; flex-direction: column; align-items: flex-end; gap: 3px; }
+.rank-dist { font-size: 11px; color: var(--muted); }
+.top-badge { background: var(--green); color: var(--white); border-radius: 100px; padding: 2px 8px; font-size: 10px; font-weight: 700; opacity: 0; transform: scale(0.6); transition: opacity 0.35s 0.1s ease, transform 0.35s 0.1s ease; white-space: nowrap; }
+.rank-item.target-restaurant.is-top .top-badge { opacity: 1; transform: scale(1); }
+
+/* ── KEYFRAMES ── */
+@keyframes fadeUp   { from{opacity:0;transform:translateY(16px);} to{opacity:1;transform:translateY(0);} }
+@keyframes fadeDown { from{opacity:0;transform:translateY(-10px);} to{opacity:1;transform:translateY(0);} }
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <div class="logo">
+    <div class="logo-mark">
+      <svg viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5" stroke="white" stroke-width="2"/><circle cx="7" cy="7" r="2" fill="white"/></svg>
+    </div>
+    owner
+  </div>
+  <ul class="nav-links">
+    <li><a href="#">Products</a></li>
+    <li><a href="#">Solutions</a></li>
+    <li><a href="#">Pricing</a></li>
+    <li><a href="#">Resources</a></li>
+  </ul>
+  <div class="nav-actions">
+    <button class="btn-ghost">Log in</button>
+    <button class="btn-primary">Get Started</button>
+  </div>
+</nav>
+
+<!-- TAB STRIP -->
+<div class="tab-strip" id="tabStrip">
+  <div class="tab active" id="tab-ordering" onclick="switchTab('ordering')">Food Ordering</div>
+  <div class="tab" id="tab-analytics" onclick="switchTab('analytics')">Analytics</div>
+  <div class="tab" id="tab-search" onclick="switchTab('search')">Smart Search</div>
+  <div class="tab-indicator" id="tabIndicator"></div>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+
+  <!-- LEFT COLUMN -->
+  <div class="left-col">
+    <div class="tagline-chip">The complete restaurant OS</div>
+    <h1 class="heading">Every order,<br>every table,<br>flawlessly managed.</h1>
+    <p class="sub-copy">Owner connects your kitchen, floor, and analytics in one fluid platform — so your team delivers flawlessly, every service.</p>
+    <div class="cta-row">
+      <button class="cta-primary">Start Free Trial</button>
+      <button class="cta-secondary">See Demo →</button>
+    </div>
+    <div class="social-proof">
+      <span class="stars">★★★★★</span>
+      <span>Trusted by 2,400+ restaurants</span>
+    </div>
+  </div>
+
+  <!-- RIGHT COLUMN -->
+  <div class="right-col" id="rightCol">
+
+    <!-- ── FOOD ORDERING PANEL ── -->
+    <div class="panel visible" id="panel-ordering">
+      <div style="background:var(--bg)">
+        <div class="panel-header" style="background:var(--white)">
+          <span class="panel-title">Pedidos de hoy</span>
+          <span class="live-badge"><span class="live-dot"></span>En vivo</span>
+        </div>
+        <div class="cards-list" id="cardsList">
+          <div class="food-card-wrapper" id="wrap-1">
+            <div class="food-card" id="fcard-1">
+              <div class="food-emoji">🍝</div>
+              <div class="food-info">
+                <div class="food-name">Pasta al pesto <span class="food-tag tag-popular">Popular</span></div>
+                <div class="food-pts">1.200 pts</div>
+              </div>
+              <div class="food-right">
+                <span class="food-price">$480</span>
+                <button class="add-btn" id="btn-1">+</button>
+              </div>
+            </div>
+          </div>
+          <div class="food-card-wrapper" id="wrap-2">
+            <div class="food-card" id="fcard-2">
+              <div class="food-emoji">🍕</div>
+              <div class="food-info">
+                <div class="food-name">Pizza cuatro quesos</div>
+                <div class="food-pts">1.550 pts</div>
+              </div>
+              <div class="food-right">
+                <span class="food-price">$620</span>
+                <button class="add-btn" id="btn-2">+</button>
+              </div>
+            </div>
+          </div>
+          <div class="food-card-wrapper" id="wrap-3">
+            <div class="food-card" id="fcard-3">
+              <div class="food-emoji">🥗</div>
+              <div class="food-info">
+                <div class="food-name">Ensalada caprese <span class="food-tag tag-new">Nuevo</span></div>
+                <div class="food-pts">875 pts</div>
+              </div>
+              <div class="food-right">
+                <span class="food-price">$350</span>
+                <button class="add-btn" id="btn-3">+</button>
+              </div>
+            </div>
+          </div>
+          <div class="food-card-wrapper" id="wrap-4">
+            <div class="food-card" id="fcard-4">
+              <div class="food-emoji">🍮</div>
+              <div class="food-info">
+                <div class="food-name">Tiramisú</div>
+                <div class="food-pts">725 pts</div>
+              </div>
+              <div class="food-right">
+                <span class="food-price">$290</span>
+                <button class="add-btn" id="btn-4">+</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="cart-bar" id="cartBar">
+        <div class="cart-left">
+          <span class="cart-items" id="cartItems">1 item</span>
+          <div class="cart-points-display">
+            <span class="pts-value" id="ptsValue">0</span>
+            <span class="cart-pts-unit">pts</span>
+          </div>
+          <span class="cart-pts-label">Puntos acumulados</span>
+        </div>
+        <button class="cart-cta">Ver Carrito →</button>
+      </div>
+      <!-- Floating badge -->
+      <div id="ptsBadge" class="pts-badge"></div>
+    </div>
+
+    <!-- ── ANALYTICS PANEL ── -->
+    <div class="panel hidden" id="panel-analytics">
+      <div class="analytics-header">
+        <span class="analytics-title">Order Flow</span>
+        <span class="timeframe">Last 7 days ↗</span>
+      </div>
+      <div class="kpi-row">
+        <div class="kpi-card" id="kpi-1"><div class="kpi-label">Total Orders</div><div class="kpi-value">1,284</div><div class="kpi-delta delta-pos">+12.4% vs last week</div></div>
+        <div class="kpi-card" id="kpi-2"><div class="kpi-label">Avg Order Value</div><div class="kpi-value">$34.20</div><div class="kpi-delta delta-pos">+8.1% vs last week</div></div>
+        <div class="kpi-card" id="kpi-3"><div class="kpi-label">Table Turnover</div><div class="kpi-value">2.8h</div><div class="kpi-delta delta-neg">−5 min vs last week</div></div>
+      </div>
+      <div class="flow-section">
+        <div class="flow-section-header">
+          <span class="flow-section-title">Order Journey</span>
+          <span class="flow-avg">Avg: 18 min end-to-end</span>
+        </div>
+        <div class="flow-node" id="node-1"><div class="node-icon">📱</div><div class="node-text"><div class="node-title">Order Received</div><div class="node-sub">Customer places via app</div></div><div class="node-badge">0 min</div></div>
+        <div class="flow-node" id="node-2"><div class="node-icon">👨‍🍳</div><div class="node-text"><div class="node-title">Kitchen Confirmed</div><div class="node-sub">Chef accepts &amp; starts prep</div></div><div class="node-badge">2 min</div></div>
+        <div class="flow-node" id="node-3"><div class="node-icon">✅</div><div class="node-text"><div class="node-title">Quality Check</div><div class="node-sub">Station lead approves</div></div><div class="node-badge">14 min</div></div>
+        <div class="flow-node" id="node-4"><div class="node-icon">🎉</div><div class="node-text"><div class="node-title">Delivered</div><div class="node-sub">To table or picked up</div></div><div class="node-badge">18 min</div></div>
+      </div>
+    </div>
+
+    <!-- ── SMART SEARCH — SEO RANKING ── -->
+    <div class="panel hidden" id="panel-search">
+      <div class="search-top">
+        <div class="search-panel-header">
+          <span class="search-panel-title">Posicionamiento en Google</span>
+          <span class="ai-badge">✦ SEO en tiempo real</span>
+        </div>
+        <div class="search-bar">
+          <span class="search-icon">🔍</span>
+          <span class="search-text" id="searchText"></span><span class="search-cursor"></span>
+        </div>
+      </div>
+      <div class="maps-results" id="mapsResults">
+        <div class="maps-header">
+          <span>Resultados locales · Google Maps</span>
+          <span id="mapsStatus" style="color:var(--green);font-size:10px;font-weight:700;"></span>
+        </div>
+        <div class="rankings-list" id="rankingsList"></div>
+      </div>
+    </div>
+
+  </div><!-- /right-col -->
+</div><!-- /hero -->
+
+<script>
+// ═══════════════════════════════
+// TAB SYSTEM
+// ═══════════════════════════════
+function positionIndicator(tabEl) {
+  const strip = document.getElementById('tabStrip');
+  const ind   = document.getElementById('tabIndicator');
+  const sr = strip.getBoundingClientRect();
+  const tr = tabEl.getBoundingClientRect();
+  ind.style.left  = (tr.left - sr.left) + 'px';
+  ind.style.width = tr.width + 'px';
+}
+window.addEventListener('load', () => {
+  positionIndicator(document.getElementById('tab-ordering'));
+  // Start auto food animation after entrance
+  setTimeout(startFoodOrdering, 1200);
+});
+
+let analyticsAnimated = false;
+let searchTOs = [];
+
+function switchTab(name) {
+  ['ordering','analytics','search'].forEach(p => {
+    document.getElementById('panel-' + p).classList.replace('visible','hidden') ||
+    document.getElementById('panel-' + p).classList.remove('visible');
+    document.getElementById('panel-' + p).classList.add('hidden');
+  });
+  ['ordering','analytics','search'].forEach(t => document.getElementById('tab-' + t).classList.remove('active'));
+  document.getElementById('panel-' + name).classList.remove('hidden');
+  document.getElementById('panel-' + name).classList.add('visible');
+  document.getElementById('tab-' + name).classList.add('active');
+  positionIndicator(document.getElementById('tab-' + name));
+
+  if (name === 'analytics' && !analyticsAnimated) {
+    analyticsAnimated = true;
+    setTimeout(() => { ['kpi-1','kpi-2','kpi-3'].forEach((id,i)=>setTimeout(()=>document.getElementById(id).classList.add('show'), i*160)); }, 200);
+    setTimeout(() => { ['node-1','node-2','node-3','node-4'].forEach((id,i)=>setTimeout(()=>document.getElementById(id).classList.add('show'), i*380)); }, 700);
+  }
+  if (name === 'search') {
+    clearSearchTOs();
+    resetSearch();
+    searchTOs.push(setTimeout(runSearchAnim, 300));
+  }
+}
+
+// ═══════════════════════════════
+// FOOD ORDERING — AUTO ANIMATION
+// ═══════════════════════════════
+const ITEMS = [
+  { wrapId:'wrap-1', cardId:'fcard-1', btnId:'btn-1', pts:1200 },
+  { wrapId:'wrap-2', cardId:'fcard-2', btnId:'btn-2', pts:1550 },
+  { wrapId:'wrap-3', cardId:'fcard-3', btnId:'btn-3', pts: 875 },
+  { wrapId:'wrap-4', cardId:'fcard-4', btnId:'btn-4', pts: 725 },
+];
+
+let totalPts    = 0;
+let orderCount  = 0;
+let foodTOs     = [];
+
+function clearFoodTOs() { foodTOs.forEach(clearTimeout); foodTOs = []; if (aniFrameId) cancelAnimationFrame(aniFrameId); }
+
+function startFoodOrdering() {
+  clearFoodTOs();
+  totalPts   = 0;
+  orderCount = 0;
+  // Reset cards (show all, clear states)
+  ITEMS.forEach(item => {
+    const wrap = document.getElementById(item.wrapId);
+    const card = document.getElementById(item.cardId);
+    const btn  = document.getElementById(item.btnId);
+    wrap.classList.remove('collapsing');
+    wrap.style.maxHeight = '';
+    card.classList.remove('being-ordered','flying-out');
+    btn.classList.remove('auto-press');
+    wrap.style.opacity = '1';
+  });
+  document.getElementById('cartBar').classList.remove('show');
+  if (aniFrameId) cancelAnimationFrame(aniFrameId);
+  document.getElementById('ptsValue').textContent = '0';
+  document.getElementById('cartItems').textContent = '1 item';
+
+  // Stagger each item bottom-to-top (Tiramisu → Caesar → Wagyu → Risotto)
+  [...ITEMS].reverse().forEach((item, i) => {
+    foodTOs.push(setTimeout(() => animateOrder(item, i), 1000 + i * 2200));
+  });
+
+  // Loop: after all done, restart
+  foodTOs.push(setTimeout(startFoodOrdering, 1000 + ITEMS.length * 2200 + 1800));
+}
+
+function animateOrder(item, idx) {
+  const card = document.getElementById(item.cardId);
+  const btn  = document.getElementById(item.btnId);
+  const wrap = document.getElementById(item.wrapId);
+
+  // 1. Highlight card (simulated hover)
+  card.classList.add('being-ordered');
+
+  // 2. After 350ms: press the + button
+  foodTOs.push(setTimeout(() => {
+    btn.classList.add('auto-press');
+
+    // 3. After 180ms: trigger effects & card removal
+    foodTOs.push(setTimeout(() => {
+      btn.classList.remove('auto-press');
+
+      orderCount++;
+      const from = totalPts;
+      totalPts += item.pts;
+
+      // Show cart bar
+      document.getElementById('cartBar').classList.add('show');
+      document.getElementById('cartItems').textContent = orderCount === 1 ? '1 item' : orderCount + ' items';
+
+      // Floating badge (positioned near the btn)
+      showFloatingBadge(item.pts, btn);
+
+      // Animate points counter
+      animateCounter(from, totalPts, 750);
+
+      // Fly card out
+      card.classList.remove('being-ordered');
+      card.classList.add('flying-out');
+
+      // Collapse wrapper after card exits
+      foodTOs.push(setTimeout(() => {
+        wrap.style.maxHeight = wrap.offsetHeight + 'px';
+        void wrap.offsetWidth;
+        wrap.classList.add('collapsing');
+      }, 260));
+
+    }, 180));
+  }, 350));
+}
+
+function showFloatingBadge(pts, btn) {
+  const badge = document.getElementById('ptsBadge');
+  const colRect = document.getElementById('rightCol').getBoundingClientRect();
+  const btnRect  = btn.getBoundingClientRect();
+  badge.textContent = '+' + pts.toLocaleString('es-AR') + ' pts';
+  badge.style.top  = (btnRect.top - colRect.top - 8) + 'px';
+  badge.style.right = '40px';
+  badge.classList.remove('animate');
+  void badge.offsetWidth;
+  badge.classList.add('animate');
+  badge.addEventListener('animationend', () => badge.classList.remove('animate'), { once: true });
+}
+
+// ── SMOOTH COUNTER (RAF, 60fps, scramble → settle) ──
+let aniFrameId = null;
+
+function animateCounter(from, to) {
+  if (aniFrameId) cancelAnimationFrame(aniFrameId);
+
+  const el       = document.getElementById('ptsValue');
+  const DURATION = 900;   // ms total
+  const SCRAMBLE = 0.55;  // fraction of duration spent scrambling
+  const startTime = performance.now();
+  const range     = to - from;
+
+  function step(now) {
+    const elapsed  = now - startTime;
+    const t        = Math.min(elapsed / DURATION, 1);
+
+    // Ease-out expo: decelerates sharply at the end
+    const eased = t === 1 ? 1 : 1 - Math.pow(2, -10 * t);
+    const smooth = Math.round(from + range * eased);
+
+    let display;
+    if (t < SCRAMBLE) {
+      // Fast scramble phase: add random noise proportional to remaining range
+      const noise = Math.round((Math.random() - 0.3) * range * (1 - t / SCRAMBLE) * 0.45);
+      display = Math.max(from, Math.min(to, smooth + noise));
+    } else {
+      // Settle phase: clean interpolation, no noise
+      display = smooth;
+    }
+
+    el.textContent = display.toLocaleString('es-AR');
+
+    if (t < 1) {
+      aniFrameId = requestAnimationFrame(step);
+    } else {
+      el.textContent = to.toLocaleString('es-AR');
+    }
+  }
+
+  aniFrameId = requestAnimationFrame(step);
+}
+
+// ═══════════════════════════════
+// SMART SEARCH — SEO STEP-BY-STEP RISE
+// ═══════════════════════════════
+const RESTAURANTS = [
+  { id:'r0', name:'La Trattoria',  stars:'4.2', reviews:'320',  dist:'1.2 km', isTarget:false },
+  { id:'r1', name:'Bella Napoli',  stars:'3.8', reviews:'180',  dist:'0.8 km', isTarget:false },
+  { id:'r2', name:'Da Mario',      stars:'4.1', reviews:'245',  dist:'2.1 km', isTarget:false },
+  { id:'r3', name:'Il Forno',      stars:'3.9', reviews:'92',   dist:'1.5 km', isTarget:false },
+  { id:'r4', name:'Osteria Roma',  stars:'4.0', reviews:'167',  dist:'3.0 km', isTarget:false },
+  { id:'r5', name:'Pasta & Basta', stars:'3.7', reviews:'88',   dist:'2.4 km', isTarget:false },
+  { id:'r6', name:'Mi Restaurante', stars:'4.8', reviews:'512',  dist:'0.5 km', isTarget:true  },
+];
+
+const ITEM_H   = 50;  // px height per item
+const ITEM_GAP = 6;   // px gap
+const STEP_MS  = 200; // ms between each rise step
+
+let rankOrder = [];   // current ordering (array of restaurant objects)
+
+function clearSearchTOs() { searchTOs.forEach(clearTimeout); searchTOs = []; }
+
+function resetSearch() {
+  document.getElementById('searchText').textContent = '';
+  document.getElementById('mapsResults').style.opacity = '0';
+  document.getElementById('mapsStatus').textContent = '';
+  document.getElementById('rankingsList').innerHTML = '';
+  rankOrder = [];
+}
+
+function runSearchAnim() {
+  const query = 'Pizza';
+  let i = 0;
+  function typeChar() {
+    document.getElementById('searchText').textContent += query[i++];
+    if (i < query.length) searchTOs.push(setTimeout(typeChar, 130));
+    else searchTOs.push(setTimeout(buildInitialList, 450));
+  }
+  typeChar();
+}
+
+function buildInitialList() {
+  // Initial order: Pizza at position 6 (index 6, position #7)
+  rankOrder = [...RESTAURANTS];
+
+  const list = document.getElementById('rankingsList');
+  list.innerHTML = '';
+  list.style.height = (RESTAURANTS.length * ITEM_H + (RESTAURANTS.length - 1) * ITEM_GAP) + 'px';
+
+  rankOrder.forEach((r, idx) => {
+    const el = makeRankEl(r, idx + 1);
+    el.style.top = itemTop(idx) + 'px';
+    el.style.opacity = '0';
+    el.style.transition = 'opacity 0.25s ease';
+    list.appendChild(el);
+  });
+
+  document.getElementById('mapsResults').style.opacity = '1';
+
+  // Stagger appearance
+  const items = list.querySelectorAll('.rank-item');
+  items.forEach((el, i) => {
+    searchTOs.push(setTimeout(() => { el.style.opacity = '1'; }, i * 80));
+  });
+
+  // Start rising after all visible
+  const riseStart = RESTAURANTS.length * 80 + 900;
+  searchTOs.push(setTimeout(startRising, riseStart));
+}
+
+function itemTop(idx) {
+  return idx * (ITEM_H + ITEM_GAP);
+}
+
+function makeRankEl(r, pos) {
+  const div = document.createElement('div');
+  div.className = 'rank-item' + (r.isTarget ? ' target-restaurant' : '');
+  div.id = 'rankEl-' + r.id;
+  div.innerHTML = `
+    <div class="rank-num">${pos}</div>
+    <div class="rank-pin">${r.isTarget ? '🏠' : '📍'}</div>
+    <div class="rank-info">
+      <div class="rank-name">${r.name}</div>
+      <div class="rank-meta"><span class="rank-stars">⭐ ${r.stars}</span> · ${r.reviews} reseñas</div>
+    </div>
+    <div class="rank-right">
+      <span class="rank-dist">${r.dist}</span>
+      <span class="top-badge">#1 Zona</span>
+    </div>`;
+  return div;
+}
+
+function updateNumbers() {
+  rankOrder.forEach((r, idx) => {
+    const el = document.getElementById('rankEl-' + r.id);
+    if (el) el.querySelector('.rank-num').textContent = idx + 1;
+  });
+}
+
+function startRising() {
+  const RISE_MS = 1100; // total duration of the rise
+
+  document.getElementById('mapsStatus').textContent = 'Subiendo posición...';
+
+  // Give every item a smooth transition — same duration so they all move together
+  document.querySelectorAll('.rank-item').forEach(el => {
+    el.style.transition = `top ${RISE_MS}ms cubic-bezier(0.4,0,0.15,1), border-color 0.4s ease, background 0.4s ease`;
+  });
+
+  // Find target and move it straight to #1 in one shot
+  const targetIdx = rankOrder.findIndex(r => r.isTarget);
+  const target = rankOrder[targetIdx];
+
+  // New order: target first, then everyone else in original order
+  const newOrder = [target, ...rankOrder.filter(r => !r.isTarget)];
+
+  // Apply final top positions to ALL items simultaneously → CSS handles the smooth slide
+  newOrder.forEach((r, newIdx) => {
+    const el = document.getElementById('rankEl-' + r.id);
+    if (el) el.style.top = itemTop(newIdx) + 'px';
+  });
+
+  // After animation settles: update numbers + highlight
+  searchTOs.push(setTimeout(() => {
+    rankOrder = newOrder;
+    updateNumbers();
+    const targetEl = document.getElementById('rankEl-' + target.id);
+    if (targetEl) targetEl.classList.add('is-top');
+    document.getElementById('mapsStatus').textContent = '🏆 Posición #1 alcanzada';
+  }, RISE_MS + 80));
+}
+</script>
+</body>
+</html>
