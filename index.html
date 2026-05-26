@@ -198,8 +198,14 @@
       width:100%;position:relative;z-index:1;
     }
     @media(max-width:900px){
+      /* En mobile: secciones crecen vertical y los visuales se apilan debajo del texto */
+      .screen{height:auto;min-height:100svh;padding:80px 0 40px;}
       .screen-inner{grid-template-columns:1fr;gap:40px;padding:0 24px;}
-      .screen-visual{display:none;}
+      .screen-visual{
+        max-width:420px;width:100%;margin:0 auto;
+        order:2; /* siempre después del texto */
+      }
+      .screen-text{order:1;}
     }
     @media(max-width:640px){
       /* Sections: allow content to breathe vertically */
@@ -310,13 +316,15 @@
     .trust-badge svg{color:var(--green);flex-shrink:0;}
     @media(max-width:640px){.hero-trust{gap:8px;}.trust-badge{font-size:11px;}}
     @media(max-width:900px){
+      .hero{height:auto;min-height:100svh;padding-bottom:48px;}
       .hero-inner{grid-template-columns:1fr;gap:32px;padding:90px 24px 40px;}
       .hero h1{max-width:100%;margin:0 0 16px;text-align:left;}
       .hero-sub{max-width:100%;margin:0 0 28px;text-align:left;}
       .hero-actions{justify-content:flex-start;}
       .hero-trust{justify-content:flex-start;}
-      .hv-wrap{display:none;}
-      .hero-visual{display:none;}
+      /* Hero visual visible en mobile, centrado y debajo del texto */
+      .hero-visual{order:2;}
+      .hv-wrap{max-width:380px;margin:0 auto;}
     }
     @media(max-width:640px){
       /* Hero: fix iOS viewport height + layout */
@@ -1375,6 +1383,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     let currentIdx = 0;
     let locked = false;
 
+    /* En mobile (<=900px) el scroll snap se desactiva — el contenido crece
+       vertical y el usuario scrollea naturalmente para ver los visuales. */
+    const isMobile = () => window.matchMedia('(max-width: 900px)').matches;
+
     function getClosestIdx(){
       let best=0, minDist=Infinity;
       sections.forEach((s,i)=>{
@@ -1421,6 +1433,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     /* Wheel */
     window.addEventListener('wheel',e=>{
+      if(isMobile())return; // scroll nativo en mobile
       const last=sections[sections.length-1];
       const lastTop=last.getBoundingClientRect().top;
       const inFooter=lastTop<-20;
@@ -1450,6 +1463,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     let ty=0;
     window.addEventListener('touchstart',e=>{ty=e.touches[0].clientY;},{passive:true});
     window.addEventListener('touchend',e=>{
+      if(isMobile())return; // scroll nativo en mobile
       if(locked)return;
       const diff=ty-e.changedTouches[0].clientY;
       if(Math.abs(diff)<50)return;
@@ -1467,6 +1481,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     /* Teclado */
     window.addEventListener('keydown',e=>{
+      if(isMobile())return; // scroll nativo en mobile
       if(locked)return;
       const last=sections[sections.length-1];
       const lastTop=last.getBoundingClientRect().top;
