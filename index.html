@@ -200,12 +200,15 @@
     @media(max-width:900px){
       /* En mobile: secciones crecen vertical y los visuales se apilan debajo del texto */
       .screen{height:auto;min-height:100svh;padding:80px 0 40px;}
-      .screen-inner{grid-template-columns:1fr;gap:40px;padding:0 24px;}
+      .screen-inner{grid-template-columns:1fr;gap:40px;padding:0 24px;justify-items:center;}
       .screen-visual{
-        max-width:420px;width:100%;margin:0 auto;
+        width:100%;max-width:420px;margin:0 auto;
+        justify-self:center;
+        display:flex;flex-direction:column;align-items:center;
         order:2; /* siempre después del texto */
       }
-      .screen-text{order:1;}
+      .screen-visual > *{margin-left:auto;margin-right:auto;}
+      .screen-text{order:1;width:100%;}
     }
     @media(max-width:640px){
       /* Sections: allow content to breathe vertically */
@@ -323,8 +326,14 @@
       .hero-actions{justify-content:flex-start;}
       .hero-trust{justify-content:flex-start;}
       /* Hero visual visible en mobile, centrado y debajo del texto */
-      .hero-visual{order:2;}
-      .hv-wrap{max-width:380px;margin:0 auto;}
+      .hero-visual{
+        order:2;
+        display:flex;justify-content:center;align-items:center;
+      }
+      .hv-wrap{
+        max-width:380px;width:100%;
+        margin-left:auto;margin-right:auto;
+      }
     }
     @media(max-width:640px){
       /* Hero: fix iOS viewport height + layout */
