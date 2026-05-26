@@ -138,24 +138,50 @@ footer{background:#111;padding:48px 0;border-top:1px solid rgba(255,255,255,.06)
 @media(max-width:640px){
   .container{padding:0 16px;}
   .services-grid{grid-template-columns:1fr;}
+  nav{padding:14px 16px;}
+
+  /* Hero */
   .hero-h1{font-size:clamp(40px,11vw,56px);line-height:1.0;}
-  .hero-sub{font-size:15px;}
-  .hero-btns{gap:10px;}
+  .hero-sub{font-size:15px;max-width:100%;}
+  .hero-btns{gap:10px;flex-wrap:wrap;}
   .btn-lg{padding:13px 22px;font-size:14px;}
-  .section-tag{margin-bottom:16px;}
-  .services-intro{padding:48px 0 32px;}
-  .services-intro h2{font-size:28px;}
-  .service-card{padding:28px 20px;}
-  .cta-h2{font-size:clamp(36px,9vw,52px) !important;}
+
+  /* Tags */
+  .section-tag{margin-bottom:16px;font-size:11px;padding:6px 12px;}
+
+  /* Services intro section */
+  .services-intro{padding:48px 0 24px;}
+  .services-intro h2{font-size:clamp(28px,8vw,40px);}
+  .services-intro p{font-size:15px;max-width:100%;}
+  .services-grid{margin-top:32px;}
+
+  /* Service cards */
+  .service-card{padding:24px 16px;}
+  .service-num{font-size:36px;margin-bottom:12px;}
+  .service-icon{font-size:24px;margin-bottom:12px;}
+  .service-title{font-size:18px;}
+  .service-desc{font-size:14px;line-height:1.55;}
+  .service-tag{font-size:10px;padding:3px 8px;}
+  .kairo-badge{font-size:10px;padding:5px 10px;}
+
+  /* CTA */
+  .cta-h2{font-size:clamp(36px,9vw,52px) !important;max-width:100%;}
+  .cta-btns{flex-direction:column;align-items:center;gap:10px;}
+
+  /* Reporte section */
   #reporte{padding:60px 0 !important;}
   .report-card{padding:20px 16px;}
+  .report-row{font-size:13px;}
   .reporte-grid{grid-template-columns:1fr !important;gap:32px !important;}
+
+  /* bg-num scale down */
+  .bg-num{font-size:clamp(140px,35vw,260px);right:0;overflow:hidden;}
+
+  /* Page nav */
   .page-nav{padding:24px 16px;}
   .page-nav-inner{flex-direction:column;align-items:stretch;gap:12px;}
   .page-nav-btn{justify-content:flex-start;}
   .page-nav-home{text-align:center;padding:8px 0;}
-  nav{padding:14px 16px;}
-  .section-tag{font-size:11px;padding:6px 12px;}
 }
 </style>
 </head>

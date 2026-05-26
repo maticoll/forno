@@ -151,41 +151,68 @@ footer{background:#1A1612;padding:48px 0;}
 @media(max-width:640px){
   /* Container & nav */
   .container{padding:0 16px;}
-  nav{padding:16px 16px;}
+  nav{padding:14px 16px;}
+
   /* Hero */
   .screen{min-height:auto;padding:100px 0 60px;}
   #hero{padding-top:60px;}
   .hero-h1{font-size:clamp(40px,11vw,56px);line-height:1.0;}
-  .hero-sub{font-size:15px;margin-bottom:24px;}
-  .hero-btns{gap:10px;}
+  .hero-sub{font-size:15px;margin-bottom:24px;max-width:100%;}
+  .hero-btns{gap:10px;flex-wrap:wrap;}
   .hero-grid{gap:32px;}
+
   /* Section padding */
   .section-pad{padding:56px 0;}
-  /* Grids → 1 column */
+
+  /* Grids */
   .feature-grid{grid-template-columns:1fr;gap:32px;}
-  .kpi-grid{grid-template-columns:1fr;gap:10px;}
+  /* KPI grid: KEEP 2 columns on mobile — do not collapse to 1 */
+  .kpi-grid{grid-template-columns:repeat(2,1fr);gap:10px;}
+
   /* Typography */
   .section-tag{margin-bottom:16px;}
   .feature-h2{font-size:clamp(32px,9vw,48px);}
-  .cta-h2{font-size:clamp(36px,9vw,52px);}
+  .feature-p{font-size:14px;margin-bottom:24px;}
+  .feature-list li{font-size:14px;}
+  .cta-h2{font-size:clamp(36px,9vw,52px);max-width:100%;}
+
   /* Buttons */
   .btn-lg{padding:13px 22px;font-size:14px;}
   .cta-btns{flex-direction:column;align-items:center;gap:12px;}
+
   /* Dashboard card */
-  .dash-card{padding:20px 16px;}
-  .kpi-box{padding:12px;}
-  .kpi-val{font-size:22px;}
+  .dash-card{padding:20px 14px;max-width:100%;}
+  .dash-title{font-size:15px;}
+  .kpi-box{padding:10px 12px;}
+  .kpi-val{font-size:20px;}
+  .kpi-lbl{font-size:10px;}
+  .chart-bars{height:40px;}
+  .chart-lbl{font-size:10px;}
+
+  /* Alert row */
+  .alert-row{font-size:12px;padding:10px 12px;gap:8px;}
+  .alert-row span{line-height:1.5;}
+
   /* CDP visual */
-  .cdp-visual{padding:20px 16px;}
-  .cdp-profile{flex-wrap:wrap;gap:10px;}
+  .cdp-visual{padding:20px 14px;max-width:100%;}
+  .cdp-title{font-size:16px;margin-bottom:16px;}
+  .cdp-profile{align-items:flex-start;gap:10px;}
+  .cdp-profile > div:last-child{min-width:0;flex:1;}
+  .cdp-tags{flex-wrap:wrap;gap:4px;max-width:100%;}
+  .cdp-tag{font-size:9px;padding:2px 6px;}
+  .cdp-stat{font-size:11px;word-break:break-word;}
+  .cdp-name{font-size:13px;}
+
   /* Page nav */
-  .page-nav{padding:28px 16px;}
+  .page-nav{padding:24px 16px;}
   .page-nav-inner{flex-direction:column;gap:16px;align-items:stretch;}
   .page-nav-btn{justify-content:center;}
+
   /* Fixed-width elements max-width guard */
   img,.dash-card,.cdp-visual{max-width:100%;}
+
   /* bg decorative number — reduce so it doesn't overflow */
-  .bg-num{font-size:clamp(140px,38vw,260px);}
+  .bg-num{font-size:clamp(140px,38vw,260px);right:0;overflow:hidden;}
 }
 </style>
 </head>
