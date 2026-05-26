@@ -203,8 +203,15 @@ footer{background:#1A1612;padding:48px 0;}
   nav{padding:14px 16px;}
   .nav-back span, .nav-next span{display:none;}
 
-  /* Hero font sizes */
-  .hero-h1{font-size:clamp(40px,11vw,56px);line-height:1.0;}
+  /* Hero font sizes — Brice Black es muy ancha; "intermediarios." debe entrar en 390px */
+  .hero-grid > *{min-width:0;max-width:100%;}
+  .hero-h1{
+    font-size:clamp(32px,8.8vw,52px);
+    line-height:1.0;
+    letter-spacing:-0.01em;
+    overflow-wrap:break-word;
+    word-break:break-word;
+  }
   .hero-sub{font-size:15px;margin-bottom:24px;max-width:100%;}
   .hero-grid{gap:32px;}
   .hero-btns{gap:10px;}
