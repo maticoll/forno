@@ -158,16 +158,19 @@ footer{background:#1A1612;padding:48px 0;}
 @media(max-width:640px){
   .container{padding:0 16px;}
   /* Grids → 1 columna */
-  .hero-grid,.feature-grid{grid-template-columns:1fr;gap:28px;}
-  /* Grid de 3 col en SEO panel */
-  [style*="grid-template-columns:repeat(3,1fr)"]{grid-template-columns:1fr!important;gap:8px!important;}
-  /* web-content 2col → 1col */
-  .web-content{grid-template-columns:1fr 1fr;gap:6px;}
-  /* Font-sizes headings */
-  .hero-h1{font-size:clamp(24px,7vw,32px);line-height:1.1;}
-  .feature-h2{font-size:clamp(28px,7vw,38px);}
-  .cta-h2{font-size:clamp(32px,8vw,44px);}
-  .final-h2{font-size:clamp(36px,10vw,56px);}
+  .hero-grid,.feature-grid{grid-template-columns:1fr;gap:32px;}
+  /* Grid de 3 col en SEO panel — mantener 3 cols, solo reducir gap y padding */
+  [style*="grid-template-columns:repeat(3,1fr)"]{gap:8px!important;}
+  /* web-content mantiene 2 cols */
+  .web-content{grid-template-columns:1fr 1fr;gap:10px;}
+  /* Font-sizes headings — más grandes para impacto */
+  .hero-h1{font-size:clamp(40px,11vw,56px);line-height:1.0;}
+  .hero-sub{font-size:15px;margin-bottom:24px;}
+  .feature-h2{font-size:clamp(32px,9vw,48px);}
+  .cta-h2{font-size:clamp(36px,9vw,52px);}
+  .final-h2{font-size:clamp(32px,9vw,52px);line-height:.95;}
+  /* Section tag margin */
+  .section-tag{margin-bottom:16px;}
   /* Gaps reducidos */
   .section-pad{padding:56px 0;}
   .final-cta{padding:56px 0;}
@@ -175,8 +178,6 @@ footer{background:#1A1612;padding:48px 0;}
   .feature-list{gap:10px;}
   /* Nav */
   nav{padding:14px 16px;}
-  .nav-back,.nav-next{font-size:11px;gap:5px;}
-  .nav-logo{font-size:18px;}
   /* SERP card */
   .serp-card{width:100%;max-width:100%;}
   .serp-results{padding:12px;}
@@ -186,20 +187,19 @@ footer{background:#1A1612;padding:48px 0;}
   .serp-domain{font-size:11px;}
   /* Web preview */
   .web-preview{width:100%;max-width:100%;}
-  .web-content{grid-template-columns:1fr 1fr;gap:6px;}
+  /* SEO feature panel */
+  .fade-up[style*="background:#fff"]{padding:20px!important;}
   /* Page nav */
   .page-nav{padding:28px 16px;}
   .page-nav-inner{flex-direction:column;gap:16px;align-items:stretch;}
   .page-nav-btn{justify-content:center;}
   .page-nav-home{text-align:center;}
   /* Buttons */
-  .btn-lg{padding:14px 24px;font-size:14px;}
+  .btn-lg{padding:14px 24px;font-size:15px;}
   /* Secciones hero */
   #hero{padding-top:70px;}
   /* bg-num menos intrusivo */
   .bg-num{font-size:clamp(160px,40vw,280px);}
-  /* SEO feature panel */
-  .fade-up[style*="background:#fff"]{padding:20px!important;}
 }
 </style>
 </head>
@@ -355,18 +355,18 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <div style="width:44px;height:44px;border-radius:12px;background:var(--orange-glow);display:flex;align-items:center;justify-content:center;font-size:20px;">📍</div>
           <div><div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:16px;">Google Business</div><div style="font-size:11px;color:var(--muted);">Optimizado y activo</div></div>
         </div>
-        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px;">
-          <div style="background:var(--bg2);border-radius:10px;padding:14px;text-align:center;">
-            <span style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:24px;color:var(--text);display:block;" data-target="1">#0</span>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:20px;">
+          <div style="background:var(--bg2);border-radius:10px;padding:12px 8px;text-align:center;">
+            <span style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:22px;color:var(--text);display:block;" data-target="1">#0</span>
             <span style="font-size:10px;color:var(--muted);">Posición Google</span>
           </div>
-          <div style="background:var(--bg2);border-radius:10px;padding:14px;text-align:center;">
-            <span style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:24px;color:var(--green);display:block;" data-target="340" data-suffix="%">0%</span>
+          <div style="background:var(--bg2);border-radius:10px;padding:12px 8px;text-align:center;">
+            <span style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:22px;color:var(--green);display:block;" data-target="340" data-suffix="%">0%</span>
             <span style="font-size:10px;color:var(--muted);">↑ Clics orgánicos</span>
           </div>
-          <div style="background:var(--bg2);border-radius:10px;padding:14px;text-align:center;">
-            <span style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:24px;color:var(--orange);display:block;" data-target="5">0km</span>
-            <span style="font-size:10px;color:var(--muted);">Radio geolocalización</span>
+          <div style="background:var(--bg2);border-radius:10px;padding:12px 8px;text-align:center;">
+            <span style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:22px;color:var(--orange);display:block;" data-target="5" data-suffix="km">0km</span>
+            <span style="font-size:10px;color:var(--muted);">Radio geolocaliz.</span>
           </div>
         </div>
         <div style="display:flex;flex-direction:column;gap:10px;">
@@ -450,15 +450,13 @@ const dotObs=new IntersectionObserver((e)=>{e.forEach(en=>{if(en.isIntersecting&
 document.querySelectorAll('section[id]').forEach(s=>dotObs.observe(s));
 const fuObs=new IntersectionObserver((e)=>{e.forEach(en=>{if(en.isIntersecting){en.target.classList.add('visible');fuObs.unobserve(en.target);}});},{threshold:.12});
 document.querySelectorAll('.fade-up').forEach(el=>fuObs.observe(el));
-function ac(el,t,s=''){let st=null;const dur=1800;function step(ts){if(!st)st=ts;const p=Math.min((ts-st)/dur,1);const e=1-Math.pow(1-p,3);el.textContent=(el.dataset.prefix||'')+'#'+Math.floor(e*t)+s;if(p<1)requestAnimationFrame(step);else el.textContent=(el.dataset.prefix||'')+'#'+t+s;}
-// Special case for position #1
+// Contador posición #1 (cuenta regresiva de #8 a #1)
 const posEl=document.querySelector('[data-target="1"]');
-if(posEl){const cObs=new IntersectionObserver((e)=>{e.forEach(en=>{if(en.isIntersecting){let st=null;function step(ts){if(!st)st=ts;const p=Math.min((ts-st)/1800,1);const ev=1-Math.pow(1-p,3);en.target.textContent='#'+Math.max(1,Math.round(8-ev*7));if(p<1)requestAnimationFrame(step);else en.target.textContent='#1';}requestAnimationFrame(step);cObs.unobserve(en.target);}});},{threshold:.5});cObs.observe(posEl);}
-// Other counters
+if(posEl){const posObs=new IntersectionObserver((e)=>{e.forEach(en=>{if(en.isIntersecting){let st=null;function step(ts){if(!st)st=ts;const p=Math.min((ts-st)/1800,1);const ev=1-Math.pow(1-p,3);en.target.textContent='#'+Math.max(1,Math.round(8-ev*7));if(p<1)requestAnimationFrame(step);else en.target.textContent='#1';}requestAnimationFrame(step);posObs.unobserve(en.target);}});},{threshold:.5});posObs.observe(posEl);}
+// Otros contadores
 function animC(el){const t=parseInt(el.dataset.target);const s=el.dataset.suffix||'';let st=null;function step(ts){if(!st)st=ts;const p=Math.min((ts-st)/1800,1);const ev=1-Math.pow(1-p,3);el.textContent=Math.floor(ev*t)+s;if(p<1)requestAnimationFrame(step);else el.textContent=t+s;}requestAnimationFrame(step);}
 const cObs=new IntersectionObserver((e)=>{e.forEach(en=>{if(en.isIntersecting&&en.target!==posEl){animC(en.target);cObs.unobserve(en.target);}});},{threshold:.5});
 document.querySelectorAll('[data-target]').forEach(el=>{if(el!==posEl)cObs.observe(el);});
-}
 /* ── SCROLL SNAP ── */
 (function(){
   const sections=Array.from(document.querySelectorAll('.snap-section'));
