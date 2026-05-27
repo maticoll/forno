@@ -808,6 +808,74 @@
     100%{opacity:0;transform:translateY(-34px) scale(.9);}
   }
 
+  /* ══ GALLERY SECTION ══ */
+  #galeria{
+    height:100vh;height:100svh;
+    position:relative;overflow:hidden;
+    background:#111;
+  }
+  .gallery-slides{
+    position:absolute;inset:0;
+  }
+  .gallery-slide{
+    position:absolute;inset:0;
+    background-size:cover;background-position:center;
+    opacity:0;
+    transition:opacity 1.2s cubic-bezier(.4,0,.2,1);
+    will-change:opacity;
+  }
+  .gallery-slide.active{opacity:1;}
+  .gallery-overlay{
+    position:absolute;inset:0;z-index:2;
+    background:linear-gradient(
+      to bottom,
+      rgba(0,0,0,.25) 0%,
+      rgba(0,0,0,.55) 50%,
+      rgba(0,0,0,.8) 100%
+    );
+  }
+  .gallery-content{
+    position:absolute;inset:0;z-index:3;
+    display:flex;flex-direction:column;
+    align-items:center;justify-content:center;
+    text-align:center;padding:0 24px;
+  }
+  .gallery-eyebrow{
+    font-size:11px;font-weight:700;letter-spacing:.18em;
+    text-transform:uppercase;color:var(--orange);
+    margin-bottom:20px;display:block;
+  }
+  .gallery-h2{
+    font-family:'Author',sans-serif;
+    font-size:clamp(52px,8vw,100px);
+    font-weight:900;line-height:1.0;
+    color:#fff;margin-bottom:20px;
+    text-transform:uppercase;
+  }
+  .gallery-p{
+    font-size:clamp(15px,1.6vw,19px);
+    color:rgba(255,255,255,.65);
+    line-height:1.7;max-width:520px;
+  }
+  .gallery-dots{
+    position:absolute;bottom:40px;left:50%;transform:translateX(-50%);
+    z-index:4;display:flex;gap:8px;
+  }
+  .gdot{
+    width:6px;height:6px;border-radius:50%;
+    background:rgba(255,255,255,.3);border:none;cursor:pointer;
+    transition:background .3s,transform .3s,width .4s;padding:0;
+  }
+  .gdot.active{
+    background:#fff;transform:scale(1.3);
+    width:22px;border-radius:3px;
+  }
+  @media(max-width:640px){
+    .gallery-h2{font-size:clamp(40px,12vw,64px);}
+    .gallery-p{font-size:14px;}
+    .gallery-dots{bottom:28px;}
+  }
+
   /* ══ SMART SEARCH — sección 06 ══ */
   .ss-panel{
     width:100%;max-width:300px;background:#fff;
@@ -919,6 +987,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- ─── SCROLL DOTS ─── -->
 <nav class="scroll-dots" id="scrollDots" aria-label="Navegación por secciones">
   <a href="#hero"          class="scroll-dot active"   title="Inicio"         aria-label="Ir al inicio"></a>
+  <a href="#galeria"       class="scroll-dot"           title="Galería"        aria-label="Ir a Galería"></a>
   <a href="#secretaria"    class="scroll-dot"           title="Secretaría"     aria-label="Ir a Secretaría"></a>
   <a href="#escalabilidad" class="scroll-dot"           title="Escalabilidad"  aria-label="Ir a Escalabilidad"></a>
   <a href="#fidelizacion"  class="scroll-dot"           title="Fidelización"   aria-label="Ir a Fidelización"></a>
@@ -1000,6 +1069,39 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 
   <div class="scroll-cue">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+  </div>
+</section>
+
+<!-- ══ GALERÍA ════════════════════════════════ -->
+<section class="snap-section" id="galeria">
+  <div class="gallery-slides" id="gallerySlides">
+    <div class="gallery-slide active" style="background-image:url('img-fuego.jpeg')"></div>
+    <div class="gallery-slide" style="background-image:url('img-pibe.jpeg')"></div>
+    <div class="gallery-slide" style="background-image:url('img-cocina1.jpeg')"></div>
+    <div class="gallery-slide" style="background-image:url('img-barra.jpeg')"></div>
+    <div class="gallery-slide" style="background-image:url('img-delivery.jpeg')"></div>
+    <div class="gallery-slide" style="background-image:url('img-chef.jpeg')"></div>
+    <div class="gallery-slide" style="background-image:url('img-hamburguesita.jpeg')"></div>
+    <div class="gallery-slide" style="background-image:url('img-foodtrack.jpeg')"></div>
+  </div>
+  <div class="gallery-overlay"></div>
+  <div class="gallery-content fade-up">
+    <span class="gallery-eyebrow">Restaurantes reales</span>
+    <h2 class="gallery-h2">Para los que<br>viven de cocinar.</h2>
+    <p class="gallery-p">FORNNO trabaja para los que se levantan a las 6 a.m.<br>y cierran pasada la medianoche.</p>
+  </div>
+  <div class="gallery-dots" id="galleryDots">
+    <button class="gdot active" data-idx="0" aria-label="Foto 1"></button>
+    <button class="gdot" data-idx="1" aria-label="Foto 2"></button>
+    <button class="gdot" data-idx="2" aria-label="Foto 3"></button>
+    <button class="gdot" data-idx="3" aria-label="Foto 4"></button>
+    <button class="gdot" data-idx="4" aria-label="Foto 5"></button>
+    <button class="gdot" data-idx="5" aria-label="Foto 6"></button>
+    <button class="gdot" data-idx="6" aria-label="Foto 7"></button>
+    <button class="gdot" data-idx="7" aria-label="Foto 8"></button>
+  </div>
+  <div class="scroll-cue" style="color:#fff">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
   </div>
 </section>
@@ -1331,7 +1433,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   const navLinks = document.getElementById('navLinks');
   const hamburger = document.getElementById('hamburger');
   const scrollDots = document.querySelectorAll('.scroll-dot');
-  const darkSections = ['escalabilidad','agencia'];
+  const darkSections = ['escalabilidad','agencia','galeria'];
 
   const screens = document.querySelectorAll('[id]');
   const sectionObs = new IntersectionObserver((entries) => {
@@ -1880,6 +1982,47 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     },{threshold:.4});
     const ssSection=document.getElementById('web');
     if(ssSection) ssObs.observe(ssSection);
+  })();
+
+  /* ══ GALLERY CAROUSEL ══ */
+  (function(){
+    const slides = document.querySelectorAll('.gallery-slide');
+    const dots   = document.querySelectorAll('.gdot');
+    if(!slides.length) return;
+
+    let current = 0;
+    let timer   = null;
+    let paused  = false;
+
+    function goTo(idx){
+      slides[current].classList.remove('active');
+      dots[current].classList.remove('active');
+      current = (idx + slides.length) % slides.length;
+      slides[current].classList.add('active');
+      dots[current].classList.add('active');
+    }
+
+    function next(){ goTo(current + 1); }
+
+    function startAuto(){
+      clearInterval(timer);
+      timer = setInterval(()=>{ if(!paused) next(); }, 4000);
+    }
+
+    // Dots click
+    dots.forEach(d => d.addEventListener('click', ()=>{
+      goTo(parseInt(d.dataset.idx));
+      startAuto(); // reinicia el timer
+    }));
+
+    // Pausar cuando la sección no está visible
+    const gallObs = new IntersectionObserver(entries=>{
+      entries.forEach(e=>{ paused = !e.isIntersecting; });
+    },{threshold:.4});
+    const gallSection = document.getElementById('galeria');
+    if(gallSection) gallObs.observe(gallSection);
+
+    startAuto();
   })();
 </script>
 </body>
