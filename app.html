@@ -261,7 +261,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </nav>
 
 <!-- HERO -->
-<section class="screen snap-section" id="hero">
+<section class="screen" id="hero">
   <div class="container" style="width:100%;">
     <div class="hero-grid">
       <div>
@@ -314,7 +314,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </section>
 
 <!-- CDP -->
-<section id="cdp" class="section-pad section-alt snap-section">
+<section id="cdp" class="section-pad section-alt">
   <div class="container">
     <div class="feature-grid">
       <div class="fade-up">
@@ -362,7 +362,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </section>
 
 <!-- DASHBOARD -->
-<section id="dashboard" class="section-pad snap-section">
+<section id="dashboard" class="section-pad">
   <div class="container">
     <div class="feature-grid">
       <div class="dash-card fade-up" style="box-shadow:0 20px 60px rgba(0,0,0,.07);">
@@ -399,7 +399,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </section>
 
 <!-- CTA -->
-<section class="screen snap-section" id="cta-app" style="background:var(--bg3);text-align:center;">
+<section class="screen" id="cta-app" style="background:var(--bg3);text-align:center;">
   <div class="container" style="width:100%;text-align:center;position:relative;z-index:1;">
     <div class="section-tag fade-up" style="display:inline-flex;margin-bottom:32px;"><span class="dot"></span>Tu negocio en datos</div>
     <h2 class="cta-h2 fade-up" style="transition-delay:.1s;">Data propia.<br><em>Decisiones mejores.</em></h2>
@@ -432,43 +432,7 @@ document.querySelectorAll('.fade-up').forEach(el=>fuObs.observe(el));
 function ac(el,t,s=''){let st=null;const dur=1800;function step(ts){if(!st)st=ts;const p=Math.min((ts-st)/dur,1);const e=1-Math.pow(1-p,3);el.textContent=Math.floor(e*t)+s;if(p<1)requestAnimationFrame(step);else el.textContent=t+s;}requestAnimationFrame(step);}
 const cObs=new IntersectionObserver((e)=>{e.forEach(en=>{if(en.isIntersecting){const t=parseInt(en.target.dataset.target);const s=en.target.dataset.suffix||'';ac(en.target,t,s);cObs.unobserve(en.target);}});},{threshold:.5});
 document.querySelectorAll('[data-target]').forEach(el=>cObs.observe(el));
-/* ── SCROLL SNAP ── */
-(function(){
-  const sections=Array.from(document.querySelectorAll('.snap-section'));
-  if(!sections.length)return;
-  let currentIdx=0,locked=false;
-  function getClosest(){let b=0,m=Infinity;sections.forEach((s,i)=>{const d=Math.abs(s.getBoundingClientRect().top);if(d<m){m=d;b=i;}});return b;}
-  function fits(s){return s.getBoundingClientRect().height<=window.innerHeight+50;}
-  function atBottom(s){return s.getBoundingClientRect().bottom<=window.innerHeight+10;}
-  function atTop(s){return s.getBoundingClientRect().top>=-10;}
-  function goTo(i){if(i<0||i>=sections.length)return;locked=true;currentIdx=i;sections[i].scrollIntoView({behavior:'smooth',block:'start'});setTimeout(()=>{locked=false;},900);}
-  const io=new IntersectionObserver(e=>{e.forEach(en=>{if(en.isIntersecting&&en.intersectionRatio>=.5)currentIdx=sections.indexOf(en.target);});},{threshold:.5});
-  sections.forEach(s=>io.observe(s));
-  window.addEventListener('wheel',e=>{
-    if(locked)return;
-    const i=getClosest(),c=sections[i];
-    if(e.deltaY>0){if((fits(c)||atBottom(c))&&i<sections.length-1){e.preventDefault();goTo(i+1);}}
-    else{if((fits(c)||atTop(c))&&i>0){e.preventDefault();goTo(i-1);}}
-  },{passive:false});
-  function blockMove(e){e.preventDefault();}
-  let ty=0;
-  window.addEventListener('touchstart',e=>{ty=e.touches[0].clientY;},{passive:true});
-  window.addEventListener('touchend',e=>{
-    if(locked)return;
-    const diff=ty-e.changedTouches[0].clientY;
-    if(Math.abs(diff)<40)return;
-    const i=getClosest(),c=sections[i];
-    function snap(idx){window.addEventListener('touchmove',blockMove,{passive:false});goTo(idx);setTimeout(()=>window.removeEventListener('touchmove',blockMove),900);}
-    if(diff>0){if((fits(c)||atBottom(c))&&i<sections.length-1)snap(i+1);}
-    else{if((fits(c)||atTop(c))&&i>0)snap(i-1);}
-  },{passive:true});
-  window.addEventListener('keydown',e=>{
-    if(locked)return;
-    const i=getClosest(),c=sections[i];
-    if(['ArrowDown','PageDown'].includes(e.key)){if((fits(c)||atBottom(c))&&i<sections.length-1){e.preventDefault();goTo(i+1);}}
-    else if(['ArrowUp','PageUp'].includes(e.key)){if((fits(c)||atTop(c))&&i>0){e.preventDefault();goTo(i-1);}}
-  });
-})();
+
 </script>
 
 <footer>
