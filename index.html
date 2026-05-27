@@ -199,6 +199,17 @@
       max-width:1200px;margin:0 auto;padding:0 48px;
       width:100%;position:relative;z-index:1;
     }
+    /* Alternar columnas en secciones pares */
+    .screen-inner.reversed .screen-text{order:2;}
+    .screen-inner.reversed .screen-visual{order:1;}
+    .screen.reversed .bg-num{right:auto;left:-2vw;}
+    @media(max-width:900px){
+      .screen-inner.reversed .screen-text{order:1;}
+      .screen-inner.reversed .screen-visual{order:2;}
+    }
+    @media(max-width:640px){
+      .screen.reversed .bg-num{left:-1vw;}
+    }
     @media(max-width:900px){
       /* En mobile: secciones crecen vertical y los visuales se apilan debajo del texto */
       .screen{height:auto;min-height:100svh;padding:80px 0 40px;}
@@ -1042,9 +1053,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </section>
 
 <!-- ══ 02 · ESCALABILIDAD ═══════════════════ -->
-<section class="screen screen-dark snap-section" id="escalabilidad">
+<section class="screen screen-dark snap-section reversed" id="escalabilidad">
   <div class="bg-num">02</div>
-  <div class="screen-inner">
+  <div class="screen-inner reversed">
     <div class="screen-text fade-up">
       <span class="screen-eyebrow">02 · Escalabilidad</span>
       <h2 class="screen-h2">Más ventas.<br><em>Sin más<br>personal.</em></h2>
@@ -1177,9 +1188,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </section>
 
 <!-- ══ 04 · APP ══════════════════════════════ -->
-<section class="screen screen-bg2 snap-section" id="app">
+<section class="screen screen-bg2 snap-section reversed" id="app">
   <div class="bg-num">04</div>
-  <div class="screen-inner">
+  <div class="screen-inner reversed">
     <div class="screen-text fade-up">
       <span class="screen-eyebrow">04 · App</span>
       <h2 class="screen-h2">Tu data,<br>tuya.<br><em>Siempre.</em></h2>
@@ -1258,9 +1269,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </section>
 
 <!-- ══ 06 · WEB ═══════════════════════════════ -->
-<section class="screen screen-bg3 snap-section" id="web">
+<section class="screen screen-bg3 snap-section reversed" id="web">
   <div class="bg-num">06</div>
-  <div class="screen-inner">
+  <div class="screen-inner reversed">
     <div class="screen-text fade-up">
       <span class="screen-eyebrow">06 · Web</span>
       <h2 class="screen-h2">¿Aparecés<br><em>primero?</em></h2>
