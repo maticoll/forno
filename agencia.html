@@ -188,6 +188,7 @@ footer{background:#111;padding:48px 0;border-top:1px solid rgba(255,255,255,.06)
   .page-nav-btn{justify-content:flex-start;}
   .page-nav-home{text-align:center;padding:8px 0;}
 }
+.fade-in{opacity:0;transition:opacity .7s ease;}.fade-in.visible{opacity:1;}
 </style>
 </head>
 <body>
@@ -380,5 +381,17 @@ document.querySelectorAll('.fade-up').forEach(el=>fuObs.observe(el));
     <div class="footer-copy">© 2026 FORNNO. Todos los derechos reservados.</div>
   </div>
 </footer>
+<script>
+(function(){
+  document.querySelectorAll('p').forEach(function(el){
+    if(!el.closest('nav')&&!el.closest('footer')&&!el.closest('.mobile-menu')&&!el.classList.contains('fade-up'))
+      el.classList.add('fade-in');
+  });
+  var fiObs=new IntersectionObserver(function(e){
+    e.forEach(function(en){if(en.isIntersecting){en.target.classList.add('visible');fiObs.unobserve(en.target);}});
+  },{threshold:.08});
+  document.querySelectorAll('.fade-in').forEach(function(el){fiObs.observe(el);});
+})();
+</script>
 </body>
 </html>

@@ -216,6 +216,7 @@ footer{background:#1A1612;padding:48px 0;}
   /* bg decorative number — reduce so it doesn't overflow */
   .bg-num{font-size:clamp(140px,38vw,260px);right:0;overflow:hidden;}
 }
+.fade-in{opacity:0;transition:opacity .7s ease;}.fade-in.visible{opacity:1;}
 </style>
 </head>
 <body>
@@ -449,5 +450,17 @@ document.querySelectorAll('[data-target]').forEach(el=>cObs.observe(el));
     <div class="footer-copy">© 2026 FORNNO. Todos los derechos reservados.</div>
   </div>
 </footer>
+<script>
+(function(){
+  document.querySelectorAll('p').forEach(function(el){
+    if(!el.closest('nav')&&!el.closest('footer')&&!el.closest('.mobile-menu')&&!el.classList.contains('fade-up'))
+      el.classList.add('fade-in');
+  });
+  var fiObs=new IntersectionObserver(function(e){
+    e.forEach(function(en){if(en.isIntersecting){en.target.classList.add('visible');fiObs.unobserve(en.target);}});
+  },{threshold:.08});
+  document.querySelectorAll('.fade-in').forEach(function(el){fiObs.observe(el);});
+})();
+</script>
 </body>
 </html>

@@ -332,6 +332,7 @@ footer{background:#1A1612;padding:48px 0;}
 .wa-input-row{background:#1f2c34;padding:8px 10px 28px;display:flex;align-items:center;gap:8px;flex-shrink:0;}
 .wa-input-box{flex:1;background:#2a3942;border-radius:20px;padding:8px 14px;font-size:10.5px;color:#8696a0;}
 .wa-send{width:32px;height:32px;border-radius:50%;background:var(--orange);border:none;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 4px 12px rgba(255,92,26,.35);}
+.fade-in{opacity:0;transition:opacity .7s ease;}.fade-in.visible{opacity:1;}
 </style>
 </head>
 <body>
@@ -784,5 +785,17 @@ document.querySelectorAll('.tilt-card').forEach(card=>{
     <div class="footer-copy">© 2026 FORNNO. Todos los derechos reservados.</div>
   </div>
 </footer>
+<script>
+(function(){
+  document.querySelectorAll('p').forEach(function(el){
+    if(!el.closest('nav')&&!el.closest('footer')&&!el.closest('.mobile-menu')&&!el.classList.contains('fade-up'))
+      el.classList.add('fade-in');
+  });
+  var fiObs=new IntersectionObserver(function(e){
+    e.forEach(function(en){if(en.isIntersecting){en.target.classList.add('visible');fiObs.unobserve(en.target);}});
+  },{threshold:.08});
+  document.querySelectorAll('.fade-in').forEach(function(el){fiObs.observe(el);});
+})();
+</script>
 </body>
 </html>

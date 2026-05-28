@@ -238,6 +238,7 @@ footer{background:#1A1612;padding:48px 0;}
   /* bg-num menos intrusivo */
   .bg-num{font-size:clamp(160px,40vw,280px);}
 }
+.fade-in{opacity:0;transition:opacity .7s ease;}.fade-in.visible{opacity:1;}
 </style>
 </head>
 <body>
@@ -577,6 +578,18 @@ document.querySelectorAll('[data-target]').forEach(el=>{if(el!==posEl)cObs.obser
   function hsSetStatus(msg,success){var el=document.getElementById('hsStatus');if(!el)return;el.textContent=msg;el.className='hs-status visible'+(success?' success':'');}
   function hsClearStatus(){var el=document.getElementById('hsStatus');if(el)el.className='hs-status';}
   window.addEventListener('load',function(){hsBuildResults();hsAnimTOs.push(setTimeout(hsRunAnimation,600));});
+})();
+</script>
+<script>
+(function(){
+  document.querySelectorAll('p').forEach(function(el){
+    if(!el.closest('nav')&&!el.closest('footer')&&!el.closest('.mobile-menu')&&!el.classList.contains('fade-up'))
+      el.classList.add('fade-in');
+  });
+  var fiObs=new IntersectionObserver(function(e){
+    e.forEach(function(en){if(en.isIntersecting){en.target.classList.add('visible');fiObs.unobserve(en.target);}});
+  },{threshold:.08});
+  document.querySelectorAll('.fade-in').forEach(function(el){fiObs.observe(el);});
 })();
 </script>
 </body>

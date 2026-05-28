@@ -36,6 +36,7 @@
 @font-face{font-family:'Author';src:url('Author_Font/Author-Bold.woff2') format('woff2');font-weight:700;font-style:normal;}
 @font-face{font-family:'Author';src:url('Author_Font/Author-Bold.woff2') format('woff2');font-weight:800;font-style:normal;}
 @font-face{font-family:'Author';src:url('Author_Font/Author-Bold.woff2') format('woff2');font-weight:900;font-style:normal;}
+.fade-in{opacity:0;transition:opacity .7s ease;}.fade-in.visible{opacity:1;}
 </style>
   <style>
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
@@ -2024,6 +2025,18 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     startAuto();
   })();
+</script>
+<script>
+(function(){
+  document.querySelectorAll('p').forEach(function(el){
+    if(!el.closest('nav')&&!el.closest('footer')&&!el.closest('.mobile-menu')&&!el.classList.contains('fade-up'))
+      el.classList.add('fade-in');
+  });
+  var fiObs=new IntersectionObserver(function(e){
+    e.forEach(function(en){if(en.isIntersecting){en.target.classList.add('visible');fiObs.unobserve(en.target);}});
+  },{threshold:.08});
+  document.querySelectorAll('.fade-in').forEach(function(el){fiObs.observe(el);});
+})();
 </script>
 </body>
 </html>
