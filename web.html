@@ -21,6 +21,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <link rel="icon" type="image/svg+xml" href="SOLO FUEGO.svg"/>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 
 <style>
 @font-face{font-family:'Author';src:url('Author_Font/Author-Regular.woff2') format('woff2');font-weight:400;font-style:normal;}
@@ -157,6 +158,40 @@ footer{background:#1A1612;padding:48px 0;}
   .final-cta{padding:72px 0;}
   .page-nav{padding:36px 24px;}
 }
+/* ── Hero SERP Animado ── */
+@keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
+@keyframes hs-blink{0%,100%{opacity:1;}50%{opacity:0;}}
+.hero-serp{background:#202124;border-radius:16px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.25);position:relative;font-family:'Roboto',Arial,sans-serif;}
+.hs-header{display:flex;align-items:center;gap:12px;padding:12px 16px 10px;border-bottom:1px solid #3c4043;opacity:0;animation:fadeIn .4s .1s ease forwards;}
+.hs-logo{font-size:18px;font-weight:500;letter-spacing:-.5px;flex-shrink:0;}
+.hs-logo span:nth-child(1){color:#8ab4f8;}
+.hs-logo span:nth-child(2){color:#f28b82;}
+.hs-logo span:nth-child(3){color:#fdd663;}
+.hs-logo span:nth-child(4){color:#8ab4f8;}
+.hs-logo span:nth-child(5){color:#81c995;}
+.hs-logo span:nth-child(6){color:#f28b82;}
+.hs-searchbar{flex:1;display:flex;align-items:center;gap:8px;background:#2d2e30;border:1px solid #3c4043;border-radius:20px;padding:7px 14px;}
+.hs-search-text{font-size:13px;color:#e8eaed;flex:1;}
+.hs-cursor{width:2px;height:15px;background:#8ab4f8;display:inline-block;margin-left:1px;animation:hs-blink .95s step-end infinite;vertical-align:middle;}
+.hs-tabs{display:flex;padding:0 16px;border-bottom:1px solid #3c4043;opacity:0;animation:fadeIn .4s .25s ease forwards;}
+.hs-tab{padding:9px 12px;font-size:12px;color:#9aa0a6;border-bottom:3px solid transparent;}
+.hs-tab.active{color:#8ab4f8;border-bottom-color:#8ab4f8;}
+.hs-content{padding:8px 14px 16px;max-height:300px;overflow:hidden;}
+.hs-stats{font-size:11px;color:#9aa0a6;padding:4px 0 10px;min-height:26px;}
+.hs-list{position:relative;}
+.hs-result{position:absolute;left:0;right:0;padding:6px 8px 8px;opacity:0;transition:top 1.15s cubic-bezier(.4,0,.15,1),opacity .35s ease,background .4s ease,border-color .4s ease;border-left:3px solid transparent;border-radius:0 6px 6px 0;}
+.hs-result.is-top{background:rgba(124,182,136,.12);border-left-color:#7CB688;}
+.hs-result-meta{display:flex;align-items:center;gap:8px;margin-bottom:4px;}
+.hs-favicon{width:15px;height:15px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:8px;flex-shrink:0;font-weight:700;color:#fff;}
+.hs-result-source{display:flex;flex-direction:column;}
+.hs-site-name{font-size:12px;color:#e8eaed;font-weight:500;line-height:1.3;}
+.hs-url{font-size:11px;color:#81c995;line-height:1.3;}
+.hs-result-title{font-size:14px;font-weight:400;color:#8ab4f8;margin-bottom:3px;line-height:1.3;}
+.hs-result-desc{font-size:11px;color:#9aa0a6;line-height:1.5;}
+.hs-status{position:absolute;bottom:14px;left:50%;transform:translateX(-50%);background:#2d2e30;border:1px solid #3c4043;border-radius:100px;padding:6px 16px;font-size:12px;color:#9aa0a6;font-weight:500;opacity:0;transition:opacity .3s ease,color .3s ease,border-color .3s ease;white-space:nowrap;z-index:10;box-shadow:0 4px 12px rgba(0,0,0,.4);font-family:'Roboto',Arial,sans-serif;}
+.hs-status.visible{opacity:1;}
+.hs-status.success{color:#7CB688;border-color:#7CB688;}
+
 @media(max-width:640px){
   .container{padding:0 16px;}
   /* Grids → 1 columna */
@@ -265,34 +300,27 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <a href="#seo" class="btn btn-secondary btn-lg">SEO local</a>
         </div>
       </div>
-      <!-- SERP mockup -->
+      <!-- SERP animado -->
       <div class="fade-up" style="transition-delay:.5s;">
-        <div class="serp-card">
-          <div class="serp-bar">
-            <div style="width:16px;height:16px;background:#4285f4;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:9px;font-weight:900;flex-shrink:0;">G</div>
-            <div class="serp-search">
-              <span class="serp-icon">🔍</span>
-              restaurante palermo buenos aires
+        <div class="hero-serp">
+          <div class="hs-header">
+            <div class="hs-logo"><span>G</span><span>o</span><span>o</span><span>g</span><span>l</span><span>e</span></div>
+            <div class="hs-searchbar">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#9aa0a6" stroke-width="2.5" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="22" y2="22"/></svg>
+              <span class="hs-search-text" id="hsSearchQuery"></span><span class="hs-cursor"></span>
             </div>
           </div>
-          <div class="serp-results">
-            <div class="serp-result top">
-              <div class="serp-domain">tunegocio.com.ar › palermo</div>
-              <div class="serp-title">Tu Restaurante en Palermo | Reservas Online</div>
-              <div class="serp-snippet">La mejor cocina del barrio. Reservás directo, sin comisiones. Menú completo online, delivery propio y programa de lealtad…</div>
-              <div class="serp-pos">📍 Posición #1 · Tu zona</div>
-            </div>
-            <div class="serp-result" style="opacity:.5;">
-              <div class="serp-domain">competencia.com.ar</div>
-              <div class="serp-title">Restaurante en Buenos Aires</div>
-              <div class="serp-snippet">Visitanos en Palermo. Reservas por teléfono…</div>
-            </div>
-            <div class="serp-result" style="opacity:.3;">
-              <div class="serp-domain">pedidosya.com.ar</div>
-              <div class="serp-title">Restaurantes en Palermo — Pedidos Ya</div>
-              <div class="serp-snippet">Encontrá restaurantes cerca tuyo…</div>
-            </div>
+          <div class="hs-tabs">
+            <div class="hs-tab active">Todo</div>
+            <div class="hs-tab">Imágenes</div>
+            <div class="hs-tab">Maps</div>
+            <div class="hs-tab">Videos</div>
           </div>
+          <div class="hs-content">
+            <div class="hs-stats" id="hsStats"></div>
+            <div class="hs-list" id="hsList"></div>
+          </div>
+          <div class="hs-status" id="hsStatus"></div>
         </div>
       </div>
     </div>
@@ -323,7 +351,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <div class="web-dot" style="background:#ff5f56;"></div>
             <div class="web-dot" style="background:#ffbd2e;"></div>
             <div class="web-dot" style="background:#27c93f;"></div>
-            <div class="web-url">tunegocio.com.ar</div>
+            <div class="web-url">tunegocio.com.uy</div>
           </div>
           <div class="web-hero-mock">
             <div class="web-logo-mock">● TU RESTAURANTE</div>
@@ -476,5 +504,77 @@ document.querySelectorAll('[data-target]').forEach(el=>{if(el!==posEl)cObs.obser
     <div class="footer-copy">© 2026 FORNNO. Todos los derechos reservados.</div>
   </div>
 </footer>
+<script>
+(function(){
+  var HS_RESULTS=[
+    {id:'h0',favicon:{bg:'#e8453c',text:'D'},siteName:"Domino's Pizza",url:'dominospizza.com.uy › pizza-online',title:"Domino's Pizza Uruguay | Pedí online ahora",desc:"Ordená tu pizza online. Delivery y retiro en local disponible.",isTarget:false},
+    {id:'h1',favicon:{bg:'#ff4500',text:'R'},siteName:'Reddit · r/uruguay',url:'reddit.com › r › uruguay',title:'¿Dónde está la mejor pizza en Mdeo? : r/uruguay',desc:'83 respuestas · Mejor respuesta: yaguaron 1414 tremenda muzza.',isTarget:false},
+    {id:'h2',favicon:{bg:'#00af87',text:'T'},siteName:'Tripadvisor',url:'tripadvisor.es › Restaurants-g294323',title:'Los 10 mejores restaurantes de pizza en Montevideo',desc:'1. Don Ciccio · (315 opiniones). 2. Pizzería Venecia · (207 opiniones).',isTarget:false},
+    {id:'h3',favicon:{bg:'#ff6900',text:'P'},siteName:'PedidosYa',url:'pedidosya.com.uy › pizza › montevideo',title:'Pizza en Montevideo para delivery — PedidosYa',desc:'Los mejores restaurantes de pizza cerca tuyo. Más de 200 locales.',isTarget:false},
+    {id:'h4',favicon:{bg:'#c0392b',text:'C'},siteName:'Confitería Carrera',url:'carrera.com.uy › salado › pizzas',title:'Pizzas artesanales — Confitería Carrera',desc:'Pizzeta con Muzzarella y Aceitunas $U 455. Disponible todos los días.',isTarget:false},
+    {id:'h5',favicon:{bg:'#f39c12',text:'E'},siteName:'La Especialista',url:'laespecialista.com.uy › pizzas',title:'Pizzas y masas para horno — La Especialista',desc:'Pizza Muzzarella $369 · Pizza Jamón y Muzzarella $415. Envío a todo el país.',isTarget:false},
+    {id:'h6',favicon:{bg:'#7CB688',text:'M'},siteName:'Mi Restaurante',url:'mirestaurante.com.uy › menu › pizzas',title:'Mi Restaurante | La mejor pizza de Montevideo',desc:'Masa madre, ingredientes frescos. Delivery y salón. Reservas online.',isTarget:true},
+  ];
+  var HS_ITEM_H=95;
+  var hsOrder=[].concat(HS_RESULTS);
+  var hsAnimTOs=[];
+  function hsClearTOs(){hsAnimTOs.forEach(clearTimeout);hsAnimTOs=[];}
+  function hsBuildResults(){
+    var list=document.getElementById('hsList');
+    if(!list)return;
+    list.innerHTML='';
+    list.style.height=(HS_RESULTS.length*HS_ITEM_H)+'px';
+    hsOrder.forEach(function(r,idx){
+      var el=hsMakeEl(r);
+      el.style.top=(idx*HS_ITEM_H)+'px';
+      el.style.opacity='0';
+      el.style.transition='opacity 0.35s ease';
+      list.appendChild(el);
+    });
+  }
+  function hsMakeEl(r){
+    var div=document.createElement('div');
+    div.className='hs-result'+(r.isTarget?' target':'');
+    div.id='hsr-'+r.id;
+    div.innerHTML='<div class="hs-result-meta"><div class="hs-favicon" style="background:'+r.favicon.bg+'">'+r.favicon.text+'</div><div class="hs-result-source"><span class="hs-site-name">'+r.siteName+'</span><span class="hs-url">'+r.url+'</span></div></div><div class="hs-result-title">'+r.title+'</div><div class="hs-result-desc">'+r.desc+'</div>';
+    return div;
+  }
+  function hsRunAnimation(){
+    hsClearTOs();
+    var query='pizza montevideo';
+    var qEl=document.getElementById('hsSearchQuery');
+    if(!qEl)return;
+    qEl.textContent='';
+    var sEl=document.getElementById('hsStats');
+    if(sEl)sEl.textContent='';
+    var i=0;
+    function typeChar(){qEl.textContent+=query[i++];if(i<query.length)hsAnimTOs.push(setTimeout(typeChar,90));else hsAnimTOs.push(setTimeout(hsShowResults,380));}
+    hsAnimTOs.push(setTimeout(typeChar,400));
+  }
+  function hsShowResults(){
+    hsAnimTOs.push(setTimeout(function(){var sEl=document.getElementById('hsStats');if(sEl)sEl.textContent='Aprox. 8.400.000 resultados (0,38 seg)';},100));
+    var items=document.querySelectorAll('.hs-result');
+    items.forEach(function(el,i){hsAnimTOs.push(setTimeout(function(){el.style.transition='opacity 0.3s ease';el.style.opacity='1';},i*80));});
+    hsAnimTOs.push(setTimeout(hsStartRising,items.length*80+1200));
+  }
+  function hsStartRising(){
+    hsSetStatus('Subiendo posición...',false);
+    document.querySelectorAll('.hs-result').forEach(function(el){el.style.transition='top 1.15s cubic-bezier(.4,0,.15,1),opacity .35s ease,background .4s ease,border-color .4s ease';});
+    var target=hsOrder.find(function(r){return r.isTarget;});
+    var newOrder=[target].concat(hsOrder.filter(function(r){return!r.isTarget;}));
+    newOrder.forEach(function(r,newIdx){var el=document.getElementById('hsr-'+r.id);if(el)el.style.top=(newIdx*HS_ITEM_H)+'px';});
+    hsAnimTOs.push(setTimeout(function(){
+      hsOrder=newOrder;
+      var tEl=document.getElementById('hsr-'+target.id);
+      if(tEl)tEl.classList.add('is-top');
+      hsSetStatus('Posición #1 alcanzada',true);
+      hsAnimTOs.push(setTimeout(function(){hsClearStatus();hsOrder=[].concat(HS_RESULTS);hsBuildResults();hsAnimTOs.push(setTimeout(hsRunAnimation,400));},4000));
+    },1230));
+  }
+  function hsSetStatus(msg,success){var el=document.getElementById('hsStatus');if(!el)return;el.textContent=msg;el.className='hs-status visible'+(success?' success':'');}
+  function hsClearStatus(){var el=document.getElementById('hsStatus');if(el)el.className='hs-status';}
+  window.addEventListener('load',function(){hsBuildResults();hsAnimTOs.push(setTimeout(hsRunAnimation,600));});
+})();
+</script>
 </body>
 </html>
