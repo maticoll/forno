@@ -913,6 +913,135 @@
     opacity:0;transform:scale(.6);transition:opacity .35s .1s ease,transform .35s .1s ease;white-space:nowrap;
   }
   .ss-rank-item.target-restaurant.is-top .ss-top-badge{opacity:1;transform:scale(1);}
+
+  /* ── MODULES SECTION ── */
+  .modules-section{
+    position:relative;
+    transition:background .4s ease, color .4s ease;
+  }
+  .modules-section[data-active="secretaria"]{ background:var(--bg2); }
+  .modules-section[data-active="escalabilidad"]{ background:var(--dark); color:#fff; }
+  .modules-section[data-active="fidelizacion"]{ background:var(--bg); }
+  .modules-section[data-active="app"]{ background:var(--bg2); }
+  .modules-section[data-active="agencia"]{ background:var(--dark); color:#fff; }
+  .modules-section[data-active="web"]{ background:var(--bg3); }
+
+  /* ── MODULES TABS (subheader) ── */
+  .modules-tabs{
+    display:flex;align-items:center;
+    gap:0;
+    border-bottom:1px solid var(--border);
+    background:inherit;
+    position:sticky;top:60px;z-index:100;
+    padding:0 48px;
+    overflow-x:auto;
+    scrollbar-width:none;
+  }
+  .modules-tabs::-webkit-scrollbar{display:none;}
+  .modules-section[data-active="escalabilidad"] .modules-tabs,
+  .modules-section[data-active="agencia"] .modules-tabs{
+    border-bottom-color:rgba(255,255,255,.1);
+  }
+  .module-tab{
+    font-family:'Author',sans-serif;
+    font-size:13px;font-weight:600;letter-spacing:.04em;
+    text-transform:uppercase;
+    padding:16px 20px;
+    border:none;background:none;
+    color:var(--muted);
+    cursor:pointer;
+    position:relative;
+    white-space:nowrap;
+    transition:color .2s;
+  }
+  .module-tab::after{
+    content:'';
+    position:absolute;bottom:-1px;left:0;right:0;
+    height:2px;background:var(--orange);
+    transform:scaleX(0);transition:transform .25s ease;
+  }
+  .module-tab:hover{color:var(--text);}
+  .module-tab.active{color:var(--text);font-weight:700;}
+  .module-tab.active::after{transform:scaleX(1);}
+  .modules-section[data-active="escalabilidad"] .module-tab,
+  .modules-section[data-active="agencia"] .module-tab{color:rgba(255,255,255,.45);}
+  .modules-section[data-active="escalabilidad"] .module-tab:hover,
+  .modules-section[data-active="agencia"] .module-tab:hover{color:#fff;}
+  .modules-section[data-active="escalabilidad"] .module-tab.active,
+  .modules-section[data-active="agencia"] .module-tab.active{color:#fff;}
+
+  /* ── MODULE PANELS ── */
+  .module-panel{
+    display:none;
+    opacity:0;
+    transition:opacity .2s ease;
+  }
+  .module-panel.active{
+    display:flex;
+    opacity:1;
+  }
+
+  /* ── CONTACT FORM SECTION ── */
+  .contact-section{
+    background:var(--dark);color:#fff;
+    padding:100px 48px;
+  }
+  .contact-inner{
+    max-width:640px;margin:0 auto;text-align:center;
+  }
+  .contact-eyebrow{
+    font-size:11px;font-weight:700;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--orange);
+    display:block;margin-bottom:20px;
+  }
+  .contact-h2{
+    font-family:'Author',sans-serif;
+    font-size:clamp(40px,6vw,72px);font-weight:900;
+    line-height:1.0;margin-bottom:16px;color:#fff;
+  }
+  .contact-p{
+    font-size:clamp(15px,1.5vw,18px);
+    color:rgba(255,255,255,.5);line-height:1.7;
+    margin-bottom:48px;
+  }
+  .contact-form{
+    display:flex;flex-direction:column;gap:16px;
+    text-align:left;
+  }
+  .contact-form input{
+    width:100%;padding:16px 20px;
+    background:rgba(255,255,255,.06);
+    border:1.5px solid rgba(255,255,255,.1);
+    border-radius:10px;
+    color:#fff;font-family:'Author',sans-serif;
+    font-size:15px;font-weight:500;
+    transition:border-color .2s;outline:none;
+  }
+  .contact-form input::placeholder{color:rgba(255,255,255,.3);}
+  .contact-form input:focus{border-color:var(--orange);}
+  .contact-form-row{display:flex;gap:16px;}
+  .contact-form-row input{flex:1;}
+  .contact-submit{
+    margin-top:8px;
+    width:100%;padding:18px 32px;
+    background:var(--orange);color:#fff;
+    border:none;border-radius:10px;
+    font-family:'Author',sans-serif;
+    font-size:16px;font-weight:700;
+    cursor:pointer;
+    transition:background .2s,transform .2s,box-shadow .2s;
+  }
+  .contact-submit:hover{
+    background:var(--orange-dark);
+    transform:translateY(-2px);
+    box-shadow:0 8px 30px rgba(255,92,26,.4);
+  }
+  @media(max-width:768px){
+    .modules-tabs{padding:0 20px;}
+    .module-tab{padding:14px 14px;font-size:12px;}
+    .contact-section{padding:72px 24px;}
+    .contact-form-row{flex-direction:column;}
+  }
   </style>
 </head>
 <body>
