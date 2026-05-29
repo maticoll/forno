@@ -1569,6 +1569,41 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   }, { threshold: .1 });
   document.querySelectorAll('.fade-up').forEach(el => fadeObs.observe(el));
 
+  /* ── MODULE TABS ── */
+  (function(){
+    const modulesSection = document.getElementById('modulos');
+    const tabs = document.querySelectorAll('.module-tab');
+    const panels = document.querySelectorAll('.module-panel');
+
+    function activateTab(targetId) {
+      modulesSection.setAttribute('data-active', targetId);
+      tabs.forEach(t => t.classList.toggle('active', t.dataset.target === targetId));
+
+      const current = document.querySelector('.module-panel.active');
+      const next = document.getElementById(targetId);
+      if (!next || current === next) return;
+
+      current.style.opacity = '0';
+      setTimeout(() => {
+        current.classList.remove('active');
+        current.style.opacity = '';
+
+        next.classList.add('active');
+        next.querySelectorAll('.fade-up').forEach(el => {
+          el.classList.remove('visible');
+          void el.offsetWidth;
+          el.classList.add('visible');
+        });
+      }, 180);
+    }
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => activateTab(tab.dataset.target));
+    });
+
+    // Activar el primero al cargar
+    activateTab('secretaria');
+  })();
 
   /* ── INTRO OVERLAY ── */
   (function(){
