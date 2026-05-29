@@ -968,18 +968,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </div>
 
-<!-- ─── SCROLL DOTS ─── -->
-<nav class="scroll-dots" id="scrollDots" aria-label="Navegación por secciones">
-  <a href="#hero"          class="scroll-dot active"   title="Inicio"         aria-label="Ir al inicio"></a>
-  <a href="#galeria"       class="scroll-dot"           title="Galería"        aria-label="Ir a Galería"></a>
-  <a href="#secretaria"    class="scroll-dot"           title="Secretaría"     aria-label="Ir a Secretaría"></a>
-  <a href="#escalabilidad" class="scroll-dot"           title="Escalabilidad"  aria-label="Ir a Escalabilidad"></a>
-  <a href="#fidelizacion"  class="scroll-dot"           title="Fidelización"   aria-label="Ir a Fidelización"></a>
-  <a href="#app"           class="scroll-dot"           title="App"            aria-label="Ir a App"></a>
-  <a href="#agencia"       class="scroll-dot"           title="Agencia"        aria-label="Ir a Agencia"></a>
-  <a href="#web"           class="scroll-dot"           title="Web"            aria-label="Ir a Web"></a>
-</nav>
-
 <!-- ══ HERO ══════════════════════════════════ -->
 <section class="hero snap-section" id="hero">
   <div class="hero-glow"></div>
@@ -1133,9 +1121,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
     </div>
   </div>
-  <div class="scroll-cue">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
-  </div>
 </section>
 
 <!-- ══ 02 · ESCALABILIDAD ═══════════════════ -->
@@ -1168,9 +1153,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
       </div>
     </div>
-  </div>
-  <div class="scroll-cue">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
   </div>
 </section>
 
@@ -1268,9 +1250,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
     </div>
   </div>
-  <div class="scroll-cue">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
-  </div>
 </section>
 
 <!-- ══ 04 · APP ══════════════════════════════ -->
@@ -1320,9 +1299,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
     </div>
   </div>
-  <div class="scroll-cue">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
-  </div>
 </section>
 
 <!-- ══ 05 · AGENCIA ══════════════════════════ -->
@@ -1348,9 +1324,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <span style="color:var(--orange);font-weight:700;letter-spacing:.04em;">Kairo</span>
       </div>
     </div>
-  </div>
-  <div class="scroll-cue">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
   </div>
 </section>
 
@@ -1416,36 +1389,31 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   const nav = document.getElementById('nav');
   const navLinks = document.getElementById('navLinks');
   const hamburger = document.getElementById('hamburger');
-  const scrollDots = document.querySelectorAll('.scroll-dot');
-  const darkSections = ['escalabilidad','agencia','galeria'];
 
-  const screens = document.querySelectorAll('[id]');
-  const sectionObs = new IntersectionObserver((entries) => {
+  const heroEl = document.getElementById('hero');
+  const galeriaEl = document.getElementById('galeria');
+  const contactoEl = document.getElementById('contacto');
+
+  const navObs = new IntersectionObserver((entries) => {
     entries.forEach(e => {
-      if (e.isIntersecting && e.intersectionRatio >= .4) {
-        const id = e.target.id;
-        // Update dot
-        scrollDots.forEach(d => d.classList.remove('active'));
-        const dot = document.querySelector(`.scroll-dot[href="#${id}"]`);
-        if (dot) dot.classList.add('active');
-        // Update nav theme
-        if (id === 'hero') {
-          nav.classList.remove('solid','solid-dark');
-          navLinks.classList.remove('dark');
-          hamburger.classList.remove('dark');
-        } else if (darkSections.includes(id)) {
-          nav.classList.remove('solid'); nav.classList.add('solid-dark');
-          navLinks.classList.add('dark');
-          hamburger.classList.add('dark');
-        } else {
-          nav.classList.remove('solid-dark'); nav.classList.add('solid');
-          navLinks.classList.remove('dark');
-          hamburger.classList.remove('dark');
-        }
+      if (!e.isIntersecting) return;
+      const id = e.target.id;
+      if (id === 'hero') {
+        nav.classList.remove('solid','solid-dark');
+        navLinks.classList.remove('dark');
+        hamburger.classList.remove('dark');
+      } else if (id === 'galeria' || id === 'contacto') {
+        nav.classList.remove('solid'); nav.classList.add('solid-dark');
+        navLinks.classList.add('dark');
+        hamburger.classList.add('dark');
+      } else {
+        nav.classList.remove('solid-dark'); nav.classList.add('solid');
+        navLinks.classList.remove('dark');
+        hamburger.classList.remove('dark');
       }
     });
-  }, { threshold: .5 });
-  document.querySelectorAll('.screen, .hero').forEach(s => sectionObs.observe(s));
+  }, { threshold: .3 });
+  [heroEl, galeriaEl, contactoEl].filter(Boolean).forEach(el => navObs.observe(el));
 
   /* ── HAMBURGER ── */
   const mobileMenu = document.getElementById('mobileMenu');
@@ -1464,125 +1432,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   }, { threshold: .1 });
   document.querySelectorAll('.fade-up').forEach(el => fadeObs.observe(el));
 
-  /* ── SCROLL SNAP (JS-controlled) ── */
-  (function(){
-    const sections = Array.from(document.querySelectorAll('.snap-section'));
-    let currentIdx = 0;
-    let locked = false;
-
-    /* En mobile (<=900px) el scroll snap se desactiva — el contenido crece
-       vertical y el usuario scrollea naturalmente para ver los visuales. */
-    const isMobile = () => window.matchMedia('(max-width: 900px)').matches;
-
-    function getClosestIdx(){
-      let best=0, minDist=Infinity;
-      sections.forEach((s,i)=>{
-        const d=Math.abs(s.getBoundingClientRect().top);
-        if(d<minDist){minDist=d;best=i;}
-      });
-      return best;
-    }
-
-    function updateNavFor(id){
-      scrollDots.forEach(d=>d.classList.remove('active'));
-      const dot=document.querySelector(`.scroll-dot[href="#${id}"]`);
-      if(dot)dot.classList.add('active');
-      if(id==='hero'){
-        nav.classList.remove('solid','solid-dark');
-        navLinks.classList.remove('dark');
-        hamburger.classList.remove('dark');
-      } else if(darkSections.includes(id)){
-        nav.classList.remove('solid');nav.classList.add('solid-dark');
-        navLinks.classList.add('dark');hamburger.classList.add('dark');
-      } else {
-        nav.classList.remove('solid-dark');nav.classList.add('solid');
-        navLinks.classList.remove('dark');hamburger.classList.remove('dark');
-      }
-    }
-
-    function goTo(idx){
-      if(idx<0||idx>=sections.length)return;
-      locked=true;
-      currentIdx=idx;
-      sections[idx].scrollIntoView({behavior:'smooth',block:'start'});
-      updateNavFor(sections[idx].id);
-      setTimeout(()=>{locked=false;},900);
-    }
-
-    // Sync currentIdx via IntersectionObserver
-    const snapIO=new IntersectionObserver(entries=>{
-      entries.forEach(e=>{
-        if(e.isIntersecting&&e.intersectionRatio>=.5)
-          currentIdx=sections.indexOf(e.target);
-      });
-    },{threshold:.5});
-    sections.forEach(s=>snapIO.observe(s));
-
-    /* Wheel */
-    window.addEventListener('wheel',e=>{
-      if(isMobile())return; // scroll nativo en mobile
-      const last=sections[sections.length-1];
-      const lastTop=last.getBoundingClientRect().top;
-      const inFooter=lastTop<-20;
-
-      if(inFooter){
-        // En el footer: scroll arriba vuelve a última sección
-        if(e.deltaY<0){e.preventDefault();if(!locked)goTo(sections.length-1);}
-        return;
-      }
-
-      // En la última sección scrolleando hacia abajo → mostrar footer libremente
-      if(e.deltaY>0&&currentIdx===sections.length-1)return;
-
-      e.preventDefault();
-      if(locked)return;
-
-      const idx=getClosestIdx();
-      currentIdx=idx;
-      if(e.deltaY>0)goTo(idx+1);
-      else if(e.deltaY<0)goTo(idx-1);
-
-    },{passive:false});
-
-    /* Touch */
-    function blockMove(e){e.preventDefault();}
-    function snapTo(idx){window.addEventListener('touchmove',blockMove,{passive:false});goTo(idx);setTimeout(()=>window.removeEventListener('touchmove',blockMove),900);}
-    let ty=0;
-    window.addEventListener('touchstart',e=>{ty=e.touches[0].clientY;},{passive:true});
-    window.addEventListener('touchend',e=>{
-      if(isMobile())return; // scroll nativo en mobile
-      if(locked)return;
-      const diff=ty-e.changedTouches[0].clientY;
-      if(Math.abs(diff)<50)return;
-      const last=sections[sections.length-1];
-      const lastTop=last.getBoundingClientRect().top;
-      const inFooter=lastTop<-20;
-      if(diff>0){ // swipe up = bajar
-        if(inFooter||currentIdx===sections.length-1)return;
-        snapTo(currentIdx+1);
-      } else { // swipe down = subir
-        if(inFooter)snapTo(sections.length-1);
-        else snapTo(currentIdx-1);
-      }
-    },{passive:true});
-
-    /* Teclado */
-    window.addEventListener('keydown',e=>{
-      if(isMobile())return; // scroll nativo en mobile
-      if(locked)return;
-      const last=sections[sections.length-1];
-      const lastTop=last.getBoundingClientRect().top;
-      const inFooter=lastTop<-20;
-      if(['ArrowDown','PageDown'].includes(e.key)){
-        if(inFooter||currentIdx===sections.length-1)return;
-        e.preventDefault();goTo(currentIdx+1);
-      } else if(['ArrowUp','PageUp'].includes(e.key)){
-        e.preventDefault();
-        if(inFooter)goTo(sections.length-1);
-        else goTo(currentIdx-1);
-      }
-    });
-  })();
 
   /* ── INTRO OVERLAY ── */
   (function(){
