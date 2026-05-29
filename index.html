@@ -1505,6 +1505,25 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 </section><!-- /modulos -->
 
+<!-- ══ CONTACTO ══════════════════════════════════════ -->
+<section id="contacto" class="contact-section">
+  <div class="contact-inner fade-up">
+    <span class="contact-eyebrow">Empezá hoy</span>
+    <h2 class="contact-h2">¿Listo para<br>crecer?</h2>
+    <p class="contact-p">Dejanos tus datos y te contactamos en menos de 24 horas para mostrarte cómo FORNNO transforma tu restaurante.</p>
+    <form class="contact-form" id="contactForm">
+      <div class="contact-form-row">
+        <input type="text" name="nombre" placeholder="Tu nombre" required>
+        <input type="text" name="restaurante" placeholder="Nombre del restaurante" required>
+      </div>
+      <input type="tel" name="whatsapp" placeholder="Tu WhatsApp (ej: +5491112345678)" required>
+      <button type="submit" class="contact-submit">
+        Quiero mi demo gratuita →
+      </button>
+    </form>
+  </div>
+</section>
+
 <!-- ─── FOOTER ─── -->
 <footer>
   <div class="footer-inner">
@@ -2041,6 +2060,19 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   },{threshold:.08});
   document.querySelectorAll('.fade-in').forEach(function(el){fiObs.observe(el);});
 })();
+</script>
+<script>
+/* ── CONTACT FORM → WhatsApp ── */
+document.getElementById('contactForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  var nombre = this.nombre.value.trim();
+  var restaurante = this.restaurante.value.trim();
+  var whatsapp = this.whatsapp.value.trim();
+  var msg = encodeURIComponent(
+    'Hola FORNNO! Soy ' + nombre + ' del restaurante "' + restaurante + '". Quiero saber más. Mi WhatsApp es ' + whatsapp + '.'
+  );
+  window.open('https://wa.me/549XXXXXXXXX?text=' + msg, '_blank');
+});
 </script>
 </body>
 </html>
