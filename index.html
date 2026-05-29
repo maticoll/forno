@@ -928,8 +928,9 @@
 
   /* ── MODULES TABS (subheader) ── */
   .modules-tabs{
-    display:flex;align-items:center;
+    display:flex;align-items:center;justify-content:center;
     gap:0;
+    border-top:1px solid var(--border);
     border-bottom:1px solid var(--border);
     background:inherit;
     position:sticky;top:60px;z-index:100;
@@ -940,6 +941,7 @@
   .modules-tabs::-webkit-scrollbar{display:none;}
   .modules-section[data-active="escalabilidad"] .modules-tabs,
   .modules-section[data-active="agencia"] .modules-tabs{
+    border-top-color:rgba(255,255,255,.1);
     border-bottom-color:rgba(255,255,255,.1);
   }
   .module-tab{
