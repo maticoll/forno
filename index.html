@@ -74,7 +74,7 @@
     nav{
       position:fixed;top:0;left:0;right:0;z-index:200;
       padding:18px 0;
-      transition:background .4s,border-color .4s;
+      transition:background .2s,border-color .2s;
     }
     nav.solid{background:rgba(245,240,232,.97);border-bottom:1px solid var(--border);}
     nav.solid-dark{background:rgba(26,22,18,.97);border-bottom:1px solid rgba(255,255,255,.06);}
@@ -1580,22 +1580,30 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   const heroEl = document.getElementById('hero');
   const contactoEl = document.getElementById('contacto');
 
+  function setNavSolid() {
+    nav.classList.remove('solid-dark'); nav.classList.add('solid');
+    navLinks.classList.remove('dark');
+    hamburger.classList.remove('dark');
+  }
   const navObs = new IntersectionObserver((entries) => {
     entries.forEach(e => {
-      if (!e.isIntersecting) return;
       const id = e.target.id;
       if (id === 'hero') {
-        nav.classList.remove('solid','solid-dark');
-        navLinks.classList.add('dark');
-        hamburger.classList.add('dark');
+        if (e.isIntersecting) {
+          nav.classList.remove('solid','solid-dark');
+          navLinks.classList.add('dark');
+          hamburger.classList.add('dark');
+        } else {
+          setNavSolid();
+        }
       } else if (id === 'contacto') {
-        nav.classList.remove('solid'); nav.classList.add('solid-dark');
-        navLinks.classList.add('dark');
-        hamburger.classList.add('dark');
-      } else {
-        nav.classList.remove('solid-dark'); nav.classList.add('solid');
-        navLinks.classList.remove('dark');
-        hamburger.classList.remove('dark');
+        if (e.isIntersecting) {
+          nav.classList.remove('solid'); nav.classList.add('solid-dark');
+          navLinks.classList.add('dark');
+          hamburger.classList.add('dark');
+        } else {
+          setNavSolid();
+        }
       }
     });
   }, { threshold: .3 });
