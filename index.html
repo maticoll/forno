@@ -885,7 +885,7 @@
     border-top:1px solid var(--border);
     border-bottom:1px solid var(--border);
     background:inherit;
-    position:sticky;top:60px;z-index:100;
+    position:sticky;top:78px;z-index:100;
     padding:0 48px;
     overflow-x:auto;
     scrollbar-width:none;
@@ -991,10 +991,13 @@
     box-shadow:0 8px 30px rgba(255,92,26,.4);
   }
   @media(max-width:768px){
-    .modules-tabs{padding:0 20px;}
+    .modules-tabs{padding:0 20px;top:78px;}
     .module-tab{padding:14px 14px;font-size:12px;}
     .contact-section{padding:72px 24px;}
     .contact-form-row{flex-direction:column;}
+  }
+  @media(max-width:640px){
+    .modules-tabs{top:66px;}
   }
   </style>
 </head>
