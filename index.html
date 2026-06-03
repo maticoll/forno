@@ -375,6 +375,8 @@
       /* Trust badges: wrap nicely on mobile */
       .hero-trust{gap:8px;}
       .trust-badge{font-size:11px;padding:5px 9px;}
+      /* Floating cards: ocultar en mobile para evitar recorte visual */
+      .hv-float{display:none;}
     }
 
     /* ── HERO VISUAL (derecha) ── */
@@ -728,6 +730,15 @@
       .brand-item img{height:80px;max-width:160px;}
       .brands-track-wrapper::before,
       .brands-track-wrapper::after{width:80px;}
+    }
+    @media(max-width:640px){
+      .brands-section{padding:48px 0 40px;}
+      .brands-header{padding:0 20px;margin-bottom:28px;}
+      .brands-title{font-size:clamp(24px,7vw,36px);}
+      .brand-item{padding:0 14px;}
+      .brand-item img{height:56px;max-width:110px;}
+      .brands-track-wrapper::before,
+      .brands-track-wrapper::after{width:48px;}
     }
 
     /* ── FOOTER ── */
@@ -1099,7 +1110,11 @@
     .contact-form-row{flex-direction:column;}
   }
   @media(max-width:640px){
-    .modules-tabs{top:66px;}
+    .modules-tabs{top:66px;padding:0 12px;}
+    .module-tab{padding:13px 11px;font-size:12px;}
+  }
+  @media(max-width:480px){
+    .module-tab{padding:12px 9px;font-size:11px;letter-spacing:.02em;}
   }
   </style>
 </head>
