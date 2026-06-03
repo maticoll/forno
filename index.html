@@ -1506,7 +1506,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   let contactoVisible = false;
 
   function updateNav() {
-    if (heroVisible) {
+    /* Si el scroll está cerca del tope, el hero siempre cuenta como visible */
+    const atTop = heroVisible || window.scrollY < window.innerHeight * 0.5;
+    if (atTop) {
       nav.classList.remove('solid','solid-dark');
       navLinks.classList.add('dark');
       hamburger.classList.add('dark');
@@ -1530,7 +1532,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       if (e.target.id === 'contacto') contactoVisible = e.isIntersecting;
     });
     updateNav();
-  }, { threshold: .3 });
+  }, { threshold: 0.1 });
   [heroEl, contactoEl].filter(Boolean).forEach(el => navObs.observe(el));
 
   /* ── HAMBURGER ── */
