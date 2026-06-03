@@ -689,7 +689,7 @@
       align-items:center;
       gap:0;
       width:max-content;
-      animation:brands-scroll 45s linear infinite;
+      animation:brands-scroll 28s linear infinite;
     }
     @keyframes brands-scroll{
       from{transform:translateX(0);}
@@ -1110,8 +1110,38 @@
     .contact-form-row{flex-direction:column;}
   }
   @media(max-width:640px){
-    .modules-tabs{top:66px;padding:0 12px;}
+    .modules-tabs{top:66px;padding:0 12px;overscroll-behavior-x:contain;}
     .module-tab{padding:13px 11px;font-size:12px;}
+
+    /* ── Estabilizar altura del panel de módulos en mobile ── */
+    /* Todos los paneles mantienen al menos 100svh para que al
+       cambiar de tab el documento no se mueva */
+    .module-panel.screen{
+      min-height:100svh;
+    }
+
+    /* Secretaria: iPhone reducido para que el panel no supere 100svh
+       y el cambio de tab no cause salto */
+    #secretaria .iphone{
+      width:min(190px,52vw);
+      height:auto;
+      aspect-ratio:280/580;
+      border-radius:clamp(32px,8vw,50px);
+    }
+    #secretaria .iphone-screen{border-radius:clamp(24px,6vw,44px);}
+    #secretaria .iphone-di{width:clamp(68px,18vw,100px);}
+
+    /* fo-cart-bar: posición absoluta para que su aparición no
+       cambie la altura del fo-panel y no mueva el contenido inferior */
+    #foPanel{
+      position:relative;
+      padding-bottom:68px; /* reserva espacio fijo para el cart bar */
+    }
+    #foCartBar{
+      position:absolute;
+      bottom:0;left:0;right:0;
+      /* la transición max-height ya controla show/hide */
+    }
   }
   @media(max-width:480px){
     .module-tab{padding:12px 9px;font-size:11px;letter-spacing:.02em;}
