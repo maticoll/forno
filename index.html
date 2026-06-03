@@ -1502,37 +1502,34 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   const heroEl = document.getElementById('hero');
   const contactoEl = document.getElementById('contacto');
 
-  /* Estado inicial: transparente (hero visible al cargar) */
-  nav.classList.remove('solid','solid-dark');
-  navLinks.classList.add('dark');
-  hamburger.classList.add('dark');
+  let heroVisible = true;
+  let contactoVisible = false;
 
-  function setNavSolid() {
-    nav.classList.remove('solid-dark'); nav.classList.add('solid');
-    navLinks.classList.remove('dark');
-    hamburger.classList.remove('dark');
+  function updateNav() {
+    if (heroVisible) {
+      nav.classList.remove('solid','solid-dark');
+      navLinks.classList.add('dark');
+      hamburger.classList.add('dark');
+    } else if (contactoVisible) {
+      nav.classList.remove('solid'); nav.classList.add('solid-dark');
+      navLinks.classList.add('dark');
+      hamburger.classList.add('dark');
+    } else {
+      nav.classList.remove('solid-dark'); nav.classList.add('solid');
+      navLinks.classList.remove('dark');
+      hamburger.classList.remove('dark');
+    }
   }
+
+  /* Estado inicial: transparente */
+  updateNav();
+
   const navObs = new IntersectionObserver((entries) => {
     entries.forEach(e => {
-      const id = e.target.id;
-      if (id === 'hero') {
-        if (e.isIntersecting) {
-          nav.classList.remove('solid','solid-dark');
-          navLinks.classList.add('dark');
-          hamburger.classList.add('dark');
-        } else {
-          setNavSolid();
-        }
-      } else if (id === 'contacto') {
-        if (e.isIntersecting) {
-          nav.classList.remove('solid'); nav.classList.add('solid-dark');
-          navLinks.classList.add('dark');
-          hamburger.classList.add('dark');
-        } else {
-          setNavSolid();
-        }
-      }
+      if (e.target.id === 'hero') heroVisible = e.isIntersecting;
+      if (e.target.id === 'contacto') contactoVisible = e.isIntersecting;
     });
+    updateNav();
   }, { threshold: .3 });
   [heroEl, contactoEl].filter(Boolean).forEach(el => navObs.observe(el));
 
