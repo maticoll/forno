@@ -1502,38 +1502,34 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   const heroEl = document.getElementById('hero');
   const contactoEl = document.getElementById('contacto');
 
-  let heroVisible = true;
-  let contactoVisible = false;
-
   function updateNav() {
-    /* Si el scroll está cerca del tope, el hero siempre cuenta como visible */
-    const atTop = heroVisible || window.scrollY < window.innerHeight * 0.5;
-    if (atTop) {
+    const heroBottom  = heroEl     ? heroEl.getBoundingClientRect().bottom     : 0;
+    const contactoTop = contactoEl ? contactoEl.getBoundingClientRect().top    : Infinity;
+    const vh = window.innerHeight;
+
+    if (heroBottom > vh * 0.3) {
+      /* Hero visible → transparente */
       nav.classList.remove('solid','solid-dark');
       navLinks.classList.add('dark');
       hamburger.classList.add('dark');
-    } else if (contactoVisible) {
+    } else if (contactoTop < vh * 0.7) {
+      /* Sección contacto → fondo oscuro */
       nav.classList.remove('solid'); nav.classList.add('solid-dark');
       navLinks.classList.add('dark');
       hamburger.classList.add('dark');
     } else {
+      /* Cualquier otra sección → fondo sólido claro */
       nav.classList.remove('solid-dark'); nav.classList.add('solid');
       navLinks.classList.remove('dark');
       hamburger.classList.remove('dark');
     }
   }
 
-  /* Estado inicial: transparente */
+  /* Ejecutar inmediatamente y en cada scroll */
   updateNav();
-
-  const navObs = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.target.id === 'hero') heroVisible = e.isIntersecting;
-      if (e.target.id === 'contacto') contactoVisible = e.isIntersecting;
-    });
-    updateNav();
-  }, { threshold: 0.1 });
-  [heroEl, contactoEl].filter(Boolean).forEach(el => navObs.observe(el));
+  window.addEventListener('scroll', updateNav, { passive: true });
+  /* BFCache de Chrome: re-evaluar al volver con el botón atrás */
+  window.addEventListener('pageshow', updateNav);
 
   /* ── HAMBURGER ── */
   const mobileMenu = document.getElementById('mobileMenu');
