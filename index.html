@@ -628,6 +628,109 @@
     .search-result-desc{font-size:11px;color:var(--muted);line-height:1.5;}
     .search-result2{padding:16px;opacity:.5;}
 
+    /* ── BRANDS CAROUSEL ── */
+    .brands-section{
+      background:var(--dark);
+      padding:90px 0 80px;
+      overflow:hidden;
+      position:relative;
+    }
+    .brands-section::before{
+      content:'';
+      position:absolute;top:0;left:0;right:0;height:1px;
+      background:linear-gradient(90deg,transparent,var(--orange),transparent);
+    }
+    .brands-header{
+      text-align:center;
+      padding:0 48px;
+      margin-bottom:56px;
+    }
+    .brands-eyebrow{
+      font-size:11px;font-weight:700;letter-spacing:.15em;
+      text-transform:uppercase;color:var(--orange);
+      display:block;margin-bottom:16px;
+    }
+    .brands-title{
+      font-family:'Author',sans-serif;
+      font-size:clamp(32px,4.5vw,60px);
+      font-weight:900;
+      color:#fff;
+      line-height:1.0;
+      letter-spacing:-.02em;
+    }
+    .brands-divider{
+      width:60px;height:3px;
+      background:var(--orange);
+      margin:20px auto 0;
+      border-radius:2px;
+    }
+    .brands-track-wrapper{
+      position:relative;
+      overflow:hidden;
+    }
+    .brands-track-wrapper::before,
+    .brands-track-wrapper::after{
+      content:'';
+      position:absolute;top:0;bottom:0;width:180px;
+      z-index:2;pointer-events:none;
+    }
+    .brands-track-wrapper::before{
+      left:0;
+      background:linear-gradient(to right,var(--dark) 0%,transparent 100%);
+    }
+    .brands-track-wrapper::after{
+      right:0;
+      background:linear-gradient(to left,var(--dark) 0%,transparent 100%);
+    }
+    .brands-track{
+      display:flex;
+      align-items:center;
+      gap:0;
+      width:max-content;
+      animation:brands-scroll 45s linear infinite;
+    }
+    .brands-track:hover{animation-play-state:paused;}
+    @keyframes brands-scroll{
+      from{transform:translateX(0);}
+      to{transform:translateX(-50%);}
+    }
+    .brand-item{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      flex-shrink:0;
+      padding:0 40px;
+      position:relative;
+    }
+    .brand-item::after{
+      content:'';
+      position:absolute;right:0;top:50%;transform:translateY(-50%);
+      width:1px;height:30px;
+      background:rgba(255,255,255,.1);
+    }
+    .brand-item img{
+      height:72px;
+      width:auto;
+      max-width:160px;
+      object-fit:contain;
+      filter:brightness(0) invert(1);
+      opacity:.45;
+      transition:opacity .4s,transform .4s,filter .4s;
+    }
+    .brand-item img:hover{
+      opacity:1;
+      transform:scale(1.08);
+      filter:brightness(0) invert(1) drop-shadow(0 0 18px rgba(217,79,26,.6));
+    }
+    @media(max-width:768px){
+      .brands-section{padding:64px 0 56px;}
+      .brands-header{padding:0 24px;margin-bottom:40px;}
+      .brand-item{padding:0 24px;}
+      .brand-item img{height:52px;max-width:110px;}
+      .brands-track-wrapper::before,
+      .brands-track-wrapper::after{width:80px;}
+    }
+
     /* ── FOOTER ── */
     footer{
       background:var(--dark);color:rgba(255,255,255,.6);
@@ -1474,6 +1577,48 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         Quiero mi demo gratuita →
       </button>
     </form>
+  </div>
+</section>
+
+<!-- ══ MARCAS ═══════════════════════════════════════ -->
+<section class="brands-section">
+  <div class="brands-header fade-up">
+    <span class="brands-eyebrow">Comunidad</span>
+    <h2 class="brands-title">Marcas con las que trabajamos</h2>
+    <div class="brands-divider"></div>
+  </div>
+  <div class="brands-track-wrapper">
+    <div class="brands-track">
+      <div class="brand-item"><img src="LOGOS SVG/BONUS.svg" alt="Bonus"></div>
+      <div class="brand-item"><img src="LOGOS SVG/BURGUER ZONE.svg" alt="Burguer Zone"></div>
+      <div class="brand-item"><img src="LOGOS SVG/CHIVIPIZZA.svg" alt="Chivipizza"></div>
+      <div class="brand-item"><img src="LOGOS SVG/HORREO BURGER.svg" alt="Horreo Burger"></div>
+      <div class="brand-item"><img src="LOGOS SVG/LA BURGUERIA.svg" alt="La Burguería"></div>
+      <div class="brand-item"><img src="LOGOS SVG/LA SEDE.svg" alt="La Sede"></div>
+      <div class="brand-item"><img src="LOGOS SVG/LA TRULA.svg" alt="La Trula"></div>
+      <div class="brand-item"><img src="LOGOS SVG/PANDA.svg" alt="Panda"></div>
+      <div class="brand-item"><img src="LOGOS SVG/SANGUCHE.svg" alt="Sanguche"></div>
+      <div class="brand-item"><img src="LOGOS SVG/SUSHI TIME.svg" alt="Sushi Time"></div>
+      <div class="brand-item"><img src="LOGOS SVG/tommy bistro.svg" alt="Tommy Bistro"></div>
+      <div class="brand-item"><img src="LOGOS SVG/TRANQUILO.svg" alt="Tranquilo"></div>
+      <div class="brand-item"><img src="LOGOS SVG/VALITO.svg" alt="Valito"></div>
+      <div class="brand-item"><img src="LOGOS SVG/XXL.svg" alt="XXL"></div>
+      <!-- Duplicado para loop infinito -->
+      <div class="brand-item"><img src="LOGOS SVG/BONUS.svg" alt="Bonus"></div>
+      <div class="brand-item"><img src="LOGOS SVG/BURGUER ZONE.svg" alt="Burguer Zone"></div>
+      <div class="brand-item"><img src="LOGOS SVG/CHIVIPIZZA.svg" alt="Chivipizza"></div>
+      <div class="brand-item"><img src="LOGOS SVG/HORREO BURGER.svg" alt="Horreo Burger"></div>
+      <div class="brand-item"><img src="LOGOS SVG/LA BURGUERIA.svg" alt="La Burguería"></div>
+      <div class="brand-item"><img src="LOGOS SVG/LA SEDE.svg" alt="La Sede"></div>
+      <div class="brand-item"><img src="LOGOS SVG/LA TRULA.svg" alt="La Trula"></div>
+      <div class="brand-item"><img src="LOGOS SVG/PANDA.svg" alt="Panda"></div>
+      <div class="brand-item"><img src="LOGOS SVG/SANGUCHE.svg" alt="Sanguche"></div>
+      <div class="brand-item"><img src="LOGOS SVG/SUSHI TIME.svg" alt="Sushi Time"></div>
+      <div class="brand-item"><img src="LOGOS SVG/tommy bistro.svg" alt="Tommy Bistro"></div>
+      <div class="brand-item"><img src="LOGOS SVG/TRANQUILO.svg" alt="Tranquilo"></div>
+      <div class="brand-item"><img src="LOGOS SVG/VALITO.svg" alt="Valito"></div>
+      <div class="brand-item"><img src="LOGOS SVG/XXL.svg" alt="XXL"></div>
+    </div>
   </div>
 </section>
 
