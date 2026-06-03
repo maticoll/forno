@@ -1502,6 +1502,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   const heroEl = document.getElementById('hero');
   const contactoEl = document.getElementById('contacto');
 
+  /* Estado inicial: transparente (hero visible al cargar) */
+  nav.classList.remove('solid','solid-dark');
+  navLinks.classList.add('dark');
+  hamburger.classList.add('dark');
+
   function setNavSolid() {
     nav.classList.remove('solid-dark'); nav.classList.add('solid');
     navLinks.classList.remove('dark');
