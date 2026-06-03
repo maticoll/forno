@@ -1040,7 +1040,7 @@
 
   /* ── CONTACT FORM SECTION ── */
   .contact-section{
-    background:var(--dark);color:#fff;
+    background:#fff;color:var(--text);
     padding:100px 48px;
   }
   .contact-inner{
@@ -1054,11 +1054,11 @@
   .contact-h2{
     font-family:'Author',sans-serif;
     font-size:clamp(40px,6vw,72px);font-weight:900;
-    line-height:1.0;margin-bottom:16px;color:#fff;
+    line-height:1.0;margin-bottom:16px;color:var(--text);
   }
   .contact-p{
     font-size:clamp(15px,1.5vw,18px);
-    color:rgba(255,255,255,.5);line-height:1.7;
+    color:var(--muted);line-height:1.7;
     margin-bottom:48px;
   }
   .contact-form{
@@ -1067,14 +1067,14 @@
   }
   .contact-form input{
     width:100%;padding:16px 20px;
-    background:rgba(255,255,255,.06);
-    border:1.5px solid rgba(255,255,255,.1);
+    background:var(--bg);
+    border:1.5px solid var(--border);
     border-radius:10px;
-    color:#fff;font-family:'Author',sans-serif;
+    color:var(--text);font-family:'Author',sans-serif;
     font-size:15px;font-weight:500;
     transition:border-color .2s;outline:none;
   }
-  .contact-form input::placeholder{color:rgba(255,255,255,.3);}
+  .contact-form input::placeholder{color:var(--muted2);}
   .contact-form input:focus{border-color:var(--orange);}
   .contact-form-row{display:flex;gap:16px;}
   .contact-form-row input{flex:1;}
